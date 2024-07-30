@@ -150,6 +150,11 @@ class Sirenova_Header_Menu extends Walker_Nav_Menu {
 
 		$classes   = empty( $menu_item->classes ) ? array() : (array) $menu_item->classes;
 		$classes[] = 'menu-item-' . $menu_item->ID;
+		if ($this->has_children && 0 === $depth) {
+			$classes[] = 'header__menu-toggle';
+		} elseif ($this->has_children) {
+			$classes[] = 'dropend';
+		}
 
 		/**
 		 * Filters the arguments for a single nav menu item.
@@ -232,6 +237,7 @@ class Sirenova_Header_Menu extends Walker_Nav_Menu {
 		}
 
 		$atts['aria-current'] = $menu_item->current ? 'page' : '';
+
 
 		/**
 		 * Filters the HTML attributes applied to a menu item's anchor element.

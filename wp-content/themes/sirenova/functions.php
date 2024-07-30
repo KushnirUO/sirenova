@@ -7,9 +7,12 @@ add_action('after_setup_theme', function() {
 
 register_nav_menus(
     array(
-        'Header-menu'=> __('Меню шапки','sirenova'),
-        'Footer-menu'=> __('Меню футеру','sirenova'),
+        'header-menu'=> __('Меню шапки','sirenova'),
+        'footer-menu'=> __('Меню футеру','sirenova'),
     )
 );
 
 require get_template_directory() . '/inc/theme-enqueue.php';
+require_once get_template_directory() .'/inc/class-sirenova-header-menu.php';
+
+show_admin_bar(false);

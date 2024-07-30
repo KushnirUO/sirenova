@@ -84,8 +84,8 @@
                     <?php wp_nav_menu(
                         array(
                             "container" => false,
-                            // "walker" => new Sirenova_Header_Menu,
-                            'theme_location' => 'Header-menu',
+                            "walker" => new Sirenova_Header_Menu,
+                            'theme_location' => 'header-menu',
                         )
                     ); ?>
 
