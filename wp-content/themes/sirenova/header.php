@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html <?language_attributes()?>>
+<html <? language_attributes() ?>>
+
 <head>
-    <meta charset="<?bloginfo('charset')?>">
+    <meta charset="<? bloginfo('charset') ?>">
 
     <meta id="viewport" name="viewport" content="width=device-width, user-scalable=yes">
     <meta name="format-detection" content="telephone=no">
-    <meta name="HandheldFriendly" content="false"/>
+    <meta name="HandheldFriendly" content="false" />
     <meta name="format-detection" content="telephone=no">
 
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
@@ -17,21 +18,22 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <?php wp_head()?>
+    <?php wp_head() ?>
 </head>
+
 <body>
-<div class="global-wrapper">
+    <div class="global-wrapper">
 
 
-<!-- Start Desktop header -->
-<header class="header">
+        <!-- Start Desktop header -->
+        <header class="header">
             <div class="header__top-wrap">
                 <div class="wrapper header__top">
                     <a href="" class="header__top-logo-mobile" id="mobileLogo">
@@ -98,7 +100,6 @@
                                 <img src="https://sirenova.com.ua/wp-content/themes/v2.3/img/i-user-black.svg" alt="">
                             </a>
                         </li>
-
                         <li>
                             <a href="javascript:void(0);" id="findFormBtn">
                                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,9 +147,9 @@
                 </div>
             </div>
         </header>
-<!-- End Desktop header -->
+        <!-- End Desktop header -->
 
-<!-- Start Mobile header -->
+        <!-- Start Mobile header -->
         <div class="mobile__menu-wrap" id="mobileMenu">
             <div class="blur-line"></div>
             <a href="https://sirenova.com.ua" class="mobile__logo">
@@ -210,4 +211,4 @@
                 </div>
             </div>
         </div>
-<!-- End Mobile header -->
+        <!-- End Mobile header -->
