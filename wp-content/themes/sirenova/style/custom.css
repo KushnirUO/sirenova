@@ -1,0 +1,4 @@
+.current-menu-item>a,
+.current-menu-parent>a {
+    color: #9B72CF;
+}
