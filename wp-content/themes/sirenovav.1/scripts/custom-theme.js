@@ -1,50 +1,50 @@
-function setCookie( cname, cvalue, exdays ) {
+function setCookie(cname, cvalue, exdays) {
     var d = new Date();
-    d.setTime( d.getTime() + ( exdays * 24 * 60 * 60 * 1000 ) );
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = d.toGMTString();
     document.cookie = `${cname}=${cvalue}; expires=${expires}; path=/`;
 }
 
-function getCookie( cname ) {
+function getCookie(cname) {
     var name = `${cname}=`;
     var ca = document.cookie.split(';');
-    for ( var i = 0; i < ca.length; i++ ) {
-        var c = ca[ i ];
-        while ( ' ' == c.charAt( 0 ) ) c = c.substring( 1 );
-        if ( -1 != c.indexOf( name ) ) return c.substring( name.length, c.length );
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (' ' == c.charAt(0)) c = c.substring(1);
+        if (-1 != c.indexOf(name)) return c.substring(name.length, c.length);
     }
     return '';
 }
 
-$('.add-to-wishlist').not('.act').click(function(event) {
+$('.add-to-wishlist').not('.act').click(function (event) {
     $(this).addClass('act');
     var id = $(this).attr('data-id');
-    if(getCookie('wishlist')!=''){
+    if (getCookie('wishlist') != '') {
         var ids = new Array();
         ids.push(getCookie('wishlist'));
         ids.push(id);
-        setCookie('wishlist',ids,3);
+        setCookie('wishlist', ids, 3);
     } else {
-        setCookie('wishlist',id,3);
+        setCookie('wishlist', id, 3);
     }
 
 });
-$('.wishlist-remove').click(function(event) {
+$('.wishlist-remove').click(function (event) {
     var id_r = $(this).attr('data-id');
-    $('.temp-remove-button').attr('data-id',id_r);
+    $('.temp-remove-button').attr('data-id', id_r);
 });
 
-$('.temp-remove-button').click(function(event) {
+$('.temp-remove-button').click(function (event) {
     var id = $(this).attr('data-id');
     var ids = new Array();
-    $('.wishlist-entry').each(function(index, el) {
+    $('.wishlist-entry').each(function (index, el) {
         var id_n = $(this).attr('data-id');
-        if(id_n!=id){
+        if (id_n != id) {
             ids.push(id_n);
         }
     });
     console.log(ids);
-   setCookie('wishlist',ids,3);
+    setCookie('wishlist', ids, 3);
 });
 
 var booking_mini_selectors = [
@@ -54,18 +54,18 @@ var booking_mini_selectors = [
     '.single__product .info__btns-booking',
 ];
 
-$( document ).on( 'click', booking_mini_selectors.join(', '), function ( e ) {
+$(document).on('click', booking_mini_selectors.join(', '), function (e) {
     e.preventDefault();
 
-    var booking_data = JSON.parse( atob( $( this ).attr('data-bookingform') ) );
-    var form_html = renderTemplate( booking_data );
+    var booking_data = JSON.parse(atob($(this).attr('data-bookingform')));
+    var form_html = renderTemplate(booking_data);
 
-    $.fancybox.open( {
+    $.fancybox.open({
         src: form_html,
         type: 'inline',
         opts: {
             afterLoad: function afterLoad() {
-                $('#productSliderNavigationModal').slick( {
+                $('#productSliderNavigationModal').slick({
                     slidesToShow: 5,
                     slidesToScroll: 1,
                     asNavFor: '#productSliderSingleModal',
@@ -75,11 +75,11 @@ $( document ).on( 'click', booking_mini_selectors.join(', '), function ( e ) {
                     responsive: [{
                         breakpoint: 576,
                         settings: {
-                        slidesToShow: 3
+                            slidesToShow: 3
                         }
                     }]
                 });
-                $('#productSliderSingleModal').slick( {
+                $('#productSliderSingleModal').slick({
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     arrows: false,
@@ -90,7 +90,7 @@ $( document ).on( 'click', booking_mini_selectors.join(', '), function ( e ) {
         }
     });
 
-    if(isLoggedIn) {
+    if (isLoggedIn) {
         $('[data-fancybox="popupGallery"]').fancybox({
             buttons: [
                 "download",
@@ -142,32 +142,32 @@ function dropdownSizes() {
     });
 }
 
-function renderTemplate( card ) {
-    var slider_small = ( undefined !== card.slider['thumbnails-cart-small'] ) ? `
+function renderTemplate(card) {
+    var slider_small = (undefined !== card.slider['thumbnails-cart-small']) ? `
     <div class="slider__navigation" id="productSliderNavigationModal">
-        ${card.slider['thumbnails-cart-small'].map( img => `
+        ${card.slider['thumbnails-cart-small'].map(img => `
             <div>
                 <div class="slider__navigation-wrap">
                     ${img}
                 </div>
             </div>` ).join('')}
     </div>` : '';
-    var slider_big = ( undefined !== card.slider['thumbnails-cart-big'] ) ? `
+    var slider_big = (undefined !== card.slider['thumbnails-cart-big']) ? `
     <div class="slider__single" id="productSliderSingleModal">
-        ${card.slider['thumbnails-cart-big'].map( ( img, ind )=> `
+        ${card.slider['thumbnails-cart-big'].map((img, ind) => `
             <div>
                 <a href="${card.slider['slider_url'][ind]}" data-fancybox class="slider__single-wrap">
                     ${img}
                 </a>
             </div>` ).join('')}
     </div>` : '';
-    var slider = ( 'string' == typeof card.slider ) ? card.slider : `${slider_small}${slider_big}`;
+    var slider = ('string' == typeof card.slider) ? card.slider : `${slider_small}${slider_big}`;
 
-    var sizes = ( undefined !== card.sizes ) ? `
+    var sizes = (undefined !== card.sizes) ? `
     <div class="size__dropdown">
         <span class="size__dropdown-ttl">РОЗМІР:</span>
         <div class="size__dropdown-content">
-            ${card.sizes.map( ( size, i ) => `
+            ${card.sizes.map((size, i) => `
             <label>
                 <input type="radio" name="cartProductSize" value="${size.id}"${0 == i ? ' checked="checked"' : ''}>
                 <span>${size.name}</span>
@@ -175,12 +175,12 @@ function renderTemplate( card ) {
         </div>
     </div>` : '';
 
-    var colors = ( undefined !== card.colors ) ? `
+    var colors = (undefined !== card.colors) ? `
     <div class="info__colors">
         <span>КОЛІР</span>
         <div class="pallete">
-            ${card.colors.map( color => `
-                <input data-product-color="${color.id}" type="radio" name="productPalleteModal" value="${color.value}">` ).join('')}
+            ${card.colors.map(color => `
+                <input data-product-color="${color.id}" type="radio" name="productPalleteModal" value="${color.value}">`).join('')}
         </div>
     </div>` : '';
 
@@ -220,12 +220,12 @@ function renderTemplate( card ) {
         </form>`;
 }
 
-$( document ).on( 'submit', '.modal__window.modal__product', function ( e ) {
+$(document).on('submit', '.modal__window.modal__product', function (e) {
     e.preventDefault();
-    var $form = $( this );
+    var $form = $(this);
     var $button = $form.find('.info__btns-cart');
 
-    $.ajax( {
+    $.ajax({
         url: $form.attr('action'),
         data: {
             action: $form.find('[name="action"]').val(),
@@ -236,57 +236,57 @@ $( document ).on( 'submit', '.modal__window.modal__product', function ( e ) {
         },
         method: $form.attr('method'),
         beforeSend: function () {
-            $button.attr( 'disabled', 'disabled' );
+            $button.attr('disabled', 'disabled');
         },
-        success: function ( res ) {
+        success: function (res) {
             $button.removeAttr('disabled');
 
             $.fancybox.close();
-            if ( undefined !== res.data.message ) $.fancybox.open( res.data.message );
-            if ( undefined !== res.data.header ) $('.h-booking').closest('li').html( res.data.header );
+            if (undefined !== res.data.message) $.fancybox.open(res.data.message);
+            if (undefined !== res.data.header) $('.h-booking').closest('li').html(res.data.header);
         }
     })
 });
 
-$( document ).on( 'click', '.modal__window.modal__product .productDropdownSizes li', function () {
-    $('.modal__window.modal__product [name="bookingProductSize"]').val( $( this ).attr('data-product-size') );
+$(document).on('click', '.modal__window.modal__product .productDropdownSizes li', function () {
+    $('.modal__window.modal__product [name="bookingProductSize"]').val($(this).attr('data-product-size'));
 });
 
-$(document).on('click', '#filtersMobileMenu .list__content.colors label', function(){
+$(document).on('click', '#filtersMobileMenu .list__content.colors label', function () {
     $(this).css('border', '1px solid rgb(166, 110, 204)')
 });
 
-$(document).on('click', '#filtersMobileMenu .list__content._push label, #filtersMobileMenu  .list__content.size label', function(){
+$(document).on('click', '#filtersMobileMenu .list__content._push label, #filtersMobileMenu  .list__content.size label', function () {
     $(this).find('input').prop('checked', !$(this).find('input').prop('checked'))
 });
 
-$( document ).on( 'submit', 'form.catalog__main-filters', function ( e ) {
+$(document).on('submit', 'form.catalog__main-filters', function (e) {
     e.preventDefault();
 
-    var $form = $( this );
-    var formdata = serializeForm( $form );
+    var $form = $(this);
+    var formdata = serializeForm($form);
     formdata.action = 'shop_filter';
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: formdata,
         beforeSend: function () {
-            $form.attr( 'disabled', 'disabled' );
+            $form.attr('disabled', 'disabled');
             $('.catalog__main-products').addClass('loading');
         },
-        success: function ( res ) {
+        success: function (res) {
             $form.removeAttr('disabled');
-            $form.next().html( res.data.html );
+            $form.next().html(res.data.html);
             getProductColor();
 
-            var query = get_filter_data( $form );
-            app_history.push( res.data.html, 'title', `?${query}` );
+            var query = get_filter_data($form);
+            app_history.push(res.data.html, 'title', `?${query}`);
             $('.catalog__main-products').removeClass('loading');
 
             $('.list__content.colors').find('input').each(function () {
                 color = $(this).attr('data-color');
                 $(this).next('span').css('background', color);
-                if(color === '#ffffff') {
+                if (color === '#ffffff') {
                     $(this).next('span').css('border', '1px solid #C4C4C4');
                 }
                 if ($(this).is(":checked")) {
@@ -302,37 +302,37 @@ $( document ).on( 'submit', 'form.catalog__main-filters', function ( e ) {
     });
 });
 
-$(document).on('click', '.slider__single-wrap', function() {
+$(document).on('click', '.slider__single-wrap', function () {
     var htmlRender = $('.catalog__main-products').html();
-    app_history.push( htmlRender, 'title', '' );
+    app_history.push(htmlRender, 'title', '');
 });
 
-function serializeForm( $form ) {
+function serializeForm($form) {
     var res = {};
-    $form.find('input').each( function ( i, node ) {
-        var name = $( node ).attr('name');
+    $form.find('input').each(function (i, node) {
+        var name = $(node).attr('name');
 
         var value = '';
-        switch ( $( node ).attr('type') ) {
-            case 'checkbox' : {
-                if ( node.checked ) {
-                    value = $( node ).attr('value');
+        switch ($(node).attr('type')) {
+            case 'checkbox': {
+                if (node.checked) {
+                    value = $(node).attr('value');
                 }
 
                 break;
             }
             default: {
-                value = $( node ).attr('value');
+                value = $(node).attr('value');
 
                 break;
             }
         }
 
-        if ( value ) {
-            if ( res[ name ] ) {
-                res[ name ].push( value );
+        if (value) {
+            if (res[name]) {
+                res[name].push(value);
             } else {
-                res[ name ] = [ value ];
+                res[name] = [value];
             }
         }
     });
@@ -340,27 +340,27 @@ function serializeForm( $form ) {
     return res;
 }
 
-function get_filter_data( $form ) {
-    var names = Array.from( new Set( $form.find('[name]').toArray().map( node => $( node ).attr('name') ) ) );
-    var data = names.reduce( function ( data, name ) {
+function get_filter_data($form) {
+    var names = Array.from(new Set($form.find('[name]').toArray().map(node => $(node).attr('name'))));
+    var data = names.reduce(function (data, name) {
         var nodes = $form.find(`[name=${name}]`).toArray();
-        var query = ( 1 == nodes.length ) ? nodes.map( node => $( node ).val() ).join(',') : nodes.filter( node => $( node ).is(':checked') ).map( node => $( node ).val() ).join(',');
+        var query = (1 == nodes.length) ? nodes.map(node => $(node).val()).join(',') : nodes.filter(node => $(node).is(':checked')).map(node => $(node).val()).join(',');
 
-        if ( '' !== query ) data.push( name + '=' + query );
+        if ('' !== query) data.push(name + '=' + query);
         return data;
-    }, [] );
+    }, []);
 
     return data.join('&');
 }
 
-$( document ).on( 'change', 'form.catalog__main-filters input', function () {
-    $( this ).closest('form').trigger('submit');
+$(document).on('change', 'form.catalog__main-filters input', function () {
+    $(this).closest('form').trigger('submit');
 });
 
-var changeProductQuantity = debounce( function ( item_key ) {
+var changeProductQuantity = debounce(function (item_key) {
     var $product = $(`[value="${item_key}"]`).closest('.cart__products-product-wrap');
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: {
             action: 'cart_user_update',
@@ -370,46 +370,46 @@ var changeProductQuantity = debounce( function ( item_key ) {
         beforeSend: function () {
             /** @todo add preloader */
         },
-        success: function ( res ) {
+        success: function (res) {
             /** @todo remove preloader */
 
-            if ( ! res.success ) {
-                if ( undefined !== res.data.message ) $.fancybox.open( res.data.message );
+            if (!res.success) {
+                if (undefined !== res.data.message) $.fancybox.open(res.data.message);
 
                 return;
             }
 
-            if ( undefined !== res.data.html ) $product.closest('.cart__products').html( res.data.html );
-            if ( undefined !== res.data.summary ) $('.cart .cart__total-price').html( res.data.summary );
-            if ( undefined !== res.data.cart_icon ) $('.h-cart').closest('li').html( res.data.cart_icon );
+            if (undefined !== res.data.html) $product.closest('.cart__products').html(res.data.html);
+            if (undefined !== res.data.summary) $('.cart .cart__total-price').html(res.data.summary);
+            if (undefined !== res.data.cart_icon) $('.h-cart').closest('li').html(res.data.cart_icon);
         }
     });
-}, 2000 );
+}, 2000);
 
-$( document ).on( 'change', '.cart .cart__products-product-wrap [name="quantity"]', function () {
-    var item_key = $( this ).closest('.cart__products-product').find('[name="card_item_key"]').val();
-    changeProductQuantity( item_key );
+$(document).on('change', '.cart .cart__products-product-wrap [name="quantity"]', function () {
+    var item_key = $(this).closest('.cart__products-product').find('[name="card_item_key"]').val();
+    changeProductQuantity(item_key);
 });
 
-$( document ).on( 'click', '.cart .cart__products-product-wrap .increase, .cart .cart__products-product-wrap .decrease', function () {
-    $( this ).closest('.cart__counter').find('[name="quantity"]').trigger('change');
+$(document).on('click', '.cart .cart__products-product-wrap .increase, .cart .cart__products-product-wrap .decrease', function () {
+    $(this).closest('.cart__counter').find('[name="quantity"]').trigger('change');
 });
 
 function debounce(f, t) {
     return function (args) {
         let previousCall = this.lastCall;
         this.lastCall = Date.now();
-        if (previousCall && ((this.lastCall - previousCall) <= t)) {
+        if (previousCall && ((this.lastCall - previousCall) <= t)) {
             clearTimeout(this.lastCallTimer);
         }
         this.lastCallTimer = setTimeout(() => f(args), t);
     }
 }
 
-$( document ).on( 'click', '.cart .cart__delete', function () {
-    var $product = $( this ).closest('.cart__products-product-wrap');
+$(document).on('click', '.cart .cart__delete', function () {
+    var $product = $(this).closest('.cart__products-product-wrap');
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: {
             action: 'cart_user_remove',
@@ -417,90 +417,90 @@ $( document ).on( 'click', '.cart .cart__delete', function () {
         },
         beforeSend: function () {
             /** @todo add preloader */
-            $( this ).attr( 'disabled', 'disabled' );
+            $(this).attr('disabled', 'disabled');
         },
-        success: function ( res ) {
+        success: function (res) {
             /** @todo remove preloader */
-            $( this ).removeAttr('disabled');
+            $(this).removeAttr('disabled');
 
-            if ( ! res.success ) {
-                if ( undefined !== res.data.message ) $.fancybox.open( res.data.message );
+            if (!res.success) {
+                if (undefined !== res.data.message) $.fancybox.open(res.data.message);
 
                 return;
             }
 
             $product.remove();
-            if ( undefined !== res.data.summary ) $('.cart .cart__total-price').html( res.data.summary );
-            if ( undefined !== res.data.cart_icon ) $('.h-cart').closest('li').html( res.data.cart_icon );
+            if (undefined !== res.data.summary) $('.cart .cart__total-price').html(res.data.summary);
+            if (undefined !== res.data.cart_icon) $('.h-cart').closest('li').html(res.data.cart_icon);
         }
     });
 });
 
-$( document ).on( 'click', '.reserve .product__delete', function ( e ) {
+$(document).on('click', '.reserve .product__delete', function (e) {
     e.preventDefault();
 
-    var $card = $( this ).closest('.reserve__product');
+    var $card = $(this).closest('.reserve__product');
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: {
             action: 'booking-remove',
-            variation_id: $card.attr('id').split('product-')[ 1 ],
+            variation_id: $card.attr('id').split('product-')[1],
         },
         beforeSend: function () {
-            $( this ).attr( 'disabled', 'disabled' );
+            $(this).attr('disabled', 'disabled');
         },
-        success: function ( res ) {
-            $( this ).attr('disabled');
-            if ( undefined !== res.data.header ) $('.h-booking').closest('li').html( res.data.header );
+        success: function (res) {
+            $(this).attr('disabled');
+            if (undefined !== res.data.header) $('.h-booking').closest('li').html(res.data.header);
 
             $.fancybox.open(`<div class="message">${res.data.message}</div>`);
-            if ( ! res.success ) return;
+            if (!res.success) return;
 
             $card.remove();
         }
     })
 });
 
-$( document ).on( 'click', '.reserve .product__buy', function ( e ) {
+$(document).on('click', '.reserve .product__buy', function (e) {
     e.preventDefault();
 
-    var $card = $( this ).closest('.reserve__product');
-    var $button = $( this );
+    var $card = $(this).closest('.reserve__product');
+    var $button = $(this);
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: {
             action: 'booking-cart-add',
-            product_id: $card.attr('id').split('product-')[ 1 ],
+            product_id: $card.attr('id').split('product-')[1],
             quantity: $card.find('[data-quantity]').attr('data-quantity'),
         },
         beforeSend: function () {
-            $button.attr( 'disabled', 'disabled' );
+            $button.attr('disabled', 'disabled');
         },
-        success: function ( res ) {
+        success: function (res) {
             $button.removeAttr('disabled');
 
-            if ( res.success ) {
+            if (res.success) {
                 $('.product__success-add').addClass('active');
-                setTimeout( function () {
+                setTimeout(function () {
                     $('.product__success-add').removeClass('active');
-                }, 3000 );
+                }, 3000);
             }
 
             $button.text('Вже в кошику');
-            if ( undefined !== res.data.header ) $('.h-booking').closest('li').html( res.data.header );
-            if ( undefined !== res.data.cart ) $('.h-cart').closest('li').html( res.data.cart );
+            if (undefined !== res.data.header) $('.h-booking').closest('li').html(res.data.header);
+            if (undefined !== res.data.cart) $('.h-cart').closest('li').html(res.data.cart);
         }
     })
 });
 
-$( document ).on( 'click', '.favorites .product__buy', function ( e ) {
-    var $card = $( this ).closest('.favorites__product').first();
+$(document).on('click', '.favorites .product__buy', function (e) {
+    var $card = $(this).closest('.favorites__product').first();
     var quantity = $card.find('[name="quantity"]').val();
     var size = $card.find('[data-pa_size]').data('product-value');
     var color = $card.find('[data-pa_colors]').data('product-value');
-    var product_id = $card.attr('id').replace( 'favorite-', '' );
+    var product_id = $card.attr('id').replace('favorite-', '');
 
     var data = {
         action: 'add_to_cart',
@@ -510,33 +510,33 @@ $( document ).on( 'click', '.favorites .product__buy', function ( e ) {
         product_id: product_id,
     };
 
-    $.post( {
+    $.post({
         data: data,
         url: '/wp-admin/admin-ajax.php',
         beforeSend: function () {
-            $( this ).attr( 'disabled', 'disabled' );
+            $(this).attr('disabled', 'disabled');
         },
-        success: function ( res ) {
-            $( this ).removeAttr('disabled');
+        success: function (res) {
+            $(this).removeAttr('disabled');
 
-            if ( res.success ) {
+            if (res.success) {
                 $('.product__success-add').addClass('active');
-                setTimeout( function () {
+                setTimeout(function () {
                     $('.product__success-add').removeClass('active');
-                }, 3000 );
+                }, 3000);
             } else {
-                if ( undefined !== res.data.message ) $.fancybox.open( res.data.message );
+                if (undefined !== res.data.message) $.fancybox.open(res.data.message);
             }
 
-            if ( undefined !== res.data.cart_html ) $('.h-cart').closest('li').html( res.data.cart_html );
+            if (undefined !== res.data.cart_html) $('.h-cart').closest('li').html(res.data.cart_html);
         }
     });
 });
 
-$( document ).on( 'click', '.single__product .info__btns-cart', function () {
-    var $product = $( document ).find('.single__product-main');
+$(document).on('click', '.single__product .info__btns-cart', function () {
+    var $product = $(document).find('.single__product-main');
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: {
             action: 'cart_product_add',
@@ -546,21 +546,21 @@ $( document ).on( 'click', '.single__product .info__btns-cart', function () {
             size: $product.find('[name="cartProductSize"]:checked').val(),
         },
         beforeSend: function () {
-            $( this ).attr( 'disabled', 'disabled' );
+            $(this).attr('disabled', 'disabled');
         },
-        success: function ( res ) {
-            $( this ).removeAttr('disabled');
+        success: function (res) {
+            $(this).removeAttr('disabled');
 
-            if ( res.success ) {
+            if (res.success) {
                 $('.product__success-add').addClass('active');
-                setTimeout( function () {
+                setTimeout(function () {
                     $('.product__success-add').removeClass('active');
-                }, 3000 );
+                }, 3000);
             } else {
-                if ( undefined !== res.data.message ) $.fancybox.open( res.data.message );
+                if (undefined !== res.data.message) $.fancybox.open(res.data.message);
             }
 
-            if ( undefined !== res.data.cart_html ) $('.h-cart').closest('li').html( res.data.cart_html );
+            if (undefined !== res.data.cart_html) $('.h-cart').closest('li').html(res.data.cart_html);
         }
     });
 });
@@ -571,39 +571,40 @@ var favorites_loop_checkbox_handlers = [
     '.single__product-more .icons.like [type="checkbox"]', /** single product - related */
 ];
 
-$( document ).on( 'change', favorites_loop_checkbox_handlers.join(', '), function () {
-    var $checkbox = $( this );
+$(document).on('change', favorites_loop_checkbox_handlers.join(', '), function () {
+    var $checkbox = $(this);
     var product_id = $checkbox.closest('.icons.like').attr('data-product');
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: {
             action: 'user-favorite',
             product_id: product_id,
         },
         beforeSend: function () {
-            $checkbox.attr( 'disabled', 'disabled' );
+            $checkbox.attr('disabled', 'disabled');
         },
-        success: function ( res ) {console.log( res );
+        success: function (res) {
+            console.log(res);
             $checkbox.removeAttr('disabled');
 
-            if ( undefined !== $checkbox.attr('checked') ) {
+            if (undefined !== $checkbox.attr('checked')) {
                 $checkbox.removeAttr('checked');
             } else {
-                $checkbox.attr( 'checked', 'checked' );
+                $checkbox.attr('checked', 'checked');
             }
 
-            if ( undefined !== res.data.favorite_icon ) $('.h-like').closest('li').html( res.data.favorite_icon );
+            if (undefined !== res.data.favorite_icon) $('.h-like').closest('li').html(res.data.favorite_icon);
             dropdownSizes();
         },
     });
 });
 
-$( document ).on( 'click', '.favorites .favorites__product .product__delete', function () {
-    var $card = $( this ).closest('.favorites__product');
-    var product_id = $card.attr('id').replace( 'favorite-', '' );
+$(document).on('click', '.favorites .favorites__product .product__delete', function () {
+    var $card = $(this).closest('.favorites__product');
+    var product_id = $card.attr('id').replace('favorite-', '');
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: {
             action: 'user-favorite',
@@ -612,74 +613,74 @@ $( document ).on( 'click', '.favorites .favorites__product .product__delete', fu
         beforeSend: function () {
             /** @todo add preloader */
         },
-        success: function ( res ) {
+        success: function (res) {
             /** @todo remove preloader */
 
             $card.remove();
 
-            if ( undefined !== res.data.favorite_icon ) $('.h-like').closest('li').html( res.data.favorite_icon );
-            if ( undefined !== res.data.content ) $('.favorites__products').html( res.data.content );
+            if (undefined !== res.data.favorite_icon) $('.h-like').closest('li').html(res.data.favorite_icon);
+            if (undefined !== res.data.content) $('.favorites__products').html(res.data.content);
             dropdownSizes();
         },
     })
 });
 
-$( document ).on( 'click', '.favorites .favorites__product .product__booking', function () {
-    var $card = $( this ).closest('.favorites__product');
+$(document).on('click', '.favorites .favorites__product .product__booking', function () {
+    var $card = $(this).closest('.favorites__product');
 
     var data = {
         action: 'booking-add',
-        product_id: $card.attr('id').replace( 'favorite-', '' ),
+        product_id: $card.attr('id').replace('favorite-', ''),
         size: $card.find('[data-pa_size]').attr('data-product-value'),
         color: $card.find('[data-pa_colors]').attr('data-product-value'),
         count: $card.find('[name="quantity"]').val(),
     };
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: data,
         beforeSend: function () {
-            $( this ).attr( 'disabled', 'disabled' );
+            $(this).attr('disabled', 'disabled');
         },
-        success: function ( res ) {
-            $( this ).removeAttr('disabled');
+        success: function (res) {
+            $(this).removeAttr('disabled');
 
-            if ( undefined !== res.data.message ) $.fancybox.open( res.data.message );
+            if (undefined !== res.data.message) $.fancybox.open(res.data.message);
         }
     });
 });
 
-$( document ).on( 'click', '.catalog .filters__dropdown ul li', function () {
-    var $form = $( this ).closest('form');
-    var filter_type = $( this ).attr('data-dropdown-filter');
+$(document).on('click', '.catalog .filters__dropdown ul li', function () {
+    var $form = $(this).closest('form');
+    var filter_type = $(this).attr('data-dropdown-filter');
 
-    switch ( filter_type ) {
-        case 'product-date' : {
+    switch (filter_type) {
+        case 'product-date': {
             $form.find('[name="order"]').val('DESC');
             $form.find('[name="orderby"]').val('date');
             break;
         }
-        case 'price-up' : {
+        case 'price-up': {
             $form.find('[name="order"]').val('ASC');
             $form.find('[name="orderby"]').val('price');
             break;
         }
-        case 'price-down' : {
+        case 'price-down': {
             $form.find('[name="order"]').val('DESC');
             $form.find('[name="orderby"]').val('price');
             break;
         }
-        case 'product-position' : {
+        case 'product-position': {
             $form.find('[name="order"]').val('ASC');
             $form.find('[name="orderby"]').val('menu_order');
             break;
         }
-        case 'product-naame' : {
+        case 'product-naame': {
             $form.find('[name="order"]').val('ASC');
             $form.find('[name="orderby"]').val('title');
             break;
         }
-        case 'popular' : {
+        case 'popular': {
             $form.find('[name="order"]').val('ASC');
             $form.find('[name="orderby"]').val('menu_order');
             break;
@@ -690,51 +691,51 @@ $( document ).on( 'click', '.catalog .filters__dropdown ul li', function () {
     $form.trigger('submit');
 });
 
-$( document ).on( 'click', '.single__product-main .info__btns-like', function () {
-    var $button = $( this );
+$(document).on('click', '.single__product-main .info__btns-like', function () {
+    var $button = $(this);
     var product_id = $button.closest('.single__product').find('[name="product_id"]').val();
 
-    $.post( {
+    $.post({
         url: '/wp-admin/admin-ajax.php',
         data: {
             action: 'user-favorite',
             product_id: product_id,
         },
         beforeSend: function () {
-            $button.attr( 'disabled', 'disabled' );
+            $button.attr('disabled', 'disabled');
         },
-        success: function ( res ) {
+        success: function (res) {
             $button.removeAttr('disabled');
 
-            if ( undefined !== res.data.favorite_icon ) $('.h-like').closest('li').html( res.data.favorite_icon );
+            if (undefined !== res.data.favorite_icon) $('.h-like').closest('li').html(res.data.favorite_icon);
         },
     });
 });
 
-$( document ).on( 'click', '.log-in.not, .mobile__menu-signin.not', function () {
-    $.fancybox.open( {
+$(document).on('click', '.log-in.not, .mobile__menu-signinn.not', function () {
+    $.fancybox.open({
         src: '#authorizationForm'
     });
 });
 
-$( document ).on( 'submit', '#authorizationForm form', function ( e ) {
+$(document).on('submit', '#authorizationForm form', function (e) {
     e.preventDefault();
-    var $form = $( this );
+    var $form = $(this);
     var data = $form.serialize();
 
-    $.post( {
+    $.post({
         url: $form.attr('action'),
         data: data,
         beforeSend: function () {
             /** @todo add placeholder */
-            $( this ).attr( 'disabled', 'disabled' );
+            $(this).attr('disabled', 'disabled');
         },
-        success: function ( res ) {
+        success: function (res) {
             /** @todo remove placeholder */
-            $( this ).removeAttr('disabled');
-            if ( res.success ) document.location.reload();
+            $(this).removeAttr('disabled');
+            if (res.success) document.location.reload();
 
-            if ( undefined !== res.data.message ) $.fancybox.open( res.data.message );
+            if (undefined !== res.data.message) $.fancybox.open(res.data.message);
         },
     });
 });
@@ -771,9 +772,9 @@ function dropdownSizes() {
     });
 }
 
-$( document ).on( 'click', '#filtersMobileMenu .filters__lists-list label', function ( e ) {
+$(document).on('click', '#filtersMobileMenu .filters__lists-list label', function (e) {
     e.preventDefault();
 
-    var $target = $( e.target ).closest('label').find('[type="checkbox"]');
+    var $target = $(e.target).closest('label').find('[type="checkbox"]');
     $(`form.catalog__main-filters [value="${$target.val()}"]`).trigger('click');
 });

@@ -430,11 +430,7 @@
     justify-content: flex-start;
   }
 
-  .header .header__top .header__top-contacts,
-  .header .header__top ul li:nth-of-type(1),
-  .header .header__top ul li:nth-of-type(2) {
-    display: none;
-  }
+
 
   .header .header__top ul {
     margin-left: auto;
