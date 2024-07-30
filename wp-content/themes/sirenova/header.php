@@ -83,13 +83,17 @@
                     <a href="" class="header__bottom-logo">
                         <img src="https://sirenova.com.ua/wp-content/themes/v2.3/img/logo-sirenova.png" alt="Sirenova">
                     </a>
-                    <?php wp_nav_menu(
-                        array(
-                            "container" => false,
-                            "walker" => new Sirenova_Header_Menu,
-                            'theme_location' => 'header-menu',
-                        )
-                    ); ?>
+                    <ul>
+                        <?php wp_nav_menu(
+                            array(
+                                "container" => false,
+                                "walker" => new Sirenova_Header_Menu,
+                                'theme_location' => 'header-menu',
+                                'items_wrap' => '%3$s'
+                            )
+                        ); ?>
+                        <li class="sale"><a href="/sale">Sale</a></li>
+                    </ul>
 
                     <ul>
                         <li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27"><a href="https://sirenova.com.ua/o-nas/">Про нас</a></li>
