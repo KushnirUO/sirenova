@@ -29,3 +29,5 @@
 </head>
 <body>
 <div class="global-wrapper">
+
+<?php wp_nav_menu(); ?>
