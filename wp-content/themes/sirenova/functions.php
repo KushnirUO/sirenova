@@ -7,8 +7,8 @@ add_action('after_setup_theme', function () {
 
 register_nav_menus(
     array(
-        'Header-menu' => __('Меню шапки', 'sirenovav.1'),
-        'Footer-menu' => __('Меню футеру', 'sirenovav.1'),
+        'Header-menu' => __('Меню шапки', 'sirenova'),
+        'Footer-menu' => __('Меню футеру', 'sirenova'),
     )
 );
 

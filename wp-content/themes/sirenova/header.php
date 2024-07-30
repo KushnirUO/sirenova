@@ -1,6 +1,38 @@
-        <?php
-        get_header();
-        ?>
+<!DOCTYPE html>
+<html <? language_attributes() ?>>
+
+<head>
+    <meta charset="<? bloginfo('charset') ?>">
+
+    <meta id="viewport" name="viewport" content="width=device-width, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="false" />
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <?php wp_head() ?>
+</head>
+
+<body>
+    <div class="global-wrapper">
+
+
+        <!-- Start Desktop header -->
         <header class="header">
             <div class="header__top-wrap">
                 <div class="wrapper header__top">
@@ -51,31 +83,14 @@
                     <a href="" class="header__bottom-logo">
                         <img src="https://sirenova.com.ua/wp-content/themes/v2.3/img/logo-sirenova.png" alt="Sirenova">
                     </a>
-                    <ul>
-                        <li id="menu-item-82" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children header__menu-toggle menu-item-82"><a href="https://sirenova.com.ua/komplekty-belya/">Комплекти білизни</a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-6281" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6281"><a href="https://sirenova.com.ua/komplekty-belya/erotychni-komplekty/">Еротичні комплекти</a></li>
-                                <li id="menu-item-6353" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6353"><a href="https://sirenova.com.ua/komplekty-belya/sportyvni-komplekty/">Спортивні комплекти</a></li>
-                                <li id="menu-item-6360" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6360"><a href="https://sirenova.com.ua/komplekty-belya/bazovi-komplekty/">Базові комплекти</a></li>
-                                <li id="menu-item-6996" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6996"><a href="https://sirenova.com.ua/komplekty-belya/z-dostypom/">Комплекти з доступом</a></li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-88" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children header__menu-toggle menu-item-88"><a href="https://sirenova.com.ua/trusiki/">Трусики</a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-6364" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6364"><a href="https://sirenova.com.ua/trusiki/stringy/">Стрінги</a></li>
-                                <li id="menu-item-6365" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6365"><a href="https://sirenova.com.ua/trusiki/amerykanky-brazylyany/">Американки/ бразильяни</a></li>
-                                <li id="menu-item-6363" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6363"><a href="https://sirenova.com.ua/trusiki/slipy/">Сліпи</a></li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-7229" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-7229"><a href="https://sirenova.com.ua/pijamas/">Піжами</a></li>
-                        <li id="menu-item-80" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-80"><a href="https://sirenova.com.ua/byusty/">Ліфи</a></li>
-                        <li id="menu-item-849" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-849"><a href="https://sirenova.com.ua/body/">Боді</a></li>
-                        <li id="menu-item-6362" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6362"><a href="https://sirenova.com.ua/cholovicha-bilyzna/">Чоловіча білизна</a></li>
-                        <li id="menu-item-81" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-81"><a href="https://sirenova.com.ua/drugoe-aksessuary/">Інше, аксесуари</a></li>
-                        <li id="menu-item-7232" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-7232"><a href="https://sirenova.com.ua/swimwear/">Купальники</a></li>
+                    <?php wp_nav_menu(
+                        array(
+                            "container" => false,
+                            // "walker" => new Sirenova_Header_Menu,
+                            'theme_location' => 'Header-menu',
+                        )
+                    ); ?>
 
-                        <li class="sale"><a href="/sale">Sale</a></li>
-                    </ul>
                     <ul>
                         <li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27"><a href="https://sirenova.com.ua/o-nas/">Про нас</a></li>
                         <li id="menu-item-24" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="https://sirenova.com.ua/dostavka-i-oplata/">Доставка і оплата</a></li>
@@ -132,12 +147,9 @@
                 </div>
             </div>
         </header>
+        <!-- End Desktop header -->
 
-
-
-
-
-
+        <!-- Start Mobile header -->
         <div class="mobile__menu-wrap" id="mobileMenu">
             <div class="blur-line"></div>
             <a href="https://sirenova.com.ua" class="mobile__logo">
@@ -186,7 +198,6 @@
                     <a href="https://sirenova.com.ua/o-nas/">Про нас</a>
                     <a href="https://sirenova.com.ua/dostavka-i-oplata/">Доставка і оплата</a>
                     <a rel="privacy-policy" href="https://sirenova.com.ua/politics/">Політика</a>
-
                 </div>
                 <div class="mobile__menu-contacts">
                     <a href="https://www.instagram.com/sirenova_nova/" target="_blank">
@@ -200,8 +211,4 @@
                 </div>
             </div>
         </div>
-
-        <?php
-
-        get_footer();
-        ?>
+        <!-- End Mobile header -->
