@@ -4,6 +4,7 @@ services:
   # Database
   db:
     image: mysql:5.7
+    command: --explicit_defaults_for_timestamp
     volumes:
       - db_data:/var/lib/mysql
     restart: always
