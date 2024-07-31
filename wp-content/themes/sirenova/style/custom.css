@@ -2,3 +2,259 @@
 .current-menu-parent>a {
     color: #9B72CF;
 }
+
+.sale>a {
+    font-size: 1.5rem;
+}
+
+.footer .hide {
+    display: none;
+
+}
+
+.footer .show {
+    display: block;
+}
+
+.footer .footer-catalog__title {
+    cursor: pointer;
+}
+
+.footer .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    vertical-align: middle;
+    border-top: 5px solid;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
+
+.footer .caret.active {
+    transform: rotate(180deg);
+}
+
+.footer {
+    background-color: #1d1e1f;
+    width: 100%;
+    border-top: 1px solid #E5E5E5;
+    position: relative;
+}
+
+.footer-catalog__btn {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
+.js-catalog__footer {
+    background-color: #1d1e1f;
+    border-radius: 4rem 4rem 0 0;
+    position: relative;
+    border: none;
+    top: -7rem;
+}
+
+
+
+.js-catalog__footer.btn:hover {
+    background-color: #1d1e1f;
+}
+
+.js-catalog__footer::after {
+    content: "\25BC";
+    color: #fff;
+    position: absolute;
+    top: 2.6rem;
+    right: 4rem;
+    transform: rotate(0deg);
+    transition: transform .3s;
+}
+
+.js-catalog__footer::before {
+    content: "\25BC";
+    color: #fff;
+    position: absolute;
+    top: 2.6rem;
+    left: 4rem;
+    transform: rotate(0deg);
+    transition: transform .3s;
+}
+
+.footer .wrapper {
+    color: #818181;
+    font-weight: 400;
+    position: relative;
+    z-index: 2;
+}
+
+.footer .wrapper a {
+    color: #818181;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.footer .wrapper a:hover {
+    color: #b2b2b2;
+    transition: .3s all linear;
+}
+
+.footer .footer-catalog__list {
+    flex-direction: column;
+    padding: 2rem 0 0 0;
+    gap: 1rem;
+}
+
+.footer-catalog__title {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-catalog__list-item a {
+    font-size: 1.6rem;
+}
+
+.footer .footer-catalog__title a {
+    color: white;
+    font-weight: 500;
+}
+
+.footer-catalog {
+    display: flex;
+    gap: 3rem;
+}
+
+.footer__top {
+    flex-direction: column;
+}
+
+.footer .js-footer-category-toggle-btn {
+    display: none;
+}
+
+.footer-logo {
+    width: 100%;
+    text-align: center;
+}
+
+.footer-logo img {
+    filter: contrast(0.1);
+    max-width: 20rem;
+}
+
+.footer-contacts {
+    font-weight: 100;
+}
+
+.footer-inner {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+}
+
+.footer-info__svg svg {
+    fill: #616162;
+    transition: .2s;
+}
+
+.footer-info__second-block {
+    padding: 1.5rem;
+    margin-bottom: .2rem;
+    background-color: #242526;
+    text-align: center;
+    width: 24%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.footer-info__second-block p {
+    font-size: 1.6rem;
+}
+
+.footer-info__second-block:hover p {
+    color: #b2b2b2;
+    transition: .3s all linear;
+}
+
+.footer-info__second-block:hover svg {
+    fill: #b2b2b2;
+    transition: .2s;
+}
+
+.footer-info__second {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    width: 100%;
+}
+
+.svg-footer {
+    fill: #616162;
+    transition: .2s;
+    width: 2.4rem;
+}
+
+.width-25 {
+    width: 24%;
+}
+
+.footer-delivery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.footer-socials-title a {
+    display: flex;
+    gap: 1rem;
+    font-weight: 200;
+    padding: 1rem;
+}
+
+@media only screen and (max-width: 666px) {
+    .footer .js-footer-category-toggle-btn {
+        display: flex;
+    }
+
+    .footer-catalog {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer .footer-catalog__list {
+        justify-content: flex-start;
+        align-items: start;
+    }
+
+    .footer-catalog__wrap.js-toggle-catalog__footer {
+        width: 100%;
+    }
+
+    .js-footer-category-toggle-btn {
+        width: 100%;
+        height: 2rem;
+        align-items: center;
+        justify-content: end;
+    }
+
+    .footer .footer-catalog__title a {
+        white-space: nowrap;
+    }
+
+    .footer-catalog__title {
+        padding-bottom: 1rem;
+        border-bottom: 0.1rem solid rgb(75, 75, 75);
+    }
+}

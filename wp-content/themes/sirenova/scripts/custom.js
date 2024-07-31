@@ -32,7 +32,7 @@ function menuFilters() {
         if ($(this).hasClass('mobile-filters')) {
             closeFilters();
         } else {
-            if($('#mobileMenu').hasClass('open')) {
+            if ($('#mobileMenu').hasClass('open')) {
                 closeMenu();
             } else {
                 openMenu();
@@ -40,7 +40,7 @@ function menuFilters() {
         }
     }
     function outerClose(e) {
-        if(e.target.classList.contains('hamburger-close-filter')) {
+        if (e.target.classList.contains('hamburger-close-filter')) {
             closeMenu();
             closeFilters();
         }
@@ -61,10 +61,10 @@ function openFindForm() {
         $('.black__bg').removeClass('show__bg');
     }
     function openCloseFind() {
-        ($('#findForm').hasClass('open')) ? closeFindForm(): openFindForm();
+        ($('#findForm').hasClass('open')) ? closeFindForm() : openFindForm();
     }
     function outerFindClose(e) {
-        if(e.target.classList.contains('black__bg')) {
+        if (e.target.classList.contains('black__bg')) {
             closeFindForm();
         }
     }
@@ -101,18 +101,18 @@ function dropdownFilters() {
 function listFilters() {
 
     function openCloseList() {
-        $( document ).on( 'click', '.list__ttl', function () {
-            
-                if ($(this).hasClass('list-open')) {
-                    $(this).removeClass('list-open');
-                    $(this).next('.list__content').slideUp(300);
-                    $('#showAll').text('развернуть фильтр');
-                } else {
-                    $(this).addClass('list-open');
-                    $(this).next('.list__content').slideDown(300);
-                    $('#showAll').text('скрыть фильтр');
-                }
-            
+        $(document).on('click', '.list__ttl', function () {
+
+            if ($(this).hasClass('list-open')) {
+                $(this).removeClass('list-open');
+                $(this).next('.list__content').slideUp(300);
+                $('#showAll').text('развернуть фильтр');
+            } else {
+                $(this).addClass('list-open');
+                $(this).next('.list__content').slideDown(300);
+                $('#showAll').text('скрыть фильтр');
+            }
+
         });
     }
     openCloseList();
@@ -122,7 +122,7 @@ function listFilters() {
         $('.list__content.colors').find('input').each(function () {
             color = $(this).attr('data-color');
             $(this).next('span').css('background', color);
-            if(color === '#ffffff') {
+            if (color === '#ffffff') {
                 $(this).next('span').css('border', '1px solid #C4C4C4');
             }
             $(this).on('click', function () {
@@ -194,6 +194,28 @@ function burgerFilterCatalog() {
     })
 }
 
+function AccFooter() {
+    var isMobile = window.innerWidth < 768;
+    $('.js-catalog__footer').on('click', function () {
+        $('.js-toggle-catalog__footer').toggleClass('hide');
+    });
+    if (isMobile) {
+
+        $('.js-footer-category-toggle-btn').on('click', function () {
+            var $parentBlock = $(this).closest('.js-footer-category-block');
+            var $list = $parentBlock.find('.js-footer-category-list');
+
+            $list.toggleClass('hide');
+            $(this).find('.caret').toggleClass('active');
+        });
+    }
+    else {
+        $('.js-footer-category-list').removeClass('hide');
+    }
+
+}
+
+
 window.addEventListener('DOMContentLoaded', function () {
     menuFilters();
     openFindForm();
@@ -201,4 +223,5 @@ window.addEventListener('DOMContentLoaded', function () {
     listFilters();
     scrollToElement();
     burgerFilterCatalog();
+    AccFooter();
 });
