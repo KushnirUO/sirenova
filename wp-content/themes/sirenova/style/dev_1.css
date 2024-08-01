@@ -872,6 +872,7 @@
 
 .main__categoryes-blocks .block .block__content h3 {
   margin-bottom: 0.5rem;
+  padding: 0 1rem;
 }
 
 .main__categoryes-blocks .block .block__content span {
@@ -3286,21 +3287,27 @@
 .promo-section__wrapper {
   position: absolute;
   z-index: 10;
-  bottom: 0.7rem;
+  bottom: .8rem;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding-left: 5rem;
+  align-items: center;
 }
 
 .gift-promo p {
   max-width: 50rem;
 }
 
+.promo-text {
+  padding-top: 14rem;
+}
+
 .promo-bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  max-height: 29vw;
 }
 
 .promo-image {
