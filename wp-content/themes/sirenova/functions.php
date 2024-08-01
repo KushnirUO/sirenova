@@ -9,7 +9,7 @@ add_action('after_setup_theme', function () {
     add_theme_support('woocommerce');
 }, 20);
 
-// Register header & footer menus
+// Register menus
 register_nav_menus(
     array(
         'header-menu'=> __('Меню шапки','sirenova'),
@@ -41,5 +41,6 @@ add_action('admin_head', 'fix_svg_display');
 
 require get_template_directory() . '/inc/theme-enqueue.php';
 require_once get_template_directory() .'/inc/class-sirenova-header-menu.php';
+require_once get_template_directory() .'/inc/class-sirenova-footer-menu.php';
 
 

@@ -1,5 +1,11 @@
         <?php
         get_header();
+        
+        $product_categories = get_terms(array(
+                'taxonomy' => 'product_cat',
+                'hide_empty' => false, // Измените на true, если нужно скрыть пустые категории
+                'parent' => 0,
+            ));
         ?>
 
         <section class="promo-section">
@@ -7,7 +13,6 @@
 
                 <div class="promo-section__wrapper">
                         <div class="promo-text">
-
                                 <h1>Білизна, яка варта твоєї уваги</h1>
                                 <div class="gift-promo">
                                         <img class="gift-promo-img" src="https://sirenova.com.ua/wp-content/themes/v2.3/img/gift-promo.png" alt="">
@@ -20,48 +25,23 @@
 
         </section>
 
-
-
         <section class="wrapper main__categoryes">
                 <h2>Категорії</h2>
+                <?php if (!empty($product_categories) && !is_wp_error($product_categories)) : ?>
                 <div class="main__categoryes-blocks">
-
-                        <a class="block" href="https://sirenova.com.ua/komplekty-belya/">
-                                <div class="block__bg"><img src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_7921.jpg" alt=""></div>
+                        <?php foreach ($product_categories as $category) : 
+                                $category_link = get_term_link($category);
+                                $thumbnail_id = get_term_meta($category->term_id, 'thumbnail_id', true);
+                                $image_url = wp_get_attachment_url($thumbnail_id);        
+                        ?>                        
+                        <a class="block" href="<?php echo $category_link; ?>">
+                                <div class="block__bg"><img src="<?php echo $image_url; ?>" alt=""></div>
                                 <div class="block__content">
-                                        <h3>Комплекти білизни</h3>
+                                        <h3><?php echo $category->name; ?></h3>
                                 </div>
                         </a>
-                        <a class="block" href="https://sirenova.com.ua/komplekty-belya/">
-                                <div class="block__bg"><img src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_7921.jpg" alt=""></div>
-                                <div class="block__content">
-                                        <h3>Комплекти білизни</h3>
-                                </div>
-                        </a>
-                        <a class="block" href="https://sirenova.com.ua/komplekty-belya/">
-                                <div class="block__bg"><img src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_7921.jpg" alt=""></div>
-                                <div class="block__content">
-                                        <h3>Комплекти білизни</h3>
-                                </div>
-                        </a>
-                        <a class="block" href="https://sirenova.com.ua/komplekty-belya/">
-                                <div class="block__bg"><img src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_7921.jpg" alt=""></div>
-                                <div class="block__content">
-                                        <h3>Комплекти білизни</h3>
-                                </div>
-                        </a>
-                        <a class="block" href="https://sirenova.com.ua/komplekty-belya/">
-                                <div class="block__bg"><img src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_7921.jpg" alt=""></div>
-                                <div class="block__content">
-                                        <h3>Комплекти білизни</h3>
-                                </div>
-                        </a>
-                        <a class="block" href="https://sirenova.com.ua/komplekty-belya/">
-                                <div class="block__bg"><img src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_7921.jpg" alt=""></div>
-                                <div class="block__content">
-                                        <h3>Комплекти білизни</h3>
-                                </div>
-                        </a>
+                        <?php endforeach; ?>
+                <?php endif; ?>
 
                 </div>
         </section>

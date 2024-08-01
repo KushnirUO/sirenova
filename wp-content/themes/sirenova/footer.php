@@ -1,3 +1,13 @@
+<?php 
+$phone_icon = get_field('phone_icon', 'options');
+$phone_number = get_field('phone_number', 'options');
+$header_logo = get_field('header_logo', 'option');
+$instagram_text = get_field('instagram_text', 'options');
+$instagram_url = get_field('instagram_url', 'options');
+$tiktok_url = get_field('tiktok_url', 'options');
+$tiktok_text = get_field('tiktok_text', 'options');
+$hours = get_field('hours', 'options');
+?>
 <footer class="footer">
     <div class="footer-catalog__btn">
         <button class="btn js-catalog__footer">Каталог товарів</button>
@@ -5,143 +15,43 @@
     <div class="wrapper footer__top">
         <div class="footer-catalog__wrap js-toggle-catalog__footer hide">
             <div class="footer-catalog">
-                <div class="footer-catalog__block js-footer-category-block">
-                    <h3 class="footer-catalog__title ">
-                        <a href="/catalog/byustgalter">
-                            Комплекти білизни </a>
-                        <div class="js-footer-category-toggle-btn">
-                            <span class="caret"></span>
-                        </div>
-
-                    </h3>
-                    <ul class="footer-catalog__list js-footer-category-list hide">
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/push-up-formovannaya-chashka">
-                                Бюстгальтери Push Up </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/formovannaya-chashka">
-                                Бюстгальтери з формованною чашкою </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/myagkaya-chashka">
-                                Бюстгальтери с м’якою чашкою </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/bralette">
-                                Бралети </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-catalog__block js-footer-category-block">
-                    <h3 class="footer-catalog__title ">
-                        <a href="/catalog/byustgalter">
-                            Комплекти білизни </a>
-                        <div class="js-footer-category-toggle-btn">
-                            <span class="caret"></span>
-                        </div>
-
-                    </h3>
-                    <ul class="footer-catalog__list js-footer-category-list hide">
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/push-up-formovannaya-chashka">
-                                Бюстгальтери Push Up </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/formovannaya-chashka">
-                                Бюстгальтери з формованною чашкою </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/myagkaya-chashka">
-                                Бюстгальтери с м’якою чашкою </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/bralette">
-                                Бралети </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-catalog__block js-footer-category-block">
-                    <h3 class="footer-catalog__title ">
-                        <a href="/catalog/byustgalter">
-                            Комплекти білизни </a>
-                        <div class="js-footer-category-toggle-btn">
-                            <span class="caret"></span>
-                        </div>
-
-                    </h3>
-                    <ul class="footer-catalog__list js-footer-category-list hide">
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/push-up-formovannaya-chashka">
-                                Бюстгальтери Push Up </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/formovannaya-chashka">
-                                Бюстгальтери з формованною чашкою </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/myagkaya-chashka">
-                                Бюстгальтери с м’якою чашкою </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/bralette">
-                                Бралети </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-catalog__block js-footer-category-block">
-                    <h3 class="footer-catalog__title ">
-                        <a href="/catalog/byustgalter">
-                            Комплекти білизни </a>
-                        <div class="js-footer-category-toggle-btn">
-                            <span class="caret"></span>
-                        </div>
-
-                    </h3>
-                    <ul class="footer-catalog__list js-footer-category-list hide">
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/push-up-formovannaya-chashka">
-                                Бюстгальтери Push Up </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/formovannaya-chashka">
-                                Бюстгальтери з формованною чашкою </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/myagkaya-chashka">
-                                Бюстгальтери с м’якою чашкою </a>
-                        </li>
-                        <li class="footer-catalog__list-item">
-                            <a class="footer-catalog__list-link" href="/ua/catalog/bralette">
-                                Бралети </a>
-                        </li>
-                    </ul>
-                </div>
-
+                    <?php wp_nav_menu(
+                        array(
+                            "container" => false,
+                            "walker" => new Footer_Menu_Walker,
+                            'theme_location' => 'footer-menu',
+                            'items_wrap' => '%3$s'
+                        )
+                    );
+                    ?>
             </div>
         </div>
         <div class="footer-inner">
             <div class="footer-logo">
                 <a href="" class="header__top-logo-mobile" id="mobileLogo">
-                    <img src="https://sirenova.com.ua/wp-content/themes/v2.3/img/logo-sirenova.png" alt="Sirenova">
+                    <img src="<?php echo $header_logo['url']; ?>" alt="Sirenova">
                 </a>
             </div>
             <div class="footer-contacts width-25">
                 <div class="footer-about__info">
                     <div class="footer-delivery">
-                        <img src="https://sirenova.com.ua/wp-content/themes/v2.3/img/i-phone.svg" alt="">
+                        <img src="<?php echo $phone_icon['url']; ?>" alt="">
                     </div>
-                    <a href="tel:0800447007" class="footer-number"> 0 800 407 007</a>
+                    <a href="tel:<?php echo esc_attr($phone_number); ?>" class="footer-number"> <?php echo $phone_number; ?></a>
+
 
                 </div>
+
                 <div class="footer-schedule">
-                    <p class="footer-schedule__item">Пн-Пт | 10:00 - 19:00</p>
-                    <p class="footer-schedule__item">Сб | 11:00 - 19:00</p>
+                    <?php foreach($hours as $hour) : ?>
+                    <p class="footer-schedule__item"><?php echo $hour['working_hours']; ?></p>
+                    <?php endforeach; ?>
                 </div>
+
             </div>
             <div class="footer-socials width-25">
                 <div class="footer-socials-title">
-                    <a href="#">
+                    <a href="<?php echo $instagram_url; ?>" target='_blank'>
                         <div class="svg-footer"><svg class="c-footer-social__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 169.063 169.063" style="enable-background:new 0 0 169.063 169.063;" xml:space="preserve">
                                 <g>
                                     <g>
@@ -151,24 +61,24 @@
                                     </g>
                                 </g>
                             </svg></div>
-                        sirenova_nova
+                        <?php echo $instagram_text; ?>
                     </a>
                 </div>
                 <div class="footer-socials-title">
-                    <a href="#">
+                    <a href="<?php echo $tiktok_url; ?>" target='_blank'>
                         <div class="svg-footer"><svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 449.45 515.38">
                                 <path fill-rule="nonzero" d="M382.31 103.3c-27.76-18.1-47.79-47.07-54.04-80.82-1.35-7.29-2.1-14.8-2.1-22.48h-88.6l-.15 355.09c-1.48 39.77-34.21 71.68-74.33 71.68-12.47 0-24.21-3.11-34.55-8.56-23.71-12.47-39.94-37.32-39.94-65.91 0-41.07 33.42-74.49 74.48-74.49 7.67 0 15.02 1.27 21.97 3.44V190.8c-7.2-.99-14.51-1.59-21.97-1.59C73.16 189.21 0 262.36 0 352.3c0 55.17 27.56 104 69.63 133.52 26.48 18.61 58.71 29.56 93.46 29.56 89.93 0 163.08-73.16 163.08-163.08V172.23c34.75 24.94 77.33 39.64 123.28 39.64v-88.61c-24.75 0-47.8-7.35-67.14-19.96z" />
                             </svg></div>
-                        sirenova_nova
+                        <?php echo $tiktok_text; ?>
                     </a>
                 </div>
             </div>
             <div class="footer-delivery width-25">
-                <a href="#">Доставка і оплата</a>
-                <a href="#">Про нас</a>
+                <a href="<?php echo home_url('/dostavka-i-oplata/'); ?>">Доставка і оплата</a>
+                <a href="<?php echo home_url('/pro-nas/'); ?>">Про нас</a>
             </div>
             <div class="footer-sale width-25">
-                <a href=" /sale" class='footer-sale-btn'>ЗНИЖКИ ДО -70% </a>
+                <a href="<?php echo home_url('/sale/'); ?>" class='footer-sale-btn'>ЗНИЖКИ ДО -70% </a>
             </div>
             <div class="footer-info__second sm">
                 <div class="footer-info__second-block sm">
@@ -222,7 +132,7 @@
     <div class="footer-copyright">
         <div class="footer-copyright__wrapper">
             <div class="footer-copyright__brand">© SIRENOVA 2023 ЗРОБЛЕНО З ЛЮБОВ'Ю ДЛЯ ЛЮБОВІ</div>
-            <a href="#">
+            <a href="<?php echo home_url('/privacy-policy/'); ?>">
                 Політика Конфіденційності
             </a>
         </div>
