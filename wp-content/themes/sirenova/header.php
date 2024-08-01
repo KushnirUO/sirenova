@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <?php
-    $header_logo = get_field('header_logo', 'option');
-    $phone_icon = get_field('phone_icon', 'options');
-    $phone_number = get_field('phone_number', 'options');
-    $instagram_icon = get_field('instagram_icon', 'options');
-    $instagram_url = get_field('instagram_url', 'options');
-    $instagram_text = get_field('instagram_text', 'options');
+$header_logo = get_field('header_logo', 'option');
+$phone_icon = get_field('phone_icon', 'options');
+$phone_number = get_field('phone_number', 'options');
+$instagram_icon = get_field('instagram_icon', 'options');
+$instagram_url = get_field('instagram_url', 'options');
+$instagram_text = get_field('instagram_text', 'options');
 
-    $cart_count = WC()->cart->get_cart_contents_count();
+$cart_count = WC()->cart->get_cart_contents_count();
 
 ?>
 <html <? language_attributes() ?>>
@@ -47,7 +47,7 @@
             <!-- Start Mobile top header -->
             <div class="header__top-wrap">
                 <div class="wrapper header__top">
-                    <a href="<?php echo home_url();?>" rel='nofollow' class="header__top-logo-mobile" id="mobileLogo">
+                    <a href="<?php echo home_url(); ?>" rel='nofollow' class="header__top-logo-mobile" id="mobileLogo">
                         <img src="<?php echo $header_logo['url']; ?>" alt="Sirenova">
                     </a>
                     <ul>
@@ -74,14 +74,14 @@
                             </a>
                         </li>
                         <li>
-                        <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="h-cart <?php echo $cart_count > 0 ? 'has-something' : 'empty-cart'; ?>">
-                            <?php if ( $cart_count > 0 ) : ?>
-                                <span class="cart__counter-icon"><?php echo esc_html( $cart_count ); ?></span>
-                            <?php endif; ?>
-                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5001 12.9663L12.6412 3.29448C12.6228 3.07975 12.4419 2.91718 12.2302 2.91718H10.4633C10.4388 1.30368 9.11977 0 7.50014 0C5.88051 0 4.56149 1.30368 4.53695 2.91718H2.77008C2.55535 2.91718 2.37744 3.07975 2.35903 3.29448L1.50014 12.9663C1.50014 12.9785 1.49707 12.9908 1.49707 13.0031C1.49707 14.1043 2.50627 15 3.7486 15H11.2517C12.494 15 13.5032 14.1043 13.5032 13.0031C13.5032 12.9908 13.5032 12.9785 13.5001 12.9663ZM7.50014 0.828221C8.66271 0.828221 9.61057 1.76074 9.63511 2.91718H5.36517C5.38971 1.76074 6.33756 0.828221 7.50014 0.828221ZM11.2517 14.1718H3.7486C2.96946 14.1718 2.33756 13.6564 2.32529 13.0215L3.14738 3.74847H4.53388V5.00613C4.53388 5.2362 4.71793 5.42025 4.94799 5.42025C5.17805 5.42025 5.3621 5.2362 5.3621 5.00613V3.74847H9.63511V5.00613C9.63511 5.2362 9.81916 5.42025 10.0492 5.42025C10.2793 5.42025 10.4633 5.2362 10.4633 5.00613V3.74847H11.8498L12.675 13.0215C12.6627 13.6564 12.0277 14.1718 11.2517 14.1718Z" fill="white"></path>
-                            </svg>
-                        </a>
+                            <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="h-cart <?php echo $cart_count > 0 ? 'has-something' : 'empty-cart'; ?>">
+                                <?php if ($cart_count > 0) : ?>
+                                    <span class="cart__counter-icon"><?php echo esc_html($cart_count); ?></span>
+                                <?php endif; ?>
+                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.5001 12.9663L12.6412 3.29448C12.6228 3.07975 12.4419 2.91718 12.2302 2.91718H10.4633C10.4388 1.30368 9.11977 0 7.50014 0C5.88051 0 4.56149 1.30368 4.53695 2.91718H2.77008C2.55535 2.91718 2.37744 3.07975 2.35903 3.29448L1.50014 12.9663C1.50014 12.9785 1.49707 12.9908 1.49707 13.0031C1.49707 14.1043 2.50627 15 3.7486 15H11.2517C12.494 15 13.5032 14.1043 13.5032 13.0031C13.5032 12.9908 13.5032 12.9785 13.5001 12.9663ZM7.50014 0.828221C8.66271 0.828221 9.61057 1.76074 9.63511 2.91718H5.36517C5.38971 1.76074 6.33756 0.828221 7.50014 0.828221ZM11.2517 14.1718H3.7486C2.96946 14.1718 2.33756 13.6564 2.32529 13.0215L3.14738 3.74847H4.53388V5.00613C4.53388 5.2362 4.71793 5.42025 4.94799 5.42025C5.17805 5.42025 5.3621 5.2362 5.3621 5.00613V3.74847H9.63511V5.00613C9.63511 5.2362 9.81916 5.42025 10.0492 5.42025C10.2793 5.42025 10.4633 5.2362 10.4633 5.00613V3.74847H11.8498L12.675 13.0215C12.6627 13.6564 12.0277 14.1718 11.2517 14.1718Z" fill="white"></path>
+                                </svg>
+                            </a>
                         </li>
                     </ul>
                     <div class="header__top-hamburger" id="mobileMenuBtn">
@@ -96,7 +96,7 @@
             <!-- Start Desktop header -->
             <div class="header__bottom-wrap">
                 <div class="wrapper header__bottom">
-                    <a href="<?php echo home_url();?>" rel='nofollow' class="header__bottom-logo">
+                    <a href="<?php echo home_url(); ?>" rel='nofollow' class="header__bottom-logo">
                         <img src="<?php echo $header_logo['url']; ?>" alt="Sirenova">
                     </a>
                     <ul>
@@ -143,14 +143,14 @@
                             </a>
                         </li>
                         <li>
-                        <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="h-cart <?php echo $cart_count > 0 ? 'has-something' : 'empty-cart'; ?>">
-                            <?php if ( $cart_count > 0 ) : ?>
-                                <span class="cart__counter-icon"><?php echo esc_html( $cart_count ); ?></span>
-                            <?php endif; ?>
-                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.5001 12.9663L12.6412 3.29448C12.6228 3.07975 12.4419 2.91718 12.2302 2.91718H10.4633C10.4388 1.30368 9.11977 0 7.50014 0C5.88051 0 4.56149 1.30368 4.53695 2.91718H2.77008C2.55535 2.91718 2.37744 3.07975 2.35903 3.29448L1.50014 12.9663C1.50014 12.9785 1.49707 12.9908 1.49707 13.0031C1.49707 14.1043 2.50627 15 3.7486 15H11.2517C12.494 15 13.5032 14.1043 13.5032 13.0031C13.5032 12.9908 13.5032 12.9785 13.5001 12.9663ZM7.50014 0.828221C8.66271 0.828221 9.61057 1.76074 9.63511 2.91718H5.36517C5.38971 1.76074 6.33756 0.828221 7.50014 0.828221ZM11.2517 14.1718H3.7486C2.96946 14.1718 2.33756 13.6564 2.32529 13.0215L3.14738 3.74847H4.53388V5.00613C4.53388 5.2362 4.71793 5.42025 4.94799 5.42025C5.17805 5.42025 5.3621 5.2362 5.3621 5.00613V3.74847H9.63511V5.00613C9.63511 5.2362 9.81916 5.42025 10.0492 5.42025C10.2793 5.42025 10.4633 5.2362 10.4633 5.00613V3.74847H11.8498L12.675 13.0215C12.6627 13.6564 12.0277 14.1718 11.2517 14.1718Z" fill="white"></path>
-                            </svg>
-                        </a>
+                            <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="h-cart <?php echo $cart_count > 0 ? 'has-something' : 'empty-cart'; ?>">
+                                <?php if ($cart_count > 0) : ?>
+                                    <span class="cart__counter-icon"><?php echo esc_html($cart_count); ?></span>
+                                <?php endif; ?>
+                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.5001 12.9663L12.6412 3.29448C12.6228 3.07975 12.4419 2.91718 12.2302 2.91718H10.4633C10.4388 1.30368 9.11977 0 7.50014 0C5.88051 0 4.56149 1.30368 4.53695 2.91718H2.77008C2.55535 2.91718 2.37744 3.07975 2.35903 3.29448L1.50014 12.9663C1.50014 12.9785 1.49707 12.9908 1.49707 13.0031C1.49707 14.1043 2.50627 15 3.7486 15H11.2517C12.494 15 13.5032 14.1043 13.5032 13.0031C13.5032 12.9908 13.5032 12.9785 13.5001 12.9663ZM7.50014 0.828221C8.66271 0.828221 9.61057 1.76074 9.63511 2.91718H5.36517C5.38971 1.76074 6.33756 0.828221 7.50014 0.828221ZM11.2517 14.1718H3.7486C2.96946 14.1718 2.33756 13.6564 2.32529 13.0215L3.14738 3.74847H4.53388V5.00613C4.53388 5.2362 4.71793 5.42025 4.94799 5.42025C5.17805 5.42025 5.3621 5.2362 5.3621 5.00613V3.74847H9.63511V5.00613C9.63511 5.2362 9.81916 5.42025 10.0492 5.42025C10.2793 5.42025 10.4633 5.2362 10.4633 5.00613V3.74847H11.8498L12.675 13.0215C12.6627 13.6564 12.0277 14.1718 11.2517 14.1718Z" fill="white"></path>
+                                </svg>
+                            </a>
                         </li>
                     </ul>
 
@@ -170,12 +170,12 @@
             </div>
             <!-- End Desktop header -->
         </header>
- 
+
 
         <!-- Start Mobile header -->
         <div class="mobile__menu-wrap" id="mobileMenu">
             <div class="blur-line"></div>
-            <a href="<?php echo home_url();?>" rel='nofollow' class="mobile__logo">
+            <a href="<?php echo home_url(); ?>" rel='nofollow' class="mobile__logo">
                 <img src="<?php echo $header_logo['url']; ?>" alt="Sirenova">
             </a>
             <div class="header__top-hamburger" id="mobileMenuBtn">
@@ -192,28 +192,28 @@
                     </a>
                 </div>
 
-                <!-- <ul>
-                <?php wp_nav_menu(
-                            array(
-                                "container" => false,
-                                "walker" => new Sirenova_Header_Menu,
-                                'theme_location' => 'header-menu',
-                                'items_wrap' => '%3$s'
-                            )
-                        ); 
-                ?>
-                </ul> -->
+                <ul>
+                    <?php wp_nav_menu(
+                        array(
+                            "container" => false,
+                            "walker" => new Sirenova_Header_Menu,
+                            'theme_location' => 'header-menu',
+                            'items_wrap' => '%3$s'
+                        )
+                    );
+                    ?>
+                </ul>
                 <div class="mobile__menu-info">
-                <?php wp_nav_menu(
-                            array(
-                                "container" => false,
-                                'menu_class' => false,
-                                "walker" => new Sirenova_Header_Menu,
-                                'theme_location' => 'mobile-sub-menu',
-                                'items_wrap' => '%3$s'
-                            )
-                        );
-                ?>
+                    <?php wp_nav_menu(
+                        array(
+                            "container" => false,
+                            'menu_class' => false,
+                            "walker" => new Sirenova_Header_Menu,
+                            'theme_location' => 'mobile-sub-menu',
+                            'items_wrap' => '%3$s'
+                        )
+                    );
+                    ?>
                 </div>
                 <div class="mobile__menu-contacts">
                     <a href="<?php echo $instagram_url; ?>" target="_blank">

@@ -128,8 +128,11 @@
             </div>
             <div class="footer-contacts width-25">
                 <div class="footer-about__info">
-                    <a href="tel:0800447007" class="footer-number">0 800 407 007</a>
-                    <div class="footer-delivery">Мобільний</div>
+                    <div class="footer-delivery">
+                        <img src="https://sirenova.com.ua/wp-content/themes/v2.3/img/i-phone.svg" alt="">
+                    </div>
+                    <a href="tel:0800447007" class="footer-number"> 0 800 407 007</a>
+
                 </div>
                 <div class="footer-schedule">
                     <p class="footer-schedule__item">Пн-Пт | 10:00 - 19:00</p>
@@ -163,6 +166,9 @@
             <div class="footer-delivery width-25">
                 <a href="#">Доставка і оплата</a>
                 <a href="#">Про нас</a>
+            </div>
+            <div class="footer-sale width-25">
+                <a href=" /sale" class='footer-sale-btn'>ЗНИЖКИ ДО -70% </a>
             </div>
             <div class="footer-info__second sm">
                 <div class="footer-info__second-block sm">
@@ -210,8 +216,17 @@
                     </div>
                 </div>
             </div>
-            <p>fdfddffddf</p>
+
         </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="footer-copyright__wrapper">
+            <div class="footer-copyright__brand">© SIRENOVA 2023 ЗРОБЛЕНО З ЛЮБОВ'Ю ДЛЯ ЛЮБОВІ</div>
+            <a href="#">
+                Політика Конфіденційності
+            </a>
+        </div>
+    </div>
     </div>
 </footer>
 
