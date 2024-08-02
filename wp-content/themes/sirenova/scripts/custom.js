@@ -197,7 +197,8 @@ function burgerFilterCatalog() {
 function AccFooter() {
     var isMobile = window.innerWidth < 768;
     $('.js-catalog__footer').on('click', function () {
-        $('.js-toggle-catalog__footer').toggleClass('hide');
+        $('.js-toggle-catalog__footer').toggleClass('hide show');
+        $(this).toggleClass('active');
     });
     if (isMobile) {
 
@@ -205,7 +206,7 @@ function AccFooter() {
             var $parentBlock = $(this).closest('.js-footer-category-block');
             var $list = $parentBlock.find('.js-footer-category-list');
 
-            $list.toggleClass('hide');
+            $list.toggleClass('hide show');
             $(this).find('.caret').toggleClass('active');
         });
     }
@@ -214,6 +215,14 @@ function AccFooter() {
     }
 
 }
+function addSlowScroll() {
+    const scroll = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true
+    });
+}
+
+
 
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -224,4 +233,6 @@ window.addEventListener('DOMContentLoaded', function () {
     scrollToElement();
     burgerFilterCatalog();
     AccFooter();
+    addSlowScroll();
+
 });

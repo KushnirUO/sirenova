@@ -36,10 +36,13 @@ $cart_count = WC()->cart->get_cart_contents_count();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.js"></script>
+
     <?php wp_head() ?>
 </head>
 
-<body>
+<body data-scroll-container>
     <div class="global-wrapper">
 
         <!-- Start Mobile top header -->
