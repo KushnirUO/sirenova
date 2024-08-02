@@ -42,8 +42,8 @@ $cart_count = WC()->cart->get_cart_contents_count();
     <?php wp_head() ?>
 </head>
 
-<body data-scroll-container>
-    <div class="global-wrapper">
+<body>
+    <div data-scroll-container class="global-wrapper">
 
         <!-- Start Mobile top header -->
         <header class="header">

@@ -1,13 +1,5 @@
-@media only screen and (min-width: 1679px) {
-  .global-wrapper {
-    margin-top: 3.4rem;
-  }
-}
-
 @media only screen and (max-width: 1679px) {
-  .global-wrapper {
-    margin-top: 3.4rem;
-  }
+
 
   .main__slider-wrapp {
     /*margin-top: 3.4rem;*/
