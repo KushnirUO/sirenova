@@ -1011,6 +1011,13 @@
     display: none;
   }
 
+  .promo-section {
+    max-height: 50vh;
+    height: 50vh;
+    background: rgb(249, 218, 247);
+    background: linear-gradient(97deg, rgba(221, 161, 217, 1) 0%, rgba(246, 233, 244, 1) 45%, rgba(237, 230, 239, 1) 100%);
+  }
+
   .promo-text {
     padding: 1rem;
     display: flex;

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $phone_icon = get_field('phone_icon', 'options');
 $phone_number = get_field('phone_number', 'options');
 $header_logo = get_field('header_logo', 'option');
@@ -15,15 +15,15 @@ $hours = get_field('hours', 'options');
     <div class="wrapper footer__top">
         <div class="footer-catalog__wrap js-toggle-catalog__footer hide">
             <div class="footer-catalog">
-                    <?php wp_nav_menu(
-                        array(
-                            "container" => false,
-                            "walker" => new Footer_Menu_Walker,
-                            'theme_location' => 'footer-menu',
-                            'items_wrap' => '%3$s'
-                        )
-                    );
-                    ?>
+                <?php wp_nav_menu(
+                    array(
+                        "container" => false,
+                        "walker" => new Footer_Menu_Walker,
+                        'theme_location' => 'footer-menu',
+                        'items_wrap' => '%3$s'
+                    )
+                );
+                ?>
             </div>
         </div>
         <div class="footer-inner">
@@ -43,8 +43,8 @@ $hours = get_field('hours', 'options');
                 </div>
 
                 <div class="footer-schedule">
-                    <?php foreach($hours as $hour) : ?>
-                    <p class="footer-schedule__item"><?php echo $hour['working_hours']; ?></p>
+                    <?php foreach ($hours as $hour) : ?>
+                        <p class="footer-schedule__item"><?php echo $hour['working_hours']; ?></p>
                     <?php endforeach; ?>
                 </div>
 
