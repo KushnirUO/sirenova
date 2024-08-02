@@ -64,7 +64,14 @@
     top: -7rem;
 }
 
+.footer-catalog__list-item {
+    width: 100%;
+    display: flex;
+}
 
+.footer-catalog__list-item a {
+    width: 100%;
+}
 
 .js-catalog__footer.btn:hover {
     background-color: #1d1e1f;
