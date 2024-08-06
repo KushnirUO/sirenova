@@ -63,7 +63,8 @@ $product_categories = get_terms(array(
 <section class="wrapper main__new">
         <h2>Акційні товари</h2>
         <div class="product__slider main__new-slider" id="mainNewSlider">
-                <div class="product">
+                <?php echo do_shortcode('[sale_products limit="8"]'); ?>
+                <!-- <div class="product">
                         <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
                                 <div class="product__img-wrap">
                                         <img width="300" height="300" src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" srcset="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg 300w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-150x150.jpg 150w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-100x100.jpg 100w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-470x470.jpg 470w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-60x60.jpg 60w" sizes="(max-width: 300px) 100vw, 300px">
@@ -217,7 +218,7 @@ $product_categories = get_terms(array(
                                 <span>349 грн</span><span class="old-price">699 грн</span>
                         </div>
                         <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" class="btn product__buy" tabindex="-1">купити</a>
-                </div>
+                </div> -->
         </div>
 </section>
 <!-- Footer -->
