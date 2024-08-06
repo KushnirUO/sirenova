@@ -28,14 +28,14 @@ $product_categories = get_terms(array(
         <div class="promo-section__wrapper">
                 <div class="promo-text">
                         <h1><?php echo $hero_title; ?></h1>
-                                <div class="gift-promo">
-                                        <img class="gift-promo-img" src="<?php echo $hero_icon['url']; ?>" alt="">
-                                        <p><?php echo $hero_subtitle; ?></p>
-                                </div>
-                                <a href="<?php echo $hero_button_url; ?>" target="" class="btn"><?php echo $hero_button_text; ?></a>
+                        <div class="gift-promo">
+                                <img class="gift-promo-img" src="<?php echo $hero_icon['url']; ?>" alt="">
+                                <p><?php echo $hero_subtitle; ?></p>
+                        </div>
+                        <a href="<?php echo $hero_button_url; ?>" target="" class="btn"><?php echo $hero_button_text; ?></a>
                 </div>
                 <img class="promo-image" src="<?php echo $hero_img['url']; ?>" alt="">
-                </div>
+        </div>
 
 </section>
 
@@ -56,11 +56,170 @@ $product_categories = get_terms(array(
                                         </div>
                                 </a>
                         <?php endforeach; ?>
-        <?php endif; ?>
+                <?php endif; ?>
 
                 </div>
 </section>
+<section class="wrapper main__new">
+        <h2>Акційні товари</h2>
+        <div class="product__slider main__new-slider" id="mainNewSlider">
+                <div class="product">
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                <div class="product__img-wrap">
+                                        <img width="300" height="300" src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" srcset="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg 300w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-150x150.jpg 150w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-100x100.jpg 100w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-470x470.jpg 470w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-60x60.jpg 60w" sizes="(max-width: 300px) 100vw, 300px">
+                                </div>
+                        </a>
 
+                        <div class="product__sizes-like">
+                                <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                        <div class="product__desc">
+                                                <p>Квітковий чорний Комплект білизни з сіточки</p>
+                                        </div>
+                                </a>
+                                <label class="icons like" data-product="6926">
+                                        <input type="checkbox" name="productLike" tabindex="-1">
+                                        <div class="like__icon"></div>
+                                </label>
+                        </div>
+                        <div class="product__sizes-like">
+                                <div class="size"><span class="active__size">M</span><span class="active__size">XL</span></div>
+                                <div class="product__colors">
+                                        <div data-color="#000000"><span style="background: rgb(0, 0, 0);"></span></div>
+                                </div>
+                        </div>
+
+
+                        <div class="product__price">
+                                <span>599 грн</span>
+                        </div>
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" class="btn product__buy" tabindex="-1">купити</a>
+                </div>
+                <div class="product">
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                <div class="product__img-wrap">
+                                        <img width="300" height="300" src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" srcset="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg 300w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-150x150.jpg 150w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-100x100.jpg 100w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-470x470.jpg 470w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-60x60.jpg 60w" sizes="(max-width: 300px) 100vw, 300px">
+                                </div>
+                        </a>
+
+                        <div class="product__sizes-like">
+                                <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                        <div class="product__desc">
+                                                <p>Квітковий чорний Комплект білизни з сіточки</p>
+                                        </div>
+                                </a>
+                                <label class="icons like" data-product="6926">
+                                        <input type="checkbox" name="productLike" tabindex="-1">
+                                        <div class="like__icon"></div>
+                                </label>
+                        </div>
+                        <div class="product__sizes-like">
+                                <div class="size"><span class="active__size">M</span><span class="active__size">XL</span></div>
+                                <div class="product__colors">
+                                        <div data-color="#000000"><span style="background: rgb(0, 0, 0);"></span></div>
+                                </div>
+                        </div>
+
+
+                        <div class="product__price">
+                                <span>599 грн</span>
+                        </div>
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" class="btn product__buy" tabindex="-1">купити</a>
+                </div>
+                <div class="product">
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                <div class="product__img-wrap">
+                                        <img width="300" height="300" src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" srcset="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg 300w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-150x150.jpg 150w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-100x100.jpg 100w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-470x470.jpg 470w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-60x60.jpg 60w" sizes="(max-width: 300px) 100vw, 300px">
+                                </div>
+                        </a>
+
+                        <div class="product__sizes-like">
+                                <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                        <div class="product__desc">
+                                                <p>Квітковий чорний Комплект білизни з сіточки</p>
+                                        </div>
+                                </a>
+                                <label class="icons like" data-product="6926">
+                                        <input type="checkbox" name="productLike" tabindex="-1">
+                                        <div class="like__icon"></div>
+                                </label>
+                        </div>
+                        <div class="product__sizes-like">
+                                <div class="size"><span class="active__size">M</span><span class="active__size">XL</span></div>
+                                <div class="product__colors">
+                                        <div data-color="#000000"><span style="background: rgb(0, 0, 0);"></span></div>
+                                </div>
+                        </div>
+
+
+                        <div class="product__price">
+                                <span>599 грн</span>
+                        </div>
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" class="btn product__buy" tabindex="-1">купити</a>
+                </div>
+                <div class="product">
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                <div class="product__img-wrap">
+                                        <img width="300" height="300" src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" srcset="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg 300w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-150x150.jpg 150w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-100x100.jpg 100w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-470x470.jpg 470w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-60x60.jpg 60w" sizes="(max-width: 300px) 100vw, 300px">
+                                </div>
+                        </a>
+
+                        <div class="product__sizes-like">
+                                <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                        <div class="product__desc">
+                                                <p>Квітковий чорний Комплект білизни з сіточки</p>
+                                        </div>
+                                </a>
+                                <label class="icons like" data-product="6926">
+                                        <input type="checkbox" name="productLike" tabindex="-1">
+                                        <div class="like__icon"></div>
+                                </label>
+                        </div>
+                        <div class="product__sizes-like">
+                                <div class="size"><span class="active__size">M</span><span class="active__size">XL</span></div>
+                                <div class="product__colors">
+                                        <div data-color="#000000"><span style="background: rgb(0, 0, 0);"></span></div>
+                                </div>
+                        </div>
+
+
+                        <div class="product__price">
+                                <span>349 грн</span><span class="old-price">699 грн</span>
+                        </div>
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" class="btn product__buy" tabindex="-1">купити</a>
+                </div>
+                <div class="product">
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                <div class="product__img-wrap">
+                                        <img width="300" height="300" src="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" srcset="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-300x300.jpg 300w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-150x150.jpg 150w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-100x100.jpg 100w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-470x470.jpg 470w, https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_8399-60x60.jpg 60w" sizes="(max-width: 300px) 100vw, 300px">
+                                </div>
+                        </a>
+
+                        <div class="product__sizes-like">
+                                <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" tabindex="-1">
+                                        <div class="product__desc">
+                                                <p>Квітковий чорний Комплект білизни з сіточки</p>
+                                        </div>
+                                </a>
+                                <label class="icons like" data-product="6926">
+                                        <input type="checkbox" name="productLike" tabindex="-1">
+                                        <div class="like__icon"></div>
+                                </label>
+                        </div>
+                        <div class="product__sizes-like">
+                                <div class="size"><span class="active__size">M</span><span class="active__size">XL</span></div>
+                                <div class="product__colors">
+                                        <div data-color="#000000"><span style="background: rgb(0, 0, 0);"></span></div>
+                                </div>
+                        </div>
+
+
+                        <div class="product__price">
+                                <span>349 грн</span><span class="old-price">699 грн</span>
+                        </div>
+                        <a href="https://sirenova.com.ua/kvitkovyj-chornyj-komplekt-bilyzny-z-sitochky/" class="btn product__buy" tabindex="-1">купити</a>
+                </div>
+        </div>
+</section>
 <!-- Footer -->
 <?php
 get_footer();

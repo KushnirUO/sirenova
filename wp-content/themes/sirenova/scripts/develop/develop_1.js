@@ -32,7 +32,7 @@ function menuFilters() {
         if ($(this).hasClass('mobile-filters')) {
             closeFilters();
         } else {
-            if($('#mobileMenu').hasClass('open')) {
+            if ($('#mobileMenu').hasClass('open')) {
                 closeMenu();
             } else {
                 openMenu();
@@ -40,7 +40,7 @@ function menuFilters() {
         }
     }
     function outerClose(e) {
-        if(e.target.classList.contains('hamburger-close-filter')) {
+        if (e.target.classList.contains('hamburger-close-filter')) {
             closeMenu();
             closeFilters();
         }
@@ -61,10 +61,10 @@ function openFindForm() {
         $('.black__bg').removeClass('show__bg');
     }
     function openCloseFind() {
-        ($('#findForm').hasClass('open')) ? closeFindForm(): openFindForm();
+        ($('#findForm').hasClass('open')) ? closeFindForm() : openFindForm();
     }
     function outerFindClose(e) {
-        if(e.target.classList.contains('black__bg')) {
+        if (e.target.classList.contains('black__bg')) {
             closeFindForm();
         }
     }
@@ -101,18 +101,18 @@ function dropdownFilters() {
 function listFilters() {
 
     function openCloseList() {
-        $( document ).on( 'click', '.list__ttl', function () {
-            
-                if ($(this).hasClass('list-open')) {
-                    $(this).removeClass('list-open');
-                    $(this).next('.list__content').slideUp(300);
-                    $('#showAll').text('развернуть фильтр');
-                } else {
-                    $(this).addClass('list-open');
-                    $(this).next('.list__content').slideDown(300);
-                    $('#showAll').text('скрыть фильтр');
-                }
-            
+        $(document).on('click', '.list__ttl', function () {
+
+            if ($(this).hasClass('list-open')) {
+                $(this).removeClass('list-open');
+                $(this).next('.list__content').slideUp(300);
+                $('#showAll').text('развернуть фильтр');
+            } else {
+                $(this).addClass('list-open');
+                $(this).next('.list__content').slideDown(300);
+                $('#showAll').text('скрыть фильтр');
+            }
+
         });
     }
     openCloseList();
@@ -122,7 +122,7 @@ function listFilters() {
         $('.list__content.colors').find('input').each(function () {
             color = $(this).attr('data-color');
             $(this).next('span').css('background', color);
-            if(color === '#ffffff') {
+            if (color === '#ffffff') {
                 $(this).next('span').css('border', '1px solid #C4C4C4');
             }
             $(this).on('click', function () {
@@ -184,30 +184,30 @@ function getProductColor() {
 function cartSetProductCount() {
     var invalidChars = ["-", "e", "+", "E"];
 
-    $( document ).on( 'keydown', 'input[type="number"]', function (e) {
+    $(document).on('keydown', 'input[type="number"]', function (e) {
         if (invalidChars.includes(e.key)) {
             e.preventDefault();
         }
     });
 
-    $( document ).on('input', 'input[type="number"]', function () {
+    $(document).on('input', 'input[type="number"]', function () {
         var inputTypeValue = $(this).val();
         $(this).closest('.cart__counter').find('input').attr('value', inputTypeValue);
     });
 
-    $( document ).on( 'click', '.increase', function () {
+    $(document).on('click', '.increase', function () {
         var inputValue = $(this).closest('.cart__counter').find('input').attr('value');
         inputValue++;
-        $(this).closest('.cart__counter').find('input').attr( 'value', inputValue );
-        $(this).closest('.cart__counter').find('input').val( inputValue );
+        $(this).closest('.cart__counter').find('input').attr('value', inputValue);
+        $(this).closest('.cart__counter').find('input').val(inputValue);
     });
-    $( document ).on( 'click', '.decrease', function () {
+    $(document).on('click', '.decrease', function () {
         var inputValue = $(this).closest('.cart__counter').find('input').attr('value');
-        if ( 1 >= inputValue ) return;
+        if (1 >= inputValue) return;
 
         inputValue--;
-        $(this).closest('.cart__counter').find('input').attr( 'value', inputValue );
-        $(this).closest('.cart__counter').find('input').val( inputValue );
+        $(this).closest('.cart__counter').find('input').attr('value', inputValue);
+        $(this).closest('.cart__counter').find('input').val(inputValue);
     });
 }
 
@@ -265,24 +265,4 @@ window.addEventListener('DOMContentLoaded', function () {
     showForgotPasswordForm();
     burgerFilterCatalog();
 });
-$('#mainTopSlider').slick({
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [{
-        breakpoint: 1200,
-        settings: {
-            slidesToShow: 3
-        }
-    }, {
-        breakpoint: 768,
-        settings: {
-            slidesToShow: 2
-        }
-    }, {
-        breakpoint: 576,
-        settings: {
-            slidesToShow: 1,
-        }
-    }]
-});
+

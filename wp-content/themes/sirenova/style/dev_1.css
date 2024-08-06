@@ -741,10 +741,7 @@
   align-items: flex-start;
 }
 
-.main__new-slider .old-price,
-.main__new-slider .wholesale-price {
-  display: none;
-}
+
 
 .main__new-more {
   position: relative;
