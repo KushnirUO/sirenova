@@ -23,6 +23,8 @@ global $post, $product;
 
 ?>
 <?php
+$sale_text = ''; // Initialize sale_text variable
+
 if ($product->is_type('variable')) {
 	$available_variations = $product->get_available_variations();
 	$max_discount = 0;
@@ -32,7 +34,8 @@ if ($product->is_type('variable')) {
 		$regular_price = floatval($variation_obj->get_regular_price());
 		$sale_price = floatval($variation_obj->get_sale_price());
 
-		if ($regular_price > 0 && $sale_price < $regular_price) {
+		// Check if sale_price is not empty
+		if ($regular_price > 0 && $sale_price > 0 && $sale_price < $regular_price) {
 			$discount_percentage = (($regular_price - $sale_price) / $regular_price) * 100;
 			$max_discount = max($max_discount, $discount_percentage);
 		}
@@ -41,13 +44,16 @@ if ($product->is_type('variable')) {
 	if ($max_discount > 0) {
 		$sale_text = sprintf('-%d%%', round($max_discount));
 	} else {
-		$sale_text = esc_html__('Sale!', 'woocommerce');
+		$sale_text = '';
 	}
 } else {
 	if ($product->is_on_sale()) {
-		$sale_text = esc_html__('Sale!', 'woocommerce');
-	} else {
-		$sale_text = '';
+		$sale_price = floatval($product->get_sale_price());
+		if ($sale_price > 0) {
+			$sale_text = esc_html__('Sale!', 'woocommerce');
+		} else {
+			$sale_text = '';
+		}
 	}
 }
 
