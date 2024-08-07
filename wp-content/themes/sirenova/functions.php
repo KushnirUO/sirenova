@@ -1,7 +1,7 @@
 <?php
 
 // Hide admin bar
-// show_admin_bar(false);
+show_admin_bar(true);
 
 // Custom Theme decklaration
 add_action('after_setup_theme', function () {
@@ -52,9 +52,57 @@ function custom_price_format($price, $product)
     return $price;
 }
 
+// Create sale-product with ACF-price fields
+function update_variations_with_custom_prices($product_id)
+{
+    $product = wc_get_product($product_id);
+
+    if (!$product || !$product->is_type('variable')) {
+        return;
+    }
+
+    // Отримання кастомних цін
+    $custom_price = floatval(get_field('sirenova_price', $product_id));
+    $custom_sale_price = floatval(get_field('sirenova_sale_price', $product_id));
+
+    // Перевірка кастомних цін
+    if ($custom_price > 0 || $custom_sale_price > 0) {
+        // Оновлення всіх варіацій
+        $variations = $product->get_children(); // Отримання ID всіх варіацій
+
+        foreach ($variations as $variation_id) {
+            $variation = wc_get_product($variation_id);
+
+            if ($variation && $variation->is_type('variation')) {
+                // Отримання поточних цін
+                $variation_regular_price = floatval($variation->get_regular_price());
+                $variation_sale_price = floatval($variation->get_sale_price());
+
+                // Оновлення ціни регулярної, якщо вона пуста
+                if ($custom_price > 0 && $variation_regular_price <= 0) {
+                    $variation->set_regular_price($custom_price);
+                }
+
+                // Оновлення ціни зі знижкою, якщо вона пуста
+                if ($custom_sale_price > 0 && $variation_sale_price <= 0) {
+                    $variation->set_sale_price($custom_sale_price);
+                }
+
+                // Збереження варіації
+                $variation->save();
+            }
+        }
+    }
+}
+
+// Виклик функції при збереженні товару
+add_action('save_post_product', 'update_variations_with_custom_prices');
+
+
+
+
 remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
 remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
-remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
 remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
 
