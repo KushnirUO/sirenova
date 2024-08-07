@@ -53,6 +53,7 @@ function custom_price_format($price, $product)
 }
 
 // Create sale-product with ACF-price fields
+// Оновлення варіацій при збереженні основного товару
 function update_variations_with_custom_prices($product_id)
 {
     $product = wc_get_product($product_id);
@@ -65,7 +66,6 @@ function update_variations_with_custom_prices($product_id)
     $custom_price = floatval(get_field('sirenova_price', $product_id));
     $custom_sale_price = floatval(get_field('sirenova_sale_price', $product_id));
 
-    // Перевірка кастомних цін
     if ($custom_price > 0 || $custom_sale_price > 0) {
         // Оновлення всіх варіацій
         $variations = $product->get_children(); // Отримання ID всіх варіацій
@@ -74,17 +74,13 @@ function update_variations_with_custom_prices($product_id)
             $variation = wc_get_product($variation_id);
 
             if ($variation && $variation->is_type('variation')) {
-                // Отримання поточних цін
-                $variation_regular_price = floatval($variation->get_regular_price());
-                $variation_sale_price = floatval($variation->get_sale_price());
-
-                // Оновлення ціни регулярної, якщо вона пуста
-                if ($custom_price > 0 && $variation_regular_price <= 0) {
+                // Задання ціни регулярної
+                if ($custom_price > 0) {
                     $variation->set_regular_price($custom_price);
                 }
 
-                // Оновлення ціни зі знижкою, якщо вона пуста
-                if ($custom_sale_price > 0 && $variation_sale_price <= 0) {
+                // Задання ціни зі знижкою
+                if ($custom_sale_price > 0) {
                     $variation->set_sale_price($custom_sale_price);
                 }
 
@@ -97,6 +93,7 @@ function update_variations_with_custom_prices($product_id)
 
 // Виклик функції при збереженні товару
 add_action('save_post_product', 'update_variations_with_custom_prices');
+
 
 
 
