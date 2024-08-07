@@ -15,18 +15,44 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
 global $post, $product;
 
 ?>
-<?php if ( $product->is_on_sale() ) : ?>
+<?php
+if ($product->is_type('variable')) {
+	$available_variations = $product->get_available_variations();
+	$max_discount = 0;
 
-	<?php echo apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . esc_html__( 'Sale!', 'woocommerce' ) . '</span>', $post, $product ); ?>
+	foreach ($available_variations as $variation) {
+		$variation_obj = new WC_Product_Variation($variation['variation_id']);
+		$regular_price = floatval($variation_obj->get_regular_price());
+		$sale_price = floatval($variation_obj->get_sale_price());
 
-	<?php
-endif;
+		if ($regular_price > 0 && $sale_price < $regular_price) {
+			$discount_percentage = (($regular_price - $sale_price) / $regular_price) * 100;
+			$max_discount = max($max_discount, $discount_percentage);
+		}
+	}
+
+	if ($max_discount > 0) {
+		$sale_text = sprintf('-%d%%', round($max_discount));
+	} else {
+		$sale_text = esc_html__('Sale!', 'woocommerce');
+	}
+} else {
+	if ($product->is_on_sale()) {
+		$sale_text = esc_html__('Sale!', 'woocommerce');
+	} else {
+		$sale_text = '';
+	}
+}
+
+if ($sale_text) {
+	echo apply_filters('woocommerce_sale_flash', '<span class="onsale">' . $sale_text . '</span>', $post, $product);
+}
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
