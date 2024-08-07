@@ -142,59 +142,6 @@ if (empty($product) || !$product->is_visible()) {
     do_action('woocommerce_shop_loop_item_title');
 
 
-    // Product price
-    if (!$product) {
-        $product = wc_get_product(get_the_ID());
-    }
-
-    if ($product && $product->is_type('variable')) {
-        $available_variations = $product->get_available_variations();
-        $regular_prices = array();
-        $sale_prices = array();
-
-        foreach ($available_variations as $variation) {
-            $variation_obj = new WC_Product_Variation($variation['variation_id']);
-            $regular_prices[] = $variation_obj->get_regular_price();
-            $sale_prices[] = $variation_obj->get_sale_price();
-        }
-
-        if (!empty($regular_prices)) {
-            $min_regular_price = min($regular_prices);
-        } else {
-            $min_regular_price = null;
-        }
-
-        if (!empty($sale_prices)) {
-            // Фільтруємо масив, щоб видалити порожні значення (варіації без знижки)
-            $sale_prices = array_filter($sale_prices);
-            if (!empty($sale_prices)) {
-                $min_sale_price = min($sale_prices);
-            } else {
-                $min_sale_price = null;
-            }
-        } else {
-            $min_sale_price = null;
-        }
-    }
-
-    if (!isset($min_sale_price) || !$min_sale_price) {
-        $min_sale_price = $min_regular_price;
-    }
-
-    if (!isset($min_regular_price)) {
-        $min_regular_price = '';
-    }
-    ?>
-
-    <div class="product__price">
-        <span><?php echo custom_price_format(wc_price($min_sale_price), $product); ?></span>
-        <?php if ($min_regular_price && $min_regular_price != $min_sale_price): ?>
-            <span class="old-price"><?php echo custom_price_format(wc_price($min_regular_price), $product); ?></span>
-        <?php endif; ?>
-    </div>
-
-    <a href="<?php the_permalink(); ?>" class="btn product__buy">Переглянути</a>
-    <?php
     /**
      * Hook: woocommerce_after_shop_loop_item_title.
      *
@@ -202,9 +149,9 @@ if (empty($product) || !$product->is_visible()) {
      * @hooked woocommerce_template_loop_price - 10
      */
     do_action('woocommerce_after_shop_loop_item_title');
-
-
-
+    ?>
+    <a href="<?php the_permalink(); ?>" class="btn product__buy">Переглянути</a>
+    <?php
     /**
      * Hook: woocommerce_after_shop_loop_item.
      *
