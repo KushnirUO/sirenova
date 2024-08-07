@@ -93,6 +93,7 @@ function update_variations_with_custom_prices($product_id)
 
 // Виклик функції при збереженні товару
 add_action('save_post_product', 'update_variations_with_custom_prices');
+add_action('wp_insert_post', 'update_variations_with_custom_prices');
 
 
 
