@@ -41,13 +41,14 @@ function fix_svg_display()
 add_action('admin_head', 'fix_svg_display');
 
 // Фільтр для форматування цін
-add_filter( 'woocommerce_get_price_html', 'custom_price_format', 100, 2 );
+add_filter('woocommerce_get_price_html', 'custom_price_format', 100, 2);
 
 
-function custom_price_format( $price, $product ) {
+function custom_price_format($price, $product)
+{
     // Видалення копійок і заміна знака гривні на "грн"
-    $price = preg_replace( '/,00/', '', $price );
-     $price = str_replace( get_woocommerce_currency_symbol(), 'грн', $price );
+    $price = preg_replace('/,00/', '', $price);
+    $price = str_replace(get_woocommerce_currency_symbol(), 'грн', $price);
     return $price;
 }
 
@@ -56,20 +57,6 @@ remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_pro
 remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
 remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
-
-add_action( 'woocommerce_before_shop_loop', 'customize_shop_loop_start', 5 );
-function customize_shop_loop_start() {
-    remove_action( 'woocommerce_before_shop_loop', 'woocommerce_product_loop_start', 10 );
-}
-
-add_action( 'woocommerce_after_shop_loop', 'customize_shop_loop_end', 5 );
-
-function customize_shop_loop_end() {
-    remove_action( 'woocommerce_after_shop_loop', 'woocommerce_product_loop_end', 10 );
-}
-
-
-
 
 require get_template_directory() . '/inc/theme-enqueue.php';
 require_once get_template_directory() . '/inc/class-sirenova-header-menu.php';

@@ -30,7 +30,7 @@ function checkSliderLength() {
   if (sliderLength > 4) {
     initMainNewSlider();
   } else {
-    $('#mainNewSlider').addClass('no-slider');
+    $('#mainNewSlider').toggleClass('no-slider');
   }
 }
 
