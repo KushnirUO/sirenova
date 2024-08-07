@@ -350,6 +350,55 @@
     animation: none;
 }
 
+.product {
+    position: relative;
+}
+
+.product .onsale {
+    position: absolute;
+    background: #9b72cf;
+    color: white;
+    font-size: 1.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 3rem 0;
+}
+
+.product .new-badge {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: white;
+    background: #00d600;
+    padding: 0.5rem 2rem;
+    border-radius: 0 3rem;
+}
+
+.product.featured::after {
+    content: 'ХIT';
+    font-size: 1.7rem;
+    color: white;
+    display: flex;
+    width: 6.4rem;
+    height: 6rem;
+    top: -1.8rem;
+    right: -1.7rem;
+    background-image: url(../img/star.png);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+}
+
+.product.featured {
+    background: #ffe4c6;
+    box-shadow: 0 0.2rem 1.2rem 0.2rem #ff8603;
+}
+
+.slick-initialized .slick-slide {
+    padding-bottom: 2rem;
+}
+
 @media only screen and (max-width: 1024px) {
 
     .footer-info__second,

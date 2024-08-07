@@ -29,8 +29,6 @@ function checkSliderLength() {
   var sliderLength = $('#mainNewSlider').children().length;
   if (sliderLength > 4) {
     initMainNewSlider();
-  } else {
-    $('#mainNewSlider').toggleClass('no-slider');
   }
 }
 
@@ -82,9 +80,9 @@ $('.modal').fancybox({
   }
 });
 
-$( '[data-fancybox="productGallery"]' ).fancybox({
+$('[data-fancybox="productGallery"]').fancybox({
   buttons: [
-      "close"
+    "close"
   ]
 });
 

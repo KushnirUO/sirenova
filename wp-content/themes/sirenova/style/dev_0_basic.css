@@ -697,10 +697,19 @@ h3 {
 .product__price .old-price {
   font-size: 1.6rem;
   line-height: 2.1rem;
-  color: #C4C4C4;
+  color: black;
   text-decoration: line-through;
   margin-left: 1rem;
 }
+
+.product.sale .product__price .woocommerce-Price-amount {
+  color: #d10505;
+}
+
+.product.sale .product__price .old-price .woocommerce-Price-amount {
+  color: black;
+}
+
 
 .product__price .wholesale-price {
   color: #9B72CF;
