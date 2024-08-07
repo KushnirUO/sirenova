@@ -236,36 +236,36 @@ window.addEventListener('DOMContentLoaded', function () {
     addSlowScroll();
 
 });
-$(document).ready(function(){
+$(document).ready(function () {
     // Перевіряємо, чи існує елемент з класом .wrapper.main__new
     if ($('.wrapper.main__new').length > 0) {
         // Видаляємо div з класом woocommerce columns-4
         $('.wrapper.main__new .woocommerce.columns-4').contents().unwrap();
-         StartSlider();
-         initMainNewSlider();
+        StartSlider();
+        initMainNewSlider();
     }
 });
-function StartSlider(){
-$('#mainTopSlider').slick({
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [{
-        breakpoint: 1200,
-        settings: {
-            slidesToShow: 3
-        }
-    }, {
-        breakpoint: 768,
-        settings: {
-            slidesToShow: 2
-        }
-    }, {
-        breakpoint: 576,
-        settings: {
-            slidesToShow: 1,
-        }
-    }]
-});
+function StartSlider() {
+    $('#mainTopSlider').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [{
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 3
+            }
+        }, {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2
+            }
+        }, {
+            breakpoint: 576,
+            settings: {
+                slidesToShow: 1,
+            }
+        }]
+    });
 
 }
