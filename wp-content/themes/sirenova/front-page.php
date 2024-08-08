@@ -16,11 +16,11 @@ $hero_img = get_field('hero_img', $front_page_id);
 $category_title = get_field('category_title', $front_page_id);
 
 $product_categories = get_terms(
-        array(
-                'taxonomy' => 'product_cat',
-                'hide_empty' => false, // Змінити на true, якщо потрібно сховати пусті
-                'parent' => 0,
-        )
+    array(
+        'taxonomy' => 'product_cat',
+        'hide_empty' => true, // Змінити на true, якщо потрібно сховати пусті
+        'parent' => 0,
+    )
 );
 ?>
 
@@ -45,19 +45,19 @@ $product_categories = get_terms(
 <section class="wrapper main__categoryes">
     <h2><?php echo $category_title; ?></h2>
     <?php if (!empty($product_categories) && !is_wp_error($product_categories)): ?>
-    <div class="main__categoryes-blocks">
-        <?php foreach ($product_categories as $category):
-                                $category_link = get_term_link($category);
-                                $thumbnail_id = get_term_meta($category->term_id, 'thumbnail_id', true);
-                                $image_url = wp_get_attachment_url($thumbnail_id);
-                                ?>
-        <a class="block" href="<?php echo $category_link; ?>">
-            <div class="block__bg"><img src="<?php echo $image_url; ?>" alt=""></div>
-            <div class="block__content">
-                <h3><?php echo $category->name; ?></h3>
-            </div>
-        </a>
-        <?php endforeach; ?>
+        <div class="main__categoryes-blocks">
+            <?php foreach ($product_categories as $category):
+                $category_link = get_term_link($category);
+                $thumbnail_id = get_term_meta($category->term_id, 'thumbnail_id', true);
+                $image_url = wp_get_attachment_url($thumbnail_id);
+                ?>
+                <a class="block" href="<?php echo $category_link; ?>">
+                    <div class="block__bg"><img src="<?php echo $image_url; ?>" alt=""></div>
+                    <div class="block__content">
+                        <h3><?php echo $category->name; ?></h3>
+                    </div>
+                </a>
+            <?php endforeach; ?>
         <?php endif; ?>
 
     </div>
