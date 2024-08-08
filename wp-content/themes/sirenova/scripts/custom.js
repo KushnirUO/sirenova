@@ -222,7 +222,35 @@ function addSlowScroll() {
     // });
 }
 
+function cartSetProductCount() {
+    var invalidChars = ["-", "e", "+", "E"];
 
+    $(document).on('keydown', 'input[type="number"]', function (e) {
+        if (invalidChars.includes(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    $(document).on('input', 'input[type="number"]', function () {
+        var inputTypeValue = $(this).val();
+        $(this).closest('.cart__counter').find('input').attr('value', inputTypeValue);
+    });
+
+    $(document).on('click', '.increase', function () {
+        var inputValue = $(this).closest('.cart__counter').find('input').attr('value');
+        inputValue++;
+        $(this).closest('.cart__counter').find('input').attr('value', inputValue);
+        $(this).closest('.cart__counter').find('input').val(inputValue);
+    });
+    $(document).on('click', '.decrease', function () {
+        var inputValue = $(this).closest('.cart__counter').find('input').attr('value');
+        if (1 >= inputValue) return;
+
+        inputValue--;
+        $(this).closest('.cart__counter').find('input').attr('value', inputValue);
+        $(this).closest('.cart__counter').find('input').val(inputValue);
+    });
+}
 
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -234,6 +262,7 @@ window.addEventListener('DOMContentLoaded', function () {
     burgerFilterCatalog();
     AccFooter();
     addSlowScroll();
+    cartSetProductCount();
 
 });
 $(document).ready(function () {

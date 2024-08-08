@@ -391,7 +391,7 @@ hr {
     width: 6.3rem;
     height: 6rem;
     top: -1.8rem;
-    right: -1.7rem;
+    right: -1.3rem;
     background-image: url(../img/star.png);
     background-size: cover;
     background-position: center;
@@ -413,6 +413,36 @@ hr {
 
 .slick-initialized .slick-slide {
     padding-bottom: 2rem;
+}
+
+.cart__product-wrapp {
+    display: flex;
+    width: 100%;
+}
+
+@media only screen and (min-width: 720px) {
+    .cart_name_config {
+        display: flex;
+        gap: 6rem;
+        justify-content: space-around;
+    }
+
+    .cart__price-all-title {
+        display: none;
+    }
+
+    .cart__product-wrapp {
+        display: flex;
+        gap: 4rem;
+        justify-content: space-around;
+        align-items: center;
+        width: unset;
+    }
+
+    .product-wrapp-all {
+        display: flex;
+        gap: 6rem;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
