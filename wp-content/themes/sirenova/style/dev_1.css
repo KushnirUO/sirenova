@@ -714,17 +714,13 @@
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding-top: 7rem;
-  padding-bottom: 10rem;
+  padding-bottom: 2rem;
 }
 
 .main__new h2 {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
-.main__new-slider {
-  margin-bottom: 7rem;
-}
 
 .main__new-slider.no-slider {
   display: -ms-flexbox;
@@ -735,11 +731,6 @@
   margin-right: 3rem;
 }
 
-.main__new-slider .product__sizes-like {
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  align-items: flex-start;
-}
 
 
 

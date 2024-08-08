@@ -388,9 +388,7 @@
     margin-right: 0;
   }
 
-  .product__sizes-like .size *:not(:nth-child(5n)) {
-    margin-right: 1rem;
-  }
+
 
   .product__colors {
     margin-bottom: 1rem;
@@ -399,6 +397,7 @@
   .product__desc {
     font-size: 1.6rem;
     line-height: 2.1rem;
+    min-height: 3.8rem;
   }
 
   .product__price {
@@ -512,8 +511,8 @@
 
   .main__new {
     max-width: 72rem;
-    padding-top: 2rem;
-    padding-bottom: 4rem;
+    padding-top: 0rem;
+    padding-bottom: 2rem;
   }
 
   .main__new h2 {
@@ -521,9 +520,7 @@
     margin-bottom: 0;
   }
 
-  .main__new-slider {
-    margin-bottom: 3rem;
-  }
+
 
   .main__new-slider.no-slider>div {
     margin-bottom: 1.5rem;

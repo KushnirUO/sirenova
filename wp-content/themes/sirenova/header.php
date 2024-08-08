@@ -43,7 +43,7 @@ $cart_count = WC()->cart->get_cart_contents_count();
 </head>
 
 <body>
-    <div data-scroll-container class="global-wrapper">
+    <div class="global-wrapper">
 
         <!-- Start Mobile top header -->
         <header class="header">

@@ -216,10 +216,10 @@ function AccFooter() {
 
 }
 function addSlowScroll() {
-    const scroll = new LocomotiveScroll({
-        el: document.querySelector('[data-scroll-container]'),
-        smooth: true
-    });
+    // const scroll = new LocomotiveScroll({
+    //     el: document.querySelector('[data-scroll-container]'),
+    //     smooth: true
+    // });
 }
 
 
