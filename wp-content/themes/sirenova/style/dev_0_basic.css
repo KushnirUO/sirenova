@@ -400,17 +400,18 @@ h3 {
 
 .product__img-wrap {
   position: relative;
-  width: 100%;
+  width: 108.5%;
   height: 26rem;
-  margin-bottom: 1rem;
+  margin: -1rem -1rem 1rem -1rem;
 }
+
 
 .product__img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 50%;
-  border-radius: 2rem;
+  border-radius: 2rem 2rem 0 0;
 }
 
 .product__img-wrap .product__discount {

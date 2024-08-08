@@ -371,7 +371,7 @@
     background: #00d600;
     padding: 0.3rem 1rem;
     font-size: 1.5rem;
-    border-radius: 0 2rem;
+    border-radius: 0 2rem 0 0;
 }
 
 .footer {
@@ -401,10 +401,15 @@ hr {
     padding: 0.4rem 0 0;
 }
 
+.product.sale {
+    box-shadow: 0 0.2rem 1.2rem 0.2rem #ff030370;
+}
+
 .product.featured {
     background: #ffe4c6;
     box-shadow: 0 0.2rem 1.2rem 0.2rem #ff8603;
 }
+
 
 .slick-initialized .slick-slide {
     padding-bottom: 2rem;
