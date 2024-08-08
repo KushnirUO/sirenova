@@ -59,7 +59,6 @@ $product_categories = get_terms(
                 </a>
             <?php endforeach; ?>
         <?php endif; ?>
-
     </div>
 </section>
 <section class="wrapper main__new">
