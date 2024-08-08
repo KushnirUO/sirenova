@@ -714,7 +714,7 @@
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem;
 }
 
 .main__new h2 {
@@ -766,7 +766,7 @@
 }
 
 .main__categoryes {
-  padding: 5rem 1.6rem 0;
+  padding: 5rem 1.6rem 4rem;
 }
 
 .main__categoryes h2 {
@@ -4022,7 +4022,7 @@
 .product {
   padding: 1rem;
   border: 0.1rem solid #80808040;
-  border-radius: 4rem;
+  border-radius: 2rem;
 }
 
 .modal__window-table-wrap {

@@ -358,9 +358,9 @@
     position: absolute;
     background: red;
     color: white;
-    font-size: 1.8rem;
+    font-size: 2rem;
     padding: 0.5rem 1rem;
-    border-radius: 3rem 0;
+    border-radius: 2rem 0;
 }
 
 .product .new-badge {
@@ -369,12 +369,18 @@
     bottom: 0;
     color: white;
     background: #00d600;
-    padding: 0.5rem 2rem;
-    border-radius: 0 3rem;
+    padding: 0.3rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 0 2rem;
 }
 
 .footer {
     margin-top: 8rem;
+}
+
+hr {
+    border: none;
+    border-top: 0.1rem solid #80808040;
 }
 
 .product.featured::after {

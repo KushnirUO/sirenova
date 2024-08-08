@@ -101,6 +101,7 @@ if (empty($product) || !$product->is_visible()) {
 
         if (!empty($product_size_terms)) :
     ?>
+            <hr>
             <div class="product__sizes-like">
                 <h4>Розмір:</h4>
                 <div class="size">
@@ -133,6 +134,7 @@ if (empty($product) || !$product->is_visible()) {
 
                 ?>
                 </div>
+                <hr>
         <?php
         endif;
     endif;
