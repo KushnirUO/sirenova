@@ -20,6 +20,9 @@
     opacity: 1;
 }
 
+.h-cart {
+    cursor: pointer;
+}
 
 .footer .footer-catalog__title {
     cursor: pointer;

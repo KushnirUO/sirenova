@@ -102,7 +102,7 @@ get_header()
                         </div>
                         <span class="cart__price-all">
                             <tr>
-                                <th>Сумма:</th>
+                                <th>Сума:</th>
                                 <td><?php echo $product_subtotal; ?></td>
                             </tr>
                         </span>
@@ -136,7 +136,7 @@ get_header()
             ; ?>
     </div>
     <div class="cart__total">
-        <span>Сумма замовлення:</span>
+        <span>Сума замовлення:</span>
         <span class="cart__total-price">
             <span class="woocommerce-Price-amount amount"><?php echo $cart_total; ?>
             </span>
