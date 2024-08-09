@@ -251,6 +251,22 @@ function burgerFilterCatalog() {
         $('.catalog__main-filters').toggle("slow");
     })
 }
+function miniCartPopup() {
+    function openMenu() {
+        $('html, body').addClass('overflow');
+        $('.header__top').addClass('open-menu');
+        $('.black__bg').addClass('show__bg');
+        $('#mobileMenu').addClass('open');
+
+    }
+    function closeMenu() {
+        $('html, body').removeClass('overflow');
+        $('.header__top').removeClass('open-menu');
+        $('.black__bg').removeClass('show__bg');
+        $('#mobileMenu').removeClass('open');
+    }
+
+}
 
 window.addEventListener('DOMContentLoaded', function () {
     menuFilters();
