@@ -1,7 +1,7 @@
 <?php
 
 // Hide admin bar
-show_admin_bar(true);
+show_admin_bar(false);
 
 // Custom Theme decklaration
 add_action('after_setup_theme', function () {
@@ -88,6 +88,44 @@ function update_variations_with_custom_prices($product_id)
                 $variation->save();
             }
         }
+    }
+}
+
+// Обробка аяксу на видалення товару з корзини 
+add_action('wp_ajax_remove_cart_item', 'remove_cart_item_ajax');
+add_action('wp_ajax_nopriv_remove_cart_item', 'remove_cart_item_ajax');
+
+function remove_cart_item_ajax()
+{
+    // Перевірка, чи присутній ключ товару в запиті
+    if (isset($_POST['cart_item_key'])) {
+        $cart_item_key = sanitize_text_field($_POST['cart_item_key']);
+
+        // Видаляємо товар з корзини
+        $removed = WC()->cart->remove_cart_item($cart_item_key);
+
+        if ($removed) {
+            // Відповідь успіху
+            wp_send_json_success(
+                array(
+                    'message' => 'Товар успішно видалений',
+                )
+            );
+        } else {
+            // Відповідь помилки
+            wp_send_json_error(
+                array(
+                    'message' => 'Не вдалося видалити товар',
+                )
+            );
+        }
+    } else {
+        // Відповідь помилки
+        wp_send_json_error(
+            array(
+                'message' => 'Невірний запит',
+            )
+        );
     }
 }
 
