@@ -3,6 +3,9 @@ let home_url = window.location.origin;
 jQuery(document).ready(function ($) {
     $('.cart__delete, .min-cart__delete').on('click', function (e) {
         e.preventDefault();
+        StartLoader($('.cart__products-product-wrap'));
+        StartLoader($('.min-cart__products-product-wrap'));
+
 
         var cart_item_key = $(this).data('cart_item_key');
         var $this = $(this);
@@ -56,11 +59,13 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 if (response.success) {
                     // Оновлюємо суму товару
-                    $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').find('.cart__price-all, .min-cart__price-all div').html(response.data.item_total);
+                    $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').find('.cart__price-all div, .min-cart__price-all div').html(response.data.item_total);
 
                     // Оновлюємо тотал корзини
                     $('.cart__total-price, .min-cart__total-price').html(response.data.cart_total);
                 }
+                StopLoader($('.cart__products-product-wrap'));
+                StopLoader($('.min-cart__products-product-wrap'));
             },
             error: function (xhr, status, error) {
                 console.log('Помилка оновлення кількості товару:', error);
@@ -112,7 +117,8 @@ jQuery(document).ready(function ($) {
         var $this = $(this);
         var cart_item_key = $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').data('cart_item_key');
         var quantity = $this.val();
-
+        StartLoader($('.cart__products-product-wrap'));
+        StartLoader($('.min-cart__products-product-wrap'));
         $.ajax({
             type: 'POST',
             url: wc_cart_params.ajax_url,
@@ -124,13 +130,15 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 if (response.success) {
                     // Оновлюємо суму товару
-                    $this.closest('.cart__products-product-wrap, .mon-cart__products-product-wrap').find('.cart__price-all, ..min-cart__price-all div').html(response.data.item_total);
+                    $this.closest('.cart__products-product-wrap, .mon-cart__products-product-wrap').find('.cart__price-all div, .min-cart__price-all div').html(response.data.item_total);
 
                     // Оновлюємо тотал корзини
                     $('.cart__total-price, .cart__total-price').html(response.data.cart_total);
 
                     // Оновлюємо каунтер
                     updateCartCounter();
+                    StopLoader($('.cart__products-product-wrap'));
+                    StopLoader($('.min-cart__products-product-wrap'));
                 }
             },
             error: function (xhr, status, error) {
@@ -170,6 +178,12 @@ jQuery(document).ready(function ($) {
 });
 
 
+function StartLoader(element) {
+    element.addClass('loading');
+}
+function StopLoader(element) {
+    element.removeClass('loading');
+}
 
 
 
