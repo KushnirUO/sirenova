@@ -1811,8 +1811,10 @@
 }
 
 .cart__products-product .cart__delete {
-  width: 1.8rem;
-  height: 1.8rem;
+  max-width: 1.8rem;
+  max-height: 1.8rem;
+  width: 100%;
+  height: 100%;
   padding: 0;
   background: transparent;
   border: none;
