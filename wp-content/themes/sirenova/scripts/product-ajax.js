@@ -1,7 +1,7 @@
 let home_url = window.location.origin;
 // Видалення товару з корзини
 jQuery(document).ready(function ($) {
-    $('.cart__delete').on('click', function (e) {
+    $('.cart__delete, .min-cart__delete').on('click', function (e) {
         e.preventDefault();
 
         var cart_item_key = $(this).data('cart_item_key');
@@ -17,7 +17,7 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 if (response.success) {
                     // Видаляємо елемент з DOM
-                    $this.closest('.cart__products-product-wrap').remove();
+                    $this.closest('.cart__products-product-wrap, min-cart__products-product-wrap').remove();
 
                     // Оновлюємо тотал корзини
                     $('.cart__total-price').html(response.data.cart_total);
