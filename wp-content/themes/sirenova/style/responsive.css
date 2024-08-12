@@ -268,7 +268,7 @@
   }
 
   .cart__products-product .cart__img-wrap {
-    width: 23%;
+    width: 21%;
     height: 16rem;
   }
 
@@ -1211,7 +1211,7 @@
 
   .cart__products-product .cart__img-wrap {
     margin-right: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
   }
 
   .cart__products-product .cart__name {
