@@ -108,12 +108,58 @@ jQuery(document).ready(function ($) {
 
     // Виклик функції при зміні кількості товарів
     $('.cart__counter input[name="quantity"]').on('change', function () {
-        updateCartCounter();
+        var $this = $(this);
+        var cart_item_key = $this.closest('.cart__products-product-wrap').data('cart_item_key');
+        var quantity = $this.val();
+
+        $.ajax({
+            type: 'POST',
+            url: wc_cart_params.ajax_url,
+            data: {
+                action: 'update_cart_item_quantity',
+                cart_item_key: cart_item_key,
+                quantity: quantity,
+            },
+            success: function (response) {
+                if (response.success) {
+                    // Оновлюємо суму товару
+                    $this.closest('.cart__products-product-wrap').find('.cart__price-subtotal').html(response.data.item_total);
+
+                    // Оновлюємо тотал корзини
+                    $('.cart__total-price').html(response.data.cart_total);
+
+                    // Оновлюємо каунтер
+                    updateCartCounter();
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('Помилка оновлення кількості товару:', error);
+            }
+        });
     });
 
     // Виклик функції при видаленні товару з корзини
     $(document).on('click', '.cart__delete', function () {
-        updateCartCounter();
+        var cart_item_key = $(this).data('cart_item_key');
+        var $this = $(this);
+
+        $.ajax({
+            type: 'POST',
+            url: wc_cart_params.ajax_url,
+            data: {
+                action: 'remove_cart_item',
+                cart_item_key: cart_item_key,
+            },
+            success: function (response) {
+                if (response.success) {
+                    $this.closest('.cart__products-product-wrap').remove();
+                    updateCartCounter();
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('Помилка видалення товару:', error);
+            }
+        });
     });
 
     // Виклик функції при додаванні товару в корзину
@@ -121,6 +167,7 @@ jQuery(document).ready(function ($) {
         updateCartCounter();
     });
 });
+
 
 
 
