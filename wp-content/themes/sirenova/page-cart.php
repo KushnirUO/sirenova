@@ -105,7 +105,9 @@ get_header()
 
                                 <span class="cart__price-all">
                                     <p>Сума:</p>
-                                    <?php echo $product_subtotal; ?>
+                                    <div>
+                                        <?php echo $product_subtotal; ?>
+                                    </div>
                                 </span>
                             </div>
                         </div>
