@@ -17,10 +17,10 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 if (response.success) {
                     // Видаляємо елемент з DOM
-                    $this.closest('.cart__products-product-wrap, min-cart__products-product-wrap').remove();
+                    $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').remove();
 
                     // Оновлюємо тотал корзини
-                    $('.cart__total-price').html(response.data.cart_total);
+                    $('.cart__total-price, .min-cart__total-price').html(response.data.cart_total);
 
                     // Перевіряємо, чи залишились товари в корзині
                     if (response.data.cart_count === 0) {
@@ -42,7 +42,7 @@ jQuery(document).ready(function ($) {
 jQuery(document).ready(function ($) {
     $('.cart__counter input[name="quantity"]').on('change', function () {
         var quantity = $(this).val();
-        var cart_item_key = $(this).closest('.cart__products-product-wrap').data('cart_item_key');
+        var cart_item_key = $(this).closest('.cart__products-product-wrap, .min-cart__products-product-wrap').data('cart_item_key');
         var $this = $(this);
 
         $.ajax({
@@ -56,10 +56,10 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 if (response.success) {
                     // Оновлюємо суму товару
-                    $this.closest('.cart__products-product-wrap').find('.cart__price-subtotal').html(response.data.item_total);
+                    $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').find('.cart__price-all, .min-cart__price-all div').html(response.data.item_total);
 
                     // Оновлюємо тотал корзини
-                    $('.cart__total-price').html(response.data.cart_total);
+                    $('.cart__total-price, .min-cart__total-price').html(response.data.cart_total);
                 }
             },
             error: function (xhr, status, error) {
@@ -110,7 +110,7 @@ jQuery(document).ready(function ($) {
     // Виклик функції при зміні кількості товарів
     $('.cart__counter input[name="quantity"]').on('change', function () {
         var $this = $(this);
-        var cart_item_key = $this.closest('.cart__products-product-wrap').data('cart_item_key');
+        var cart_item_key = $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').data('cart_item_key');
         var quantity = $this.val();
 
         $.ajax({
@@ -124,10 +124,10 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 if (response.success) {
                     // Оновлюємо суму товару
-                    $this.closest('.cart__products-product-wrap').find('.cart__price-subtotal').html(response.data.item_total);
+                    $this.closest('.cart__products-product-wrap, .mon-cart__products-product-wrap').find('.cart__price-all, ..min-cart__price-all div').html(response.data.item_total);
 
                     // Оновлюємо тотал корзини
-                    $('.cart__total-price').html(response.data.cart_total);
+                    $('.cart__total-price, .cart__total-price').html(response.data.cart_total);
 
                     // Оновлюємо каунтер
                     updateCartCounter();
@@ -140,7 +140,7 @@ jQuery(document).ready(function ($) {
     });
 
     // Виклик функції при видаленні товару з корзини
-    $(document).on('click', '.cart__delete', function () {
+    $(document).on('click', '.cart__delete, .min-cart__delete', function () {
         var cart_item_key = $(this).data('cart_item_key');
         var $this = $(this);
 
@@ -153,7 +153,7 @@ jQuery(document).ready(function ($) {
             },
             success: function (response) {
                 if (response.success) {
-                    $this.closest('.cart__products-product-wrap').remove();
+                    $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').remove();
                     updateCartCounter();
                 }
             },
