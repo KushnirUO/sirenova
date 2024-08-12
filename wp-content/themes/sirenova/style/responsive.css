@@ -313,7 +313,7 @@
   }
 
   .wrapper.cart .cart__counter input {
-    width: 2.9rem;
+    width: 1.9rem;
   }
 
   .filters .filters__lists-list .list__content.colors .list__content-wrapper {
@@ -985,6 +985,24 @@
 }
 
 @media only screen and (max-width: 767px) {
+
+  .cart {
+    margin-top: 6.7rem;
+  }
+
+  .cart__price>p {
+    display: none;
+  }
+
+  .mini-cart-wrapper.open {
+    transform: translateX(0);
+  }
+
+  .mini-cart-wrapper {
+    width: 100vw;
+    top: 5.45rem;
+  }
+
   .catalog__main-filters {
     max-width: unset;
   }
