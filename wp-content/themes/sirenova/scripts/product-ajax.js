@@ -1,4 +1,7 @@
 let home_url = window.location.origin;
+var wc_cart_params = typeof wc_cart_params !== 'undefined' ? wc_cart_params : {
+    ajax_url: wc_add_to_cart_params ? wc_add_to_cart_params.ajax_url : ''
+};
 // Видалення товару з корзини
 jQuery(document).ready(function ($) {
     // Загальні функції для AJAX запитів

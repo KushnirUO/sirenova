@@ -211,6 +211,8 @@ remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_pro
 remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
 
+
+
 require get_template_directory() . '/inc/theme-enqueue.php';
 require_once get_template_directory() . '/inc/class-sirenova-header-menu.php';
 require_once get_template_directory() . '/inc/class-sirenova-footer-menu.php';
