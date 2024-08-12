@@ -1,5 +1,3 @@
-let home_url = window.location.origin;
-// Видалення товару з корзини
 jQuery(document).ready(function ($) {
     // Загальні функції для AJAX запитів
     function sendAjaxRequest(action, data, onSuccess) {
@@ -92,7 +90,3 @@ function StartLoader(element) {
 function StopLoader(element) {
     element.removeClass('loading');
 }
-
-
-
-
