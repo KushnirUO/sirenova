@@ -961,6 +961,66 @@ hr {
     gap: 1rem;
 }
 
+.cart-empty {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+}
+
+.cart-empty>p {
+    font-size: 3rem;
+}
+
+.min-cart__total-wrapper .btn:hover {
+    color: white;
+    background: blueviolet;
+    border: 1px solid transparent;
+}
+
+.cart__total-wrapper .btn:hover {
+    color: white;
+    background: blueviolet;
+    border: 1px solid transparent;
+}
+
+.mini-cart-wrapper .cart-empty>p {
+    font-size: 2.5rem;
+}
+
+.cart-empty>a {
+    width: max-content;
+    max-width: 100%;
+    border: 0.1rem solid #9b72cf;
+    color: white;
+    background: #9b72cf;
+    display: block;
+    margin-top: 1rem;
+    padding: 2.5rem 3.4rem;
+    border-radius: 4rem;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all .3s linear;
+}
+
+.cart-empty>a:hover {
+    color: white;
+    background: blueviolet;
+    border: 1px solid transparent;
+}
+
+.promo-section .btn:hover {
+    color: white;
+    background: blueviolet;
+    border: 1px solid transparent;
+}
+
 @media only screen and (min-width: 720px) {
     .cart-all__wrapper {
         width: 100%;
