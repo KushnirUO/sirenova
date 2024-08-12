@@ -11,6 +11,7 @@ get_header()
     </div>
     <h1>Кошик</h1>
     <?php
+    $shop_url = get_permalink(wc_get_page_id('shop'));
     // Отримуємо всі товари в корзині
     $cart_items = WC()->cart->get_cart();
 
@@ -59,7 +60,7 @@ get_header()
                     }
                 }
                 ?>
-        <div class="cart__products-product-wrap">
+        <div class="cart__products-product-wrap" data-cart_item_key="<?php echo $cart_item_key; ?>">
             <div class="cart__products-product">
                 <input type="hidden" name="card_item_key" value="da81668b633a6428d3cb74e4cd5aa088">
                 <a href='<?php echo $product_permalink; ?>' class="cart__img-wrap">
@@ -103,7 +104,9 @@ get_header()
                         <span class="cart__price-all">
                             <tr>
                                 <th>Сума:</th>
-                                <td><?php echo $product_subtotal; ?></td>
+                                <span class="cart__price-subtotal">
+                                    <td><?php echo $product_subtotal; ?></td>
+                                </span>
                             </tr>
                         </span>
                     </div>
@@ -143,7 +146,7 @@ get_header()
         </span>
     </div>
     <div class="cart__btns">
-        <a href="<?php echo esc_url(wc_get_cart_url()); ?>">Повернутись до магазину</a>
+        <a href="<?php echo $shop_url ?>">Повернутись до магазину</a>
         <a href="<?php echo wc_get_checkout_url(); ?>" class="btn">Замовити</a>
     </div>
     <h4>Безкоштовна доставка від 1000 грн</h4>
@@ -151,7 +154,7 @@ get_header()
     } else {
         echo '<div class="cart-empty">';
         echo '<p>У Вашій корзині ще немає товарів</p>';
-        echo '<a href=>Повернутись до магазину</a>';
+        echo "<a href='$shop_url'>Повернутись до магазину</a>";
         echo '</div>';
     }
     ;
