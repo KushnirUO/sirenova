@@ -25,8 +25,9 @@ jQuery(document).ready(function ($) {
                     // Перевіряємо, чи залишились товари в корзині
                     if (response.data.cart_count === 0) {
                         // Заміняємо розмітку корзини, коли всі товари видалені
-                        $('.cart__products, .cart__total, .cart__btns, .wrapper.cart>h4').remove();
+                        $('.cart__products, .cart-all__wrapper, .min-cart__products, .min-cart__total-wrapper').remove();
                         $('.wrapper.cart').append(`<div class="cart-empty"><p>У Вашій корзині ще немає товарів</p><a href='${home_url}/shop'>Повернутись до магазину</a></div>`);
+                        $('.mini-cart-wrapper').append(`<div class="cart-empty"><p>У Вашій корзині ще немає товарів</p><a href='${home_url}/shop'>Повернутись до магазину</a></div>`);
                     }
                 }
             },
