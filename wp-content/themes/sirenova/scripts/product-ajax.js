@@ -11,6 +11,8 @@ jQuery(document).ready(function ($) {
                 if (response.success) {
                     onSuccess(response);
                 }
+                StopLoader($('.cart__products-product-wrap'));
+                StopLoader($('.min-cart__products-product-wrap'));
             },
             error: function (xhr, status, error) {
                 console.log(`Помилка ${action}:`, error);
@@ -36,8 +38,8 @@ jQuery(document).ready(function ($) {
     function handleRemoveItem() {
         var cart_item_key = $(this).data('cart_item_key');
         var $this = $(this);
-        StartLoader($('.cart__products-product-wrap'));
-        StartLoader($('.min-cart__products-product-wrap'));
+        StartLoader($(this).closest('.cart__products-product-wrap'));
+        StartLoader($(this).closest('.min-cart__products-product-wrap'));
 
         sendAjaxRequest('remove_cart_item', { cart_item_key: cart_item_key }, function (response) {
             $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').remove();
@@ -46,9 +48,9 @@ jQuery(document).ready(function ($) {
                 $('.cart__products, .cart-all__wrapper, .min-cart__products, .min-cart__total-wrapper').remove();
                 $('.wrapper.cart').append(`<div class="cart-empty"><p>У Вашій корзині ще немає товарів</p><a href='${home_url}/shop'>Повернутись до магазину</a></div>`);
                 $('.mini-cart-wrapper').append(`<div class="cart-empty"><p>У Вашій корзині ще немає товарів</p><a href='${home_url}/shop'>Повернутись до магазину</a></div>`);
-            } else {
-                updateCartCounter();
             }
+            updateCartCounter();
+
         });
     }
 
@@ -57,8 +59,8 @@ jQuery(document).ready(function ($) {
         var cart_item_key = $(this).closest('.cart__products-product-wrap, .min-cart__products-product-wrap').data('cart_item_key');
         var $this = $(this);
 
-        StartLoader($('.cart__products-product-wrap'));
-        StartLoader($('.min-cart__products-product-wrap'));
+        StartLoader($(this).closest('.cart__products-product-wrap'));
+        StartLoader($(this).closest('.min-cart__products-product-wrap'));
 
         sendAjaxRequest('update_cart_item_quantity', { cart_item_key: cart_item_key, quantity: quantity }, function (response) {
             $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').find('.cart__price-all div, .min-cart__price-all div').html(response.data.item_total);
