@@ -184,14 +184,26 @@ function update_cart_item_quantity_ajax()
     }
 }
 
+// Оноволення каунтера товарів в хедері
+add_action('wp_ajax_update_cart_counter', 'update_cart_counter_ajax');
+add_action('wp_ajax_nopriv_update_cart_counter', 'update_cart_counter_ajax');
+
+function update_cart_counter_ajax()
+{
+    // Отримуємо загальну кількість товарів у корзині
+    $cart_count = WC()->cart->get_cart_contents_count();
+
+    wp_send_json_success(
+        array(
+            'cart_count' => $cart_count,
+        )
+    );
+}
 
 
 // Виклик функції при збереженні товару
 add_action('save_post_product', 'update_variations_with_custom_prices');
 add_action('wp_insert_post', 'update_variations_with_custom_prices');
-
-
-
 
 
 remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);

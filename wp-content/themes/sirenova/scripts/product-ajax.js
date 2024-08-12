@@ -79,5 +79,49 @@ jQuery(document).ready(function ($) {
     });
 });
 
+// Оноволення каунтера товарів в хедері
+jQuery(document).ready(function ($) {
+    function updateCartCounter() {
+        $.ajax({
+            type: 'POST',
+            url: wc_cart_params.ajax_url,
+            data: {
+                action: 'update_cart_counter'
+            },
+            success: function (response) {
+                if (response.success) {
+                    var cartCount = response.data.cart_count;
+
+                    // Оновлюємо значення каунтера
+                    if (cartCount > 0) {
+                        $('.cart__counter-icon').text(cartCount).show();
+                    } else {
+                        $('.cart__counter-icon').hide();
+                    }
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('Помилка оновлення каунтера корзини:', error);
+            }
+        });
+    }
+
+    // Виклик функції при зміні кількості товарів
+    $('.cart__counter input[name="quantity"]').on('change', function () {
+        updateCartCounter();
+    });
+
+    // Виклик функції при видаленні товару з корзини
+    $(document).on('click', '.cart__delete', function () {
+        updateCartCounter();
+    });
+
+    // Виклик функції при додаванні товару в корзину
+    $(document).on('added_to_cart', function () {
+        updateCartCounter();
+    });
+});
+
+
 
 
