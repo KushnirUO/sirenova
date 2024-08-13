@@ -1,3 +1,7 @@
+var wc_cart_params = typeof wc_cart_params !== 'undefined' ? wc_cart_params : {
+    ajax_url: wc_add_to_cart_params ? wc_add_to_cart_params.ajax_url : ''
+};
+
 $(document).ready(function () {
     var typingTimer;
     var doneTypingInterval = 2000;
@@ -16,10 +20,11 @@ $(document).ready(function () {
 
     function doneTyping(query) {
         $.ajax({
-            url: '/endpoint',
+            url: wc_cart_params.ajax_url,
             method: 'POST',
-            data: { search: query },
+            data: { search: query, action: 'find_form' },
             success: function (response) {
+                $('.result-form').html(response);
                 console.log('Отримано дані:', response);
                 $('.find__block').removeClass('loading');
 
