@@ -9,6 +9,7 @@ $(document).ready(function () {
         if ($input.val().length >= 3) {
             typingTimer = setTimeout(function () {
                 doneTyping($input.val());
+                $('.find__block').addClass('loading');
             }, doneTypingInterval);
         }
     });
@@ -20,6 +21,7 @@ $(document).ready(function () {
             data: { search: query },
             success: function (response) {
                 console.log('Отримано дані:', response);
+                $('.find__block').removeClass('loading');
 
             },
             error: function (xhr, status, error) {

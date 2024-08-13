@@ -1031,8 +1031,8 @@ hr {
 .closeBtn {
     filter: brightness(0);
     position: absolute;
-    right: 1.8rem;
-    top: 1.7rem;
+    right: -0.2rem;
+    top: -3.3rem;
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -1222,6 +1222,27 @@ hr {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+}
+
+.find__form {
+    position: relative;
+}
+
+.loading .find__form::after {
+    content: '';
+    position: absolute;
+    width: 2.8rem;
+    height: 2.8rem;
+    right: 2rem;
+    top: 1rem;
+    border: 0.3rem solid #9b72cf;
+    z-index: 10000;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+
 }
 
 @media only screen and (min-width: 720px) {
