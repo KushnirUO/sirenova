@@ -27,5 +27,6 @@ function sirenova_scripts()
 
     // AJAX на товарі
     wp_enqueue_script('product-ajax', get_template_directory_uri() . '/scripts/product-ajax.js');
-
+    // AJAX на пошук
+    wp_enqueue_script('form-find-ajax', get_template_directory_uri() . '/scripts/form-find-ajax.js');
 }

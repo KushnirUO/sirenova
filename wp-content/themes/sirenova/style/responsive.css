@@ -243,6 +243,14 @@
 }
 
 @media only screen and (max-width: 991px) {
+  .header .find__block {
+    max-width: unset;
+  }
+
+  .result-find-all {
+    width: 100%;
+  }
+
   .modal__window-table-wrap {
     display: block;
   }
@@ -441,17 +449,7 @@
     width: 100%;
   }
 
-  .header .find__block .find__form-inp,
-  .header .find__block .find__form-inp:-ms-input-placeholder {
-    font-size: 3.1rem;
-    line-height: 4.8rem;
-  }
 
-  .header .find__block .find__form-inp,
-  .header .find__block .find__form-inp::placeholder {
-    font-size: 3.1rem;
-    line-height: 4.8rem;
-  }
 
   .main__slider .slide__block-bg-txt {
     font-size: 6rem;
@@ -1691,17 +1689,7 @@
     white-space: nowrap;
   }
 
-  .header .find__block .find__form-inp,
-  .header .find__block .find__form-inp:-ms-input-placeholder {
-    font-size: 2.4rem;
-    line-height: 3.1rem;
-  }
 
-  .header .find__block .find__form-inp,
-  .header .find__block .find__form-inp::placeholder {
-    font-size: 2.4rem;
-    line-height: 3.1rem;
-  }
 
   .main__slider .slick-dots {
     bottom: 1.6rem;

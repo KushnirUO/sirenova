@@ -596,7 +596,8 @@
 
 .header .find__block {
   display: none;
-  width: 30%;
+  width: 100%;
+  max-width: 45rem;
   position: absolute;
   top: 6.6rem;
   right: 0;
@@ -606,22 +607,22 @@
 }
 
 .header .find__block .find__form-inp {
-  width: 100%;
-  margin-bottom: 3rem;
+  width: -webkit-fill-available;
+  margin-bottom: 1rem;
   border: none;
+  padding: 1rem;
   border-bottom: 1px solid #E5E5E5;
-  padding-bottom: 1.5rem;
   background: none;
-  font: 300 2.8rem / 3.2rem 'Futura Pt', sans-serif;
+  font: 300 2rem / 3rem 'Futura Pt', sans-serif;
   border-radius: 0 0 1rem 1rem;
 }
 
 .header .find__block .find__form-inp:-ms-input-placeholder {
-  font: 300 2.8rem / 3.2rem 'Futura Pt', sans-serif;
+  font: 300 2rem / 3.2rem 'Futura Pt', sans-serif;
 }
 
 .header .find__block .find__form-inp::placeholder {
-  font: 300 2.8rem / 3.2rem 'Futura Pt', sans-serif;
+  font: 300 2rem / 3.2rem 'Futura Pt', sans-serif;
 }
 
 .header .find__block .find__form-btns {
@@ -642,7 +643,8 @@
   text-transform: uppercase;
   text-decoration: underline;
   letter-spacing: .15rem;
-  margin-right: 5rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
 }
 
 .header .find__block .find__form-btns button {
