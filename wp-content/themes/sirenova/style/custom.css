@@ -1171,6 +1171,16 @@ hr {
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    width: 100%;
+}
+
+.result-find__price ins {
+    text-decoration: none;
+}
+
+.result-find__price ins .woocommerce-Price-amount.amount {
+    font-size: 1.5rem;
+    color: #d10505;
 }
 
 .result-find-all>p,
