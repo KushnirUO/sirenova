@@ -3327,8 +3327,10 @@
 }
 
 .promo-section h1 {
-  font-weight: 600;
+  font-weight: 400;
   max-width: 50rem;
+  line-height: 120%;
+  font-size: 3.8rem;
 }
 
 .promo-section__wrapper {
