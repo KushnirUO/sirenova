@@ -779,6 +779,7 @@
 
 .main__new h2 {
   margin-bottom: 1rem;
+  font-weight: 200;
 }
 
 
@@ -831,6 +832,7 @@
 
 .main__categoryes h2 {
   margin-bottom: 5rem;
+  font-weight: 200;
 }
 
 .main__categoryes-blocks {

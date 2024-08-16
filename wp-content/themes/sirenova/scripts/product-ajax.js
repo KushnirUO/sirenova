@@ -50,7 +50,7 @@ jQuery(document).ready(function ($) {
                 $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').remove();
 
                 updateCartTotal(response);
-
+                updateInfoTotalPrice();
                 if (response.data.cart_count === 0) {
                     $('.cart__products, .cart-all__wrapper, .min-cart__products, .min-cart__total-wrapper').remove();
                     $('.wrapper.cart').append(`<div class="cart-empty"><p>У Вашій корзині ще немає товарів</p><a href='${home_url}/shop'>Повернутись до магазину</a></div>`);
@@ -76,6 +76,7 @@ jQuery(document).ready(function ($) {
         sendAjaxRequest('update_cart_item_quantity', { cart_item_key: cart_item_key, quantity: quantity }, function (response) {
             $this.closest('.cart__products-product-wrap, .min-cart__products-product-wrap').find('.cart__price-all div, .min-cart__price-all div').html(response.data.item_total);
             updateCartTotal(response);
+            updateInfoTotalPrice()
             updateCartCounter();
         });
     }
@@ -105,7 +106,20 @@ function StartLoader(element) {
 function StopLoader(element) {
     element.removeClass('loading');
 }
+function updateInfoTotalPrice() {
+    let total = parseInt($('.min-cart__total-price').text());
+    if (total < 200) {
+        $('.min-cart-free p, .cart-free p').text('Мінімальна сума замовлення 200 грн');
+        $('.min-cart__total-wrapper > a, .cart__total-wrapper > a').addClass('disabledLink');
+    }
+    else {
+        $('.min-cart-free p, .cart-free p').text('БЕЗКОШТОВНА ДОСТАВКА ВІД 1000 ГРН');
+        $('.min-cart__total-wrapper > a, .cart__total-wrapper > a').removeClass('disabledLink');
+    }
+}
 
-
+$(document).ready(function () {
+    updateInfoTotalPrice();
+})
 
 
