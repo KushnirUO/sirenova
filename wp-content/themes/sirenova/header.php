@@ -39,6 +39,7 @@ $cart_count = WC()->cart->get_cart_contents_count();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.css">
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.js"></script>
 
+
     <?php wp_head() ?>
 </head>
 

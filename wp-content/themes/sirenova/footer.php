@@ -140,6 +140,7 @@ $hours = get_field('hours', 'options');
     </div>
 </footer>
 <?php wp_footer(); ?>
+
 </div>
 </body>
 
