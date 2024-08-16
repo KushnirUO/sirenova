@@ -44,22 +44,22 @@ $product_categories = get_terms(
 <!-- Category block -->
 <section class="wrapper main__categoryes">
     <h2><?php echo $category_title; ?></h2>
-    <?php if (!empty($product_categories) && !is_wp_error($product_categories)): ?>
-    <div class="main__categoryes-blocks">
-        <?php foreach ($product_categories as $category):
+    <?php if (!empty($product_categories) && !is_wp_error($product_categories)) : ?>
+        <div class="main__categoryes-blocks">
+            <?php foreach ($product_categories as $category) :
                 $category_link = get_term_link($category);
                 $thumbnail_id = get_term_meta($category->term_id, 'thumbnail_id', true);
                 $image_url = wp_get_attachment_url($thumbnail_id);
-                ?>
-        <a class="block" href="<?php echo $category_link; ?>">
-            <div class="block__bg"><img src="<?php echo $image_url; ?>" alt=""></div>
-            <div class="block__content">
-                <h3><?php echo $category->name; ?></h3>
-            </div>
-        </a>
-        <?php endforeach; ?>
+            ?>
+                <a class="block" href="<?php echo $category_link; ?>">
+                    <div class="block__bg"><img src="<?php echo $image_url; ?>" alt=""></div>
+                    <div class="block__content">
+                        <h3><?php echo $category->name; ?></h3>
+                    </div>
+                </a>
+            <?php endforeach; ?>
         <?php endif; ?>
-    </div>
+        </div>
 </section>
 <section class="wrapper main__new">
     <h2>Акційні товари</h2>
