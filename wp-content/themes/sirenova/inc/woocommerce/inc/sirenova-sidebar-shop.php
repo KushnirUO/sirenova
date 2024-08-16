@@ -96,7 +96,6 @@ foreach ($product_attributes as $attribute) {
         foreach ($terms as $term) {
             $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
             echo '<li>';
-        
             echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . $color_hex . ';" />';
             echo $term->name;
             echo '<label for="razmer-' . esc_attr($term->slug). '" style="background-color: ' . esc_attr ($color_hex) . '"></label>'; // Мітка без тексту

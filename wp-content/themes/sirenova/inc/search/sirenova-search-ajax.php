@@ -39,6 +39,7 @@ function find_form_ajax()
             if (stripos($title, $search_query) === false) {
                 continue;
             }
+            ;
 
             $counter++;
             if ($displayed_items >= $max_display) {
