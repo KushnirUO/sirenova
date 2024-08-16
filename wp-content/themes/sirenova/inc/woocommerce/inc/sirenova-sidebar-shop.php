@@ -87,18 +87,21 @@ foreach ($product_attributes as $attribute) {
     $terms = get_terms(array('taxonomy' => $attribute_name, 'hide_empty' => false));
     
     // Перевірити, чи поточний атрибут є атрибутом кольору
-    if ($attribute_name === 'pa_colors') {
+    if ($attribute_name === 'pa_color') {
         echo '<div class="single-sidebar-wrap active">';
         echo '<h3 class="product-title">' . esc_html($attribute->attribute_label) . '</h3>';
         echo '<div class="sidebar-body">';
         echo '<ul class="size-list">'; // Змінено клас для кольорів
         // Отримати значення атрибуту 'pa_color' для поточного товару
-        foreach ($terms as $product_razmer) {
-            $color_hex = get_term_meta($product_razmer->term_id, 'attribute_color', true);
+        foreach ($terms as $term) {
+            $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
             echo '<li>';
-            echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($product_razmer->slug) . '" value="' . esc_attr($product_razmer->slug) . '" style="background-color: ' . $color_hex . ';" />';
-            echo '<label for="razmer-' . esc_attr($product_razmer->slug). '" style="background-color: ' . $color_hex . '"></label>'; // Мітка без тексту
+        
+            echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . $color_hex . ';" />';
+            echo $term->name;
+            echo '<label for="razmer-' . esc_attr($term->slug). '" style="background-color: ' . esc_attr ($color_hex) . '"></label>'; // Мітка без тексту
             echo '</li>';
+            
         }
         echo '</ul>';
         echo '</div>';
@@ -109,10 +112,10 @@ foreach ($product_attributes as $attribute) {
         echo '<h3 class="product-title">' . esc_html($attribute->attribute_label) . '</h3>';
         echo '<div class="sidebar-body">';
         echo '<ul class="size-list">'; // Змінено клас для розмірів
-        foreach ($terms as $product_razmer) {
+        foreach ($terms as $term) {
             echo '<li>';
-            echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($product_razmer->slug) . '" value="' . esc_attr($product_razmer->slug) . '" />';
-            echo '<label for="razmer-' . esc_attr($product_razmer->slug) . '">' . esc_html($product_razmer->name) . '</label>';
+            echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
+            echo '<label for="razmer-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
             echo '</li>';
         }
         echo '</ul>';
