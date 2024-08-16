@@ -3914,6 +3914,9 @@
   color: #fff !important;
 }
 
+.woocommerce-notices-wrapper {
+  display: none;
+}
 
 
 .single-sidebar-wrap.active:nth-child(3) .size-list li label {

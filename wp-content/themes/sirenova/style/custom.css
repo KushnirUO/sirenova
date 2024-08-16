@@ -2141,6 +2141,10 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     border: 1px solid #9b72cf;
 }
 
+.catalog__main .product {
+    margin: 0;
+}
+
 .catalog__main .single-sidebar-wrap:nth-child(4) .size-list li label {
     height: 3rem !important;
     border-radius: 1rem !important;

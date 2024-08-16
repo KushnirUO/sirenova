@@ -169,7 +169,7 @@ h3 {
   text-transform: uppercase;
 }
 
-.bredacrumbs {
+.woocommerce-breadcrumb {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: start;
@@ -178,7 +178,8 @@ h3 {
   align-items: center;
 }
 
-.bredacrumbs * {
+.woocommerce-breadcrumb,
+.woocommerce-breadcrumb a {
   position: relative;
   font-size: 1.4rem;
   line-height: 3rem;
@@ -186,15 +187,19 @@ h3 {
   transition: all .3s linear;
 }
 
-.bredacrumbs *:not(:last-child) {
+.woocommerce-breadcrumb a:hover {
+  color: black;
+}
+
+.woocommerce-breadcrumb *:not(:last-child) {
   padding-right: 1.6rem;
 }
 
-.bredacrumbs *:not(:last-child):hover {
+.woocommerce-breadcrumb *:not(:last-child):hover {
   color: #231942;
 }
 
-.bredacrumbs *:not(:last-child)::after {
+.woocommerce-breadcrumb *:not(:last-child)::after {
   content: '/';
   position: absolute;
   right: .35rem;
