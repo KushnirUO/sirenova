@@ -1,7 +1,7 @@
 <?php
 
 // Hide admin bar
-show_admin_bar(false);
+show_admin_bar(true);
 
 // Custom Theme decklaration
 add_action('after_setup_theme', function () {
@@ -11,7 +11,8 @@ add_action('after_setup_theme', function () {
 // Add ACF Option page
 if (function_exists('acf_add_options_page')) {
     acf_add_options_page();
-};
+}
+;
 
 // Підключення скриптів та стилів
 require_once get_template_directory() . '/inc/theme-enqueue.php';

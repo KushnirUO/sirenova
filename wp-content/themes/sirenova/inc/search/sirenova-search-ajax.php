@@ -106,7 +106,7 @@ function find_form_ajax()
 
         // Якщо результатів більше 3-х, додаємо кнопку для перегляду всіх результатів
         if ($counter > $max_display) {
-            $search_page_url = esc_url(add_query_arg('s', $search_query, home_url('/search/')));
+            $search_page_url = esc_url(add_query_arg('s', $search_query, home_url('/shop/')));
             $output .= "<a href='{$search_page_url}' class='form-show-all'>Переглянути всі({$counter})</a>";
         }
 
