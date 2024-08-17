@@ -127,7 +127,9 @@
         <input type="hidden" name="action" value="ajaxfilter" />
     </form>
     <div class="wrapper-btn-select">
-        <div class="btn">Застосувати</div>
+        <div class="wrapper-btn-select_btn">
+            <div class="btn">Застосувати</div>
+        </div>
     </div>
 </div>
 
