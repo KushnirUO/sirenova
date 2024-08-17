@@ -307,12 +307,51 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 $(document).ready(function () {
     // Перевіряємо, чи існує елемент з класом .wrapper.main__new
-    if ($('.wrapper.main__new').length > 0) {
-        // Видаляємо div з класом woocommerce columns-4
-        $('.wrapper.main__new .woocommerce.columns-4').contents().unwrap();
-        StartSlider();
-        initMainNewSlider();
-    }
+
+    $('.product-filter-sort a').click(function (event) {
+        const el = $(this);
+        const val = el.attr('href').replace('?orderby=', '');
+
+        $('.product-filter-sort a').removeClass('active');
+        el.addClass('active');
+
+        $('input[name="orderby"]').val(val);
+
+        $('#ajaxform').submit();
+        event.preventDefault();
+    });
+    // асинхронный запрос при отправке формы
+    $('#ajaxform').submit(function (event) {
+        event.preventDefault();
+
+        const form = $(this);
+
+        $.ajax({
+            type: 'POST',
+            url: woocommerce_params.ajax_url,
+            data: form.serialize(),
+
+            success: function (data) {
+                // выводим отфильтрованные товары
+                $('.catalog__main-products').html(data.products);
+                // выводим счётчик количества товаров
+                $('.woocommerce-result-count').text(data.count);
+
+                $('.page-pagination-wrapper').html('');
+
+                $('#shop-page-wrapper').unblock();
+            }
+
+        });
+
+    });
+
+    // отправляем форму при клике на чекбоксы также
+    $('#ajaxform input[type="checkbox"]').change(function () {
+        $('#ajaxform').submit();
+    });
+
+
 });
 function StartSlider() {
     $('#mainTopSlider').slick({

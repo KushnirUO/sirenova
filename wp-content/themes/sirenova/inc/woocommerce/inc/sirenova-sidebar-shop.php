@@ -39,7 +39,7 @@
             <div class="sidebar-body">
                 <ul class="sidebar-list">
                     <?php foreach ($product_categories as $product_category) : ?>
-                    <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
+                    <li>
                         <input type="checkbox" name="product_cats[]"
                             id="product-cat-<?php echo absint($product_category->term_id) ?>"
                             value="<?php echo absint($product_category->term_id) ?>" />
@@ -80,53 +80,53 @@
             </div>
         </div>
         <?php
-// Отримати атрибути товарів
-$product_attributes = wc_get_attribute_taxonomies();
-foreach ($product_attributes as $attribute) {
-    $attribute_name = wc_attribute_taxonomy_name($attribute->attribute_name);
-    $terms = get_terms(array('taxonomy' => $attribute_name, 'hide_empty' => false));
-    
-    // Перевірити, чи поточний атрибут є атрибутом кольору
-    if ($attribute_name === 'pa_color') {
-        echo '<div class="single-sidebar-wrap active">';
-        echo '<h3 class="product-title">' . esc_html($attribute->attribute_label) . '</h3>';
-        echo '<div class="sidebar-body">';
-        echo '<ul class="size-list">'; // Змінено клас для кольорів
-        // Отримати значення атрибуту 'pa_color' для поточного товару
-        foreach ($terms as $term) {
-            $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
-            echo '<li>';
-            echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . $color_hex . ';" />';
-            echo $term->name;
-            echo '<label for="razmer-' . esc_attr($term->slug). '" style="background-color: ' . esc_attr ($color_hex) . '"></label>'; // Мітка без тексту
-            echo '</li>';
-            
+        // Отримати атрибути товарів
+        $product_attributes = wc_get_attribute_taxonomies();
+        foreach ($product_attributes as $attribute) {
+            $attribute_name = wc_attribute_taxonomy_name($attribute->attribute_name);
+            $terms = get_terms(array('taxonomy' => $attribute_name, 'hide_empty' => false));
+
+            // Перевірити, чи поточний атрибут є атрибутом кольору
+            if ($attribute_name === 'pa_color') {
+                echo '<div class="single-sidebar-wrap active">';
+                echo '<h3 class="product-title">' . esc_html($attribute->attribute_label) . '</h3>';
+                echo '<div class="sidebar-body">';
+                echo '<ul class="size-list">'; // Змінено клас для кольорів
+                // Отримати значення атрибуту 'pa_color' для поточного товару
+                foreach ($terms as $term) {
+                    $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
+                    echo '<li>';
+                    echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . $color_hex . ';" />';
+                    echo $term->name;
+                    echo '<label for="razmer-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>'; // Мітка без тексту
+                    echo '</li>';
+                }
+                echo '</ul>';
+                echo '</div>';
+                echo '</div>';
+            } else {
+                // Вивести інші атрибути за звичайною логікою
+                echo '<div class="single-sidebar-wrap active">';
+                echo '<h3 class="product-title">' . esc_html($attribute->attribute_label) . '</h3>';
+                echo '<div class="sidebar-body">';
+                echo '<ul class="size-list">'; // Змінено клас для розмірів
+                foreach ($terms as $term) {
+                    echo '<li>';
+                    echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
+                    echo '<label for="razmer-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
+                    echo '</li>';
+                }
+                echo '</ul>';
+                echo '</div>';
+                echo '</div>';
+            }
         }
-        echo '</ul>';
-        echo '</div>';
-        echo '</div>';
-    } else {
-        // Вивести інші атрибути за звичайною логікою
-        echo '<div class="single-sidebar-wrap active">';
-        echo '<h3 class="product-title">' . esc_html($attribute->attribute_label) . '</h3>';
-        echo '<div class="sidebar-body">';
-        echo '<ul class="size-list">'; // Змінено клас для розмірів
-        foreach ($terms as $term) {
-            echo '<li>';
-            echo '<input type="checkbox" name="razmer[]" id="razmer-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
-            echo '<label for="razmer-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
-            echo '</li>';
-        }
-        echo '</ul>';
-        echo '</div>';
-        echo '</div>';
-    }
-}
-?>
+        ?>
 
         <input type="hidden" name="orderby" value="date" />
         <input type="hidden" name="action" value="ajaxfilter" />
     </form>
+    <div class="btn">Застосувати</div>
 </div>
 
 <!-- End Sidebar Area Wrapper -->
