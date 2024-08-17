@@ -309,23 +309,21 @@ window.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
     // Перевіряємо, чи існує елемент з класом .wrapper.main__new
 
-    $('.product-filter-sort a').click(function (event) {
-        const el = $(this);
-        const val = el.attr('href').replace('?orderby=', '');
+    // $('.product-filter-sort a').click(function (event) {
+    //     const el = $(this);
+    //     const val = el.attr('href').replace('?orderby=', '');
 
-        $('.product-filter-sort a').removeClass('active');
-        el.addClass('active');
+    //     $('.product-filter-sort a').removeClass('active');
+    //     el.addClass('active');
 
-        $('input[name="orderby"]').val(val);
+    //     $('input[name="orderby"]').val(val);
 
-        $('#ajaxform').submit();
-        event.preventDefault();
-    });
+    //     $('#ajaxform').submit();
+    //     event.preventDefault();
+    // });
     // асинхронный запрос при отправке формы
-    $('#ajaxform').submit(function (event) {
-        event.preventDefault();
-
-        const form = $(this);
+    $(document).on('click', '.wrapper-btn-select .btn ', function () {
+        const form = $('#ajaxform');
 
         $.ajax({
             type: 'POST',
@@ -344,13 +342,12 @@ $(document).ready(function () {
             }
 
         });
-
     });
 
     // отправляем форму при клике на чекбоксы также
-    $('#ajaxform input[type="checkbox"]').change(function () {
-        $('#ajaxform').submit();
-    });
+    // $('#ajaxform input[type="checkbox"]').change(function () {
+    //     $('#ajaxform').submit();
+    // });
 
 
 });
@@ -414,15 +411,17 @@ $(document).ready(function () {
 
 function ScrollBtnFilter() {
     if ($('.catalog__main-filters').length > 0) {
+        var $block = $('.wrapper-btn-select_btn'); // Замените на ваш селектор
+        $block.addClass('btn-fixed');
+
         $(window).on('scroll', function () {
-            var $block = $('.catalog__main-filters .btn'); // Замените на ваш селектор
-            var scrollPosition = $(window).scrollTop() + $(window).height();
+            var scrollPosition = $(window).scrollTop() + $('.catalog__main-filters').height();
             var documentHeight = $(document).height();
             console.log(documentHeight - scrollPosition);
-            if (documentHeight - scrollPosition <= 590) {
-                $block.css('position', 'relative');
+            if (documentHeight - scrollPosition <= 390) {
+                $block.removeClass('btn-fixed');
             } else {
-                $block.css('position', 'fixed');
+                $block.addClass('btn-fixed');
             }
         });
     }
