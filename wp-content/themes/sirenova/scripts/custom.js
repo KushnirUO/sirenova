@@ -379,6 +379,12 @@ function StartSlider() {
 
 }
 $(document).ready(function () {
+    if ($('.wrapper.main__new').length > 0) {
+        // Видаляємо div з класом woocommerce columns-4
+        $('.wrapper.main__new .woocommerce.columns-4').contents().unwrap();
+        StartSlider();
+        initMainNewSlider();
+    }
     var rangeSlider = $(".price-range"),
         amount = $("#amount"),
         minPrice = rangeSlider.data('min'),
@@ -413,7 +419,7 @@ function ScrollBtnFilter() {
             var scrollPosition = $(window).scrollTop() + $(window).height();
             var documentHeight = $(document).height();
             console.log(documentHeight - scrollPosition);
-            if (documentHeight - scrollPosition <= 490) {
+            if (documentHeight - scrollPosition <= 590) {
                 $block.css('position', 'relative');
             } else {
                 $block.css('position', 'fixed');

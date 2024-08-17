@@ -2150,9 +2150,9 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
 }
 
 .catalog__main-filters .wrapper-btn-select .btn {
-    position: fixed;
-    bottom: 0;
-    max-width: 25rem;
+    bottom: 2rem;
+    left: 0;
+    max-width: 29rem;
     width: 100%;
     border: 0.1rem solid #9b72cf;
     color: white;
@@ -2161,7 +2161,17 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     margin-top: 1rem;
     padding: 1.5rem 2.4rem;
     cursor: pointer;
-    z-index: 1;
+}
+
+.catalog__main-filters .wrapper-btn-select .btn::after {
+    content: '';
+    background: white;
+    bottom: -3rem;
+    left: -1rem;
+    position: absolute;
+    width: 106%;
+    height: 3rem;
+    z-index: -100000;
 }
 
 .catalog__main .single-sidebar-wrap:nth-child(4) .size-list li label {
