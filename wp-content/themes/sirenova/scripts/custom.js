@@ -307,6 +307,13 @@ window.addEventListener('DOMContentLoaded', function () {
 
 });
 $(document).ready(function () {
+    $(document).on('click', '.catalog__main .single-sidebar-wrap:nth-child(3) .size-list li ', function () {
+        console.log(22);
+        $(this).toggleClass('checked-color');
+        $(this).find('input').prop('checked', !$(this).find('input').prop('checked'));
+
+    })
+    //
     // Перевіряємо, чи існує елемент з класом .wrapper.main__new
 
     // $('.product-filter-sort a').click(function (event) {
@@ -402,7 +409,7 @@ $(document).ready(function () {
             maxPriceField.val(ui.values[1]);
         },
         stop: function (event, ui) {
-            form.submit();
+
         }
     });
     amount.val(rangeSlider.slider("values", 0) +

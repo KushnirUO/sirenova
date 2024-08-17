@@ -1573,6 +1573,14 @@
   line-height: 6.2rem;
 }
 
+.child-filter {
+  padding-left: 2rem;
+}
+
+.parent-filter label {
+  text-decoration: underline;
+}
+
 .catalog__main {
   display: -ms-flexbox;
   display: flex;
