@@ -303,6 +303,7 @@ window.addEventListener('DOMContentLoaded', function () {
     addSlowScroll();
     cartSetProductCount();
     miniCartPopup();
+    ScrollBtnFilter();
 
 });
 $(document).ready(function () {
@@ -404,3 +405,21 @@ $(document).ready(function () {
     amount.val(rangeSlider.slider("values", 0) +
         " UAH - " + rangeSlider.slider("values", 1) + " UAH");
 });
+
+function ScrollBtnFilter() {
+    if ($('.catalog__main-filters').length > 0) {
+        $(window).on('scroll', function () {
+            var $block = $('.catalog__main-filters .btn'); // Замените на ваш селектор
+            var scrollPosition = $(window).scrollTop() + $(window).height();
+            var documentHeight = $(document).height();
+            console.log(documentHeight - scrollPosition);
+            if (documentHeight - scrollPosition <= 490) {
+                $block.css('position', 'relative');
+            } else {
+                $block.css('position', 'fixed');
+            }
+        });
+    }
+
+}
+

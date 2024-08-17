@@ -13,15 +13,9 @@
                 <li class="dropdown-show sort-by">
                     <button class="arrow-toggle">Сортувати за</button>
                     <ul class="dropdown-nav">
-                        <li><a href="?orderby=date"
-                                <?php if (isset($_GET['orderby']) && 'date' == $_GET['orderby']) : ?> class="active"
-                                <?php endif; ?>>За новизною</a></li>
-                        <li><a href="?orderby=price"
-                                <?php if (isset($_GET['orderby']) && 'price' == $_GET['orderby']) : ?> class="active"
-                                <?php endif; ?>>Від дешевих до дорогих</a></li>
-                        <li><a href="?orderby=price-desc"
-                                <?php if (isset($_GET['orderby']) && 'price-desc' == $_GET['orderby']) : ?>
-                                class="active" <?php endif; ?>>Від дорогих до дешевих</a></li>
+                        <li><a href="?orderby=date" <?php if (isset($_GET['orderby']) && 'date' == $_GET['orderby']) : ?> class="active" <?php endif; ?>>За новизною</a></li>
+                        <li><a href="?orderby=price" <?php if (isset($_GET['orderby']) && 'price' == $_GET['orderby']) : ?> class="active" <?php endif; ?>>Від дешевих до дорогих</a></li>
+                        <li><a href="?orderby=price-desc" <?php if (isset($_GET['orderby']) && 'price-desc' == $_GET['orderby']) : ?> class="active" <?php endif; ?>>Від дорогих до дешевих</a></li>
                     </ul>
                 </li>
             </ul>
@@ -33,25 +27,22 @@
         <?php
         $product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
         if ($product_categories) : ?>
-        <!-- Start Single Sidebar -->
-        <div class="single-sidebar-wrap active">
-            <h3 class="product-title">Категорії товарів</h3>
-            <div class="sidebar-body">
-                <ul class="sidebar-list">
-                    <?php foreach ($product_categories as $product_category) : ?>
-                    <li>
-                        <input type="checkbox" name="product_cats[]"
-                            id="product-cat-<?php echo absint($product_category->term_id) ?>"
-                            value="<?php echo absint($product_category->term_id) ?>" />
-                        <label
-                            for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
-                            <span>(<?php echo absint($product_category->count) ?>)</span></label>
-                    </li>
-                    <?php endforeach; ?>
-                </ul>
+            <!-- Start Single Sidebar -->
+            <div class="single-sidebar-wrap active">
+                <h3 class="product-title">Категорії товарів</h3>
+                <div class="sidebar-body">
+                    <ul class="sidebar-list">
+                        <?php foreach ($product_categories as $product_category) : ?>
+                            <li>
+                                <input type="checkbox" name="product_cats[]" id="product-cat-<?php echo absint($product_category->term_id) ?>" value="<?php echo absint($product_category->term_id) ?>" />
+                                <label for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
+                                    <span>(<?php echo absint($product_category->count) ?>)</span></label>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <!-- End Single Sidebar -->
+            <!-- End Single Sidebar -->
         <?php endif; ?>
 
         <!-- Start Single Sidebar -->
@@ -69,10 +60,8 @@
                     </div>
                     <div class="range-slider">
                         <input type="text" id="amount" value="" />
-                        <input type="hidden" id="min_price" name="min_price"
-                            value="<?php echo isset($_GET['min_price']) ? intval($_GET['min_price']) : $min_price; ?>" />
-                        <input type="hidden" id="max_price" name="max_price"
-                            value="<?php echo isset($_GET['max_price']) ? intval($_GET['max_price']) : $max_price; ?>" />
+                        <input type="hidden" id="min_price" name="min_price" value="<?php echo isset($_GET['min_price']) ? intval($_GET['min_price']) : $min_price; ?>" />
+                        <input type="hidden" id="max_price" name="max_price" value="<?php echo isset($_GET['max_price']) ? intval($_GET['max_price']) : $max_price; ?>" />
                         <?php echo wc_query_string_form_fields(null, array('min_price', 'max_price', 'paged'), '', true); ?>
                     </div>
                 </div>
@@ -126,7 +115,9 @@
         <input type="hidden" name="orderby" value="date" />
         <input type="hidden" name="action" value="ajaxfilter" />
     </form>
-    <div class="btn">Застосувати</div>
+    <div class="wrapper-btn-select">
+        <div class="btn">Застосувати</div>
+    </div>
 </div>
 
 <!-- End Sidebar Area Wrapper -->

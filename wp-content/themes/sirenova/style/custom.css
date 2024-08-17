@@ -2145,6 +2145,25 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     margin: 0;
 }
 
+.catalog__main-filters .wrapper-btn-select {
+    height: 10rem;
+}
+
+.catalog__main-filters .wrapper-btn-select .btn {
+    position: fixed;
+    bottom: 0;
+    max-width: 25rem;
+    width: 100%;
+    border: 0.1rem solid #9b72cf;
+    color: white;
+    background: #9b72cf;
+    display: block;
+    margin-top: 1rem;
+    padding: 1.5rem 2.4rem;
+    cursor: pointer;
+    z-index: 1;
+}
+
 .catalog__main .single-sidebar-wrap:nth-child(4) .size-list li label {
     height: 3rem !important;
     border-radius: 1rem !important;
