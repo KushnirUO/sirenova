@@ -39,7 +39,7 @@
             <div class="sidebar-body">
                 <ul class="sidebar-list">
                     <?php foreach ($product_categories as $product_category) : ?>
-                    <li>
+                    <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
                         <input type="checkbox" name="product_cats[]"
                             id="product-cat-<?php echo absint($product_category->term_id) ?>"
                             value="<?php echo absint($product_category->term_id) ?>" />

@@ -7,6 +7,7 @@ add_action('wp_ajax_nopriv_find_form', 'find_form_ajax');
 function find_form_ajax()
 {
     $search_query = sanitize_text_field($_POST['search']);
+    $search_query_lower = mb_strtolower($search_query); // Приводимо запит до нижнього регістру
 
     function highlight_search_term($text, $term)
     {
@@ -34,12 +35,12 @@ function find_form_ajax()
 
         foreach ($query->posts as $post_id) {
             $title = get_the_title($post_id);
+            $title_lower = mb_strtolower($title); // Приводимо заголовок до нижнього регістру
 
             // Відображаємо тільки ті товари, де запит знайдено у тайтлі
-            if (stripos($title, $search_query) === false) {
+            if (stripos($title_lower, $search_query_lower) === false) {
                 continue;
             }
-            ;
 
             $counter++;
             if ($displayed_items >= $max_display) {
@@ -123,4 +124,3 @@ function find_form_ajax()
     echo $output;
     wp_die();
 }
-;
