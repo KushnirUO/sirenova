@@ -34,5 +34,7 @@ require_once get_template_directory() . '/inc/cart/sirenova-cart-ajax.php';
 require_once get_template_directory() . '/inc/woocommerce/sirenova-custom-format-price.php';
 // Кастомне поле цін
 require_once get_template_directory() . '/inc/woocommerce/sirenova-custom-prices.php';
+// AJAX на фільтр магазину
+require_once get_template_directory() . '/inc/woocommerce/sirenova-shop-filter-ajax.php';
 // Дозвіл загружати і відображати SVG
 require_once get_template_directory() . '/inc/sirenova-allow-svg.php';

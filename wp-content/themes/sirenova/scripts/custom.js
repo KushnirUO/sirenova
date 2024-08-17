@@ -338,8 +338,9 @@ $(document).ready(function () {
             data: form.serialize(),
 
             success: function (data) {
+                const response = JSON.parse(data);
+                $('.catalog__main-products').html(response.products); console.log(response);
                 // выводим отфильтрованные товары
-                $('.catalog__main-products').html(data.products);
                 // выводим счётчик количества товаров
                 $('.woocommerce-result-count').text(data.count);
 
