@@ -11,11 +11,11 @@
                 <h4>Сортувати:</h4>
                 <div class="filters__dropdown">
                     <input type="hidden" name="order" value="up">
-                    <input type="hidden" name="orderby" value="date">
+                    <input type="hidden" name="orderby" value="new">
                     <a href="javascript:void(0);" id="dropdownFilterResult" data-dropdown-filter="product-date" class="">По новизні</a>
                     <ul id="dropdownFilterContent" style="display: none;">
-                        <li data-dropdown-filter="popular">За популярністю</li>
                         <li data-dropdown-filter="product-date">По новизні</li>
+                        <li data-dropdown-filter="popular">За популярністю</li>
                         <li data-dropdown-filter="price-up">Ціна за зростом</li>
                         <li data-dropdown-filter="price-down">Ціна за зниженням</li>
                     </ul>

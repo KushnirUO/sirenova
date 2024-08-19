@@ -197,7 +197,7 @@ function burgerFilterCatalog() {
 
     $('.filter-mobile-catalog').on('click', function () {
         $(this).toggleClass('active');
-        $('.catalog__main-filters').toggle("slow");
+        $('.catalog__main-filters').addClass("open");
     })
 }
 
@@ -208,7 +208,7 @@ function AccFooter() {
         $(this).toggleClass('active');
     });
     if (isMobile) {
-
+        burgerFilterCatalog();
         $('.js-footer-category-toggle-btn').on('click', function () {
             var $parentBlock = $(this).closest('.js-footer-category-block');
             var $list = $parentBlock.find('.js-footer-category-list');
@@ -298,7 +298,6 @@ window.addEventListener('DOMContentLoaded', function () {
     dropdownFilters();
     listFilters();
     scrollToElement();
-    burgerFilterCatalog();
     AccFooter();
     addSlowScroll();
     cartSetProductCount();
@@ -319,12 +318,12 @@ $(document).on('click', ' .filters__dropdown ul li', function () {
         }
         case 'price-up': {
             $form.find('[name="order"]').val('up');
-            $form.find('[name="orderby"]').val('price up');
+            $form.find('[name="orderby"]').val('price_up');
             break;
         }
         case 'price-down': {
             $form.find('[name="order"]').val('down');
-            $form.find('[name="orderby"]').val('price down');
+            $form.find('[name="orderby"]').val('price_down');
             break;
         }
         case 'popular': {
@@ -444,19 +443,23 @@ $(document).ready(function () {
 });
 
 function ScrollBtnFilter() {
-    if ($('.catalog__main-filters').length > 0) {
-        var $block = $('.wrapper-btn-select_btn'); // Замените на ваш селектор
-        $block.addClass('btn-fixed');
+    var isMobile = window.innerWidth < 768;
+    var $block = $('.wrapper-btn-select_btn'); // Замените на ваш селектор
+    $block.addClass('btn-fixed');
+    if (!isMobile) {
+        if ($('.catalog__main-filters').length > 0) {
 
-        $(window).on('scroll', function () {
-            var scrollPosition = $(window).height() + $(window).scrollTop();
-            var documentHeight = $('.catalog__main-filters').height() + $('.woocommerce-products-header__title.page-title').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
-            if (documentHeight < scrollPosition) {
-                $block.removeClass('btn-fixed');
-            } else {
-                $block.addClass('btn-fixed');
-            }
-        });
+
+            $(window).on('scroll', function () {
+                var scrollPosition = $(window).height() + $(window).scrollTop();
+                var documentHeight = $('.catalog__main-filters').height() + $('.woocommerce-products-header__title.page-title').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
+                if (documentHeight < scrollPosition) {
+                    $block.removeClass('btn-fixed');
+                } else {
+                    $block.addClass('btn-fixed');
+                }
+            });
+        }
     }
 
 }
