@@ -28,6 +28,8 @@ require_once get_template_directory() . '/inc/woocommerce/sirenova-remove-action
 require_once get_template_directory() . '/inc/woocommerce/sirenova-color-picker.php';
 // Пошук
 require_once get_template_directory() . '/inc/search/sirenova-search-ajax.php';
+// Пошук на сторінці магазину
+require_once get_template_directory() . '/inc/search/sirenova-shop-search.php';
 // Корзина та міні-корзина
 require_once get_template_directory() . '/inc/cart/sirenova-cart-ajax.php';
 // Кастомний формат цін
