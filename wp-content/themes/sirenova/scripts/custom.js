@@ -336,51 +336,19 @@ $(document).on('click', ' .filters__dropdown ul li', function () {
     }
     ajaxSendFilter();
 });
-function ajaxFilterOrder() {
-    const data = {
-        orderby: $('input[name="orderby"]').val(),
-        action: 'ordering',
-    };
-    $('.catalog__main-products').addClass('loading');
-
-    $.ajax({
-        type: 'POST',
-        url: woocommerce_params.ajax_url,
-        data: data,
-
-        success: function (data) {
-            const response = JSON.parse(data);
-            $('.catalog__main-products').html(response.products); console.log(response);
-            // выводим отфильтрованные товары
-            // выводим счётчик количества товаров
-            $('.woocommerce-result-count').text(data.count);
-
-            $('.page-pagination-wrapper').html('');
-
-            $('#shop-page-wrapper').unblock();
-            $('.catalog__main-products').removeClass('loading');
-
-        }
-
-    });
-}
 $(document).ready(function () {
-    $(document).on('click', '.catalog__main .single-sidebar-wrap:nth-child(3) .size-list li ', function () {
+    $(document).on('click', '.catalog__main .single-sidebar-wrap:nth-child(4) .size-list li ', function () {
         $(this).toggleClass('checked-color');
         $(this).find('input').prop('checked', !$(this).find('input').prop('checked'));
 
     })
-
-
-
-
 });
 function SendFilterClick() {
     $(document).on('click', '.wrapper-btn-select .btn ', function () {
         ajaxSendFilter();
     });
     $(document).on('click', '.wrapper-btn-select .btn-link', function () {
-        $('#ajaxform').reset();
+        $('#ajaxform')[0].reset();
         ajaxSendFilter();
     });
 }
@@ -483,7 +451,6 @@ function ScrollBtnFilter() {
         $(window).on('scroll', function () {
             var scrollPosition = $(window).height() + $(window).scrollTop();
             var documentHeight = $('.catalog__main-filters').height() + $('.woocommerce-products-header__title.page-title').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
-            console.log(documentHeight, scrollPosition);
             if (documentHeight < scrollPosition) {
                 $block.removeClass('btn-fixed');
             } else {
