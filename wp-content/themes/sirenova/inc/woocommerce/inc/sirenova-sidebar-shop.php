@@ -3,25 +3,25 @@
     Фільтр
 </div>
 <div class="catalog__main-filters">
-    <div class="product-config-area">
-        <div class="filters">
-            <h4>Сортувати:</h4>
-            <div class="filters__dropdown">
-                <input type="hidden" name="order" value="up">
-                <input type="hidden" name="orderby" value="date">
-                <a href="javascript:void(0);" id="dropdownFilterResult" data-dropdown-filter="product-date" class="">По новизні</a>
-                <ul id="dropdownFilterContent" style="display: none;">
-                    <li data-dropdown-filter="popular">За популярністю</li>
-                    <li data-dropdown-filter="product-date">По новизні</li>
-                    <li data-dropdown-filter="price-up">Ціна за зростом</li>
-                    <li data-dropdown-filter="price-down">Ціна за зниженням</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
 
     <form action="" method="POST" id="ajaxform">
-
+        <div class="product-config-area">
+            <div class="filters">
+                <h4>Сортувати:</h4>
+                <div class="filters__dropdown">
+                    <input type="hidden" name="order" value="up">
+                    <input type="hidden" name="orderby" value="date">
+                    <a href="javascript:void(0);" id="dropdownFilterResult" data-dropdown-filter="product-date" class="">По новизні</a>
+                    <ul id="dropdownFilterContent" style="display: none;">
+                        <li data-dropdown-filter="popular">За популярністю</li>
+                        <li data-dropdown-filter="product-date">По новизні</li>
+                        <li data-dropdown-filter="price-up">Ціна за зростом</li>
+                        <li data-dropdown-filter="price-down">Ціна за зниженням</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <?php
         $product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
         if ($product_categories) : ?>
@@ -114,15 +114,13 @@
             }
         }
         ?>
-
-        <input type="hidden" name="orderby" value="date" />
         <input type="hidden" name="action" value="ajaxfilter" />
     </form>
     <div class="wrapper-btn-select">
         <div class="wrapper-btn-select_btn">
             <div class="wrapper-btn-select_btn-wrap">
                 <div class="btn">Застосувати</div>
-                <div class="btn-link">Скасувати всі фільтри</div>
+                <div class="btn-link">Скинути фільтри</div>
             </div>
         </div>
     </div>

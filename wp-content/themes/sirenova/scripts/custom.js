@@ -304,6 +304,7 @@ window.addEventListener('DOMContentLoaded', function () {
     cartSetProductCount();
     miniCartPopup();
     ScrollBtnFilter();
+    SendFilterClick();
 
 });
 $(document).on('click', ' .filters__dropdown ul li', function () {
@@ -333,9 +334,7 @@ $(document).on('click', ' .filters__dropdown ul li', function () {
         }
 
     }
-    ajaxFilterOrder();
-    console.log($('input[name="orderby"]').val(), $('input[name="order"]').val());
-
+    ajaxSendFilter();
 });
 function ajaxFilterOrder() {
     const data = {
@@ -372,35 +371,46 @@ $(document).ready(function () {
 
     })
 
-    // асинхронный запрос при отправке формы
-    $(document).on('click', '.wrapper-btn-select .btn ', function () {
-        const form = $('#ajaxform');
-        $('.catalog__main-products').addClass('loading');
 
-        $.ajax({
-            type: 'POST',
-            url: woocommerce_params.ajax_url,
-            data: form.serialize(),
-
-            success: function (data) {
-                const response = JSON.parse(data);
-                $('.catalog__main-products').html(response.products); console.log(response);
-                // выводим отфильтрованные товары
-                // выводим счётчик количества товаров
-                $('.woocommerce-result-count').text(data.count);
-
-                $('.page-pagination-wrapper').html('');
-
-                $('#shop-page-wrapper').unblock();
-                $('.catalog__main-products').removeClass('loading');
-
-            }
-
-        });
-    });
 
 
 });
+function SendFilterClick() {
+    $(document).on('click', '.wrapper-btn-select .btn ', function () {
+        ajaxSendFilter();
+    });
+    $(document).on('click', '.wrapper-btn-select .btn-link', function () {
+        $('#ajaxform').reset();
+        ajaxSendFilter();
+    });
+}
+function ajaxSendFilter() {
+    // асинхронный запрос при отправке формы
+    const form = $('#ajaxform');
+    $('.catalog__main-products').addClass('loading');
+
+    $.ajax({
+        type: 'POST',
+        url: woocommerce_params.ajax_url,
+        data: form.serialize(),
+
+        success: function (data) {
+            const response = JSON.parse(data);
+            $('.catalog__main-products').html(response.products); console.log(response);
+            // выводим отфильтрованные товары
+            // выводим счётчик количества товаров
+            $('.woocommerce-result-count').text(data.count);
+
+            $('.page-pagination-wrapper').html('');
+
+            $('#shop-page-wrapper').unblock();
+            $('.catalog__main-products').removeClass('loading');
+
+        }
+
+    });
+
+}
 $(document).ready(function () {
     $(".single-sidebar-wrap").each(function () {
         $(this).find("h3").click(function () {

@@ -2179,6 +2179,22 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     background: white;
     width: max-content;
     padding: 0 0.7rem 2rem 0rem;
+    width: 100%;
+    max-width: 26rem;
+}
+
+.wrapper-btn-select_btn-wrap .btn-link {
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    letter-spacing: .15rem;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline;
+    text-transform: uppercase;
+    color: #C4C4C4;
+    text-align: center;
+    padding: 1rem 0 0;
+    cursor: pointer;
 }
 
 .checked-color {
