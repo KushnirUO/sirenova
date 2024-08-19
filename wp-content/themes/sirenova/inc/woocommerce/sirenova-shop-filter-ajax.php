@@ -9,14 +9,15 @@ function shop_filter_ajax()
     $max_price = isset($_POST['max_price']) ? floatval($_POST['max_price']) : 0;
     $color = isset($_POST['color']) ? sanitize_text_field($_POST['color']) : '';
     $size = isset($_POST['size']) ? sanitize_text_field($_POST['size']) : '';
+    $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : '';
 
     // Базовий масив аргументів для WP_Query
     $args = array(
         'post_type' => 'product',
-        'posts_per_page' => -1, // Отримати всі відповідні товари
+        'posts_per_page' => -1,
         'post_status' => 'publish',
-        'tax_query' => array('relation' => 'AND'), // Використовуємо для категорій та атрибутів
-        'meta_query' => array('relation' => 'AND'), // Використовуємо для цін
+        'tax_query' => array('relation' => 'AND'),
+        'meta_query' => array('relation' => 'AND'),
     );
 
     // Фільтр за категоріями
@@ -33,7 +34,7 @@ function shop_filter_ajax()
         $args['tax_query'][] = array(
             'taxonomy' => 'pa_color',
             'field' => 'slug',
-            'terms' => explode(',', $color), // Розділяємо кілька значень
+            'terms' => explode(',', $color),
         );
     }
 
@@ -42,28 +43,82 @@ function shop_filter_ajax()
         $args['tax_query'][] = array(
             'taxonomy' => 'pa_size',
             'field' => 'slug',
-            'terms' => explode(',', $size), // Розділяємо кілька значень
+            'terms' => explode(',', $size),
         );
     }
 
     // Фільтр за мінімальною ціною
     if ($min_price > 0) {
         $args['meta_query'][] = array(
-            'key' => '_price',
-            'value' => $min_price,
-            'compare' => '>=',
-            'type' => 'NUMERIC'
+            'relation' => 'OR',
+            array(
+                'key' => 'sirenova_sale_price',
+                'value' => $min_price,
+                'compare' => '>=',
+                'type' => 'NUMERIC'
+            ),
+            array(
+                'key' => 'sirenova_price',
+                'value' => $min_price,
+                'compare' => '>=',
+                'type' => 'NUMERIC'
+            ),
         );
     }
 
     // Фільтр за максимальною ціною
     if ($max_price > 0) {
         $args['meta_query'][] = array(
-            'key' => '_price',
-            'value' => $max_price,
-            'compare' => '<=',
-            'type' => 'NUMERIC'
+            'relation' => 'OR',
+            array(
+                'key' => 'sirenova_sale_price',
+                'value' => $max_price,
+                'compare' => '<=',
+                'type' => 'NUMERIC'
+            ),
+            array(
+                'key' => 'sirenova_price',
+                'value' => $max_price,
+                'compare' => '<=',
+                'type' => 'NUMERIC'
+            ),
         );
+    }
+
+    // Додавання сортування
+    if ($orderby === 'price_up' || $orderby === 'price_down') {
+        add_filter('posts_clauses', function ($clauses, $query) use ($orderby) {
+            global $wpdb;
+            if ($query->get('orderby') === 'price') {
+                $order = ($orderby === 'price_up') ? 'ASC' : 'DESC';
+                $clauses['fields'] .= ", COALESCE(
+                    CAST( (SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id = {$wpdb->posts}.ID AND meta_key = 'sirenova_sale_price') AS DECIMAL(10,2) ),
+                    CAST( (SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id = {$wpdb->posts}.ID AND meta_key = 'sirenova_price') AS DECIMAL(10,2) )
+                ) AS sort_price";
+                $clauses['orderby'] = "sort_price $order";
+            }
+            return $clauses;
+        }, 10, 2);
+
+        // Установити мета-ключ для сортування
+        $args['meta_key'] = 'sort_price';
+        $args['orderby'] = 'meta_value_num';
+    } else {
+        switch ($orderby) {
+            case 'popular':
+                $args['meta_key'] = 'total_sales';
+                $args['orderby'] = 'meta_value_num';
+                $args['order'] = 'DESC';
+                break;
+            case 'new':
+                $args['orderby'] = 'date';
+                $args['order'] = 'DESC';
+                break;
+            default:
+                $args['orderby'] = 'date';
+                $args['order'] = 'DESC';
+                break;
+        }
     }
 
     // Виконуємо запит

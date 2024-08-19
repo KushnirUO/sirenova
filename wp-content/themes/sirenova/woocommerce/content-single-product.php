@@ -27,14 +27,6 @@ if (empty($product) || !$product->is_visible()) {
 ?>
 <div class="single__product-main">
     <input type="hidden" name="product_id" value="<?php echo $product->get_id(); ?>">
-    <?php
-    /**
-     * Hook: woocommerce_before_shop_loop_item.
-     *
-     * @hooked woocommerce_template_loop_product_link_open - 10
-     */
-    do_action('woocommerce_before_shop_loop_item');
-    ?>
 
     <div class="slider">
         <?php
@@ -57,17 +49,11 @@ if (empty($product) || !$product->is_visible()) {
         <!-- Your existing product display code -->
 
         <?php if ($is_new): ?>
-        <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
+            <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
         <?php endif;
-        /**
-         * Hook: woocommerce_before_shop_loop_item_title.
-         *
-         * @hooked woocommerce_show_product_loop_sale_flash - 10
-         * @hooked woocommerce_template_loop_product_thumbnail - 10
-         */
-        do_action('woocommerce_before_shop_loop_item_title');
-
-        // New product flash
+        if ($product->is_on_sale()) {
+            echo '<div class="sale-flash">' . wc_get_template_html('woocommerce/loop/sale-flash.php') . '</div>';
+        }
         ?>
     </div>
     <div class="info">
