@@ -340,7 +340,8 @@ $(document).on('click', ' .filters__dropdown ul li', function () {
 function ajaxFilterOrder() {
     const data = {
         order: $('input[name="order"]').val(),
-        orderby: $('input[name="orderby"]').val()
+        orderby: $('input[name="orderby"]').val(),
+        action: 'ordering',
     };
     $('.catalog__main-products').addClass('loading');
 
