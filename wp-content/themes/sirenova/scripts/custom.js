@@ -318,12 +318,12 @@ $(document).on('click', ' .filters__dropdown ul li', function () {
         }
         case 'price-up': {
             $form.find('[name="order"]').val('up');
-            $form.find('[name="orderby"]').val('price');
+            $form.find('[name="orderby"]').val('price up');
             break;
         }
         case 'price-down': {
             $form.find('[name="order"]').val('down');
-            $form.find('[name="orderby"]').val('price');
+            $form.find('[name="orderby"]').val('price down');
             break;
         }
         case 'popular': {
@@ -339,7 +339,6 @@ $(document).on('click', ' .filters__dropdown ul li', function () {
 });
 function ajaxFilterOrder() {
     const data = {
-        order: $('input[name="order"]').val(),
         orderby: $('input[name="orderby"]').val(),
         action: 'ordering',
     };
