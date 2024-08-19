@@ -306,31 +306,76 @@ window.addEventListener('DOMContentLoaded', function () {
     ScrollBtnFilter();
 
 });
+$(document).on('click', ' .filters__dropdown ul li', function () {
+    var $form = $(this).closest('.filters__dropdown');
+    var filter_type = $(this).attr('data-dropdown-filter');
+
+    switch (filter_type) {
+        case 'product-date': {
+            $form.find('[name="order"]').val('up');
+            $form.find('[name="orderby"]').val('new');
+            break;
+        }
+        case 'price-up': {
+            $form.find('[name="order"]').val('up');
+            $form.find('[name="orderby"]').val('price');
+            break;
+        }
+        case 'price-down': {
+            $form.find('[name="order"]').val('down');
+            $form.find('[name="orderby"]').val('price');
+            break;
+        }
+        case 'popular': {
+            $form.find('[name="order"]').val('up');
+            $form.find('[name="orderby"]').val('popular');
+            break;
+        }
+
+    }
+    ajaxFilterOrder();
+    console.log($('input[name="orderby"]').val(), $('input[name="order"]').val());
+
+});
+function ajaxFilterOrder() {
+    const data = {
+        order: $('input[name="order"]').val(),
+        orderby: $('input[name="orderby"]').val()
+    };
+    $('.catalog__main-products').addClass('loading');
+
+    $.ajax({
+        type: 'POST',
+        url: woocommerce_params.ajax_url,
+        data: data,
+
+        success: function (data) {
+            const response = JSON.parse(data);
+            $('.catalog__main-products').html(response.products); console.log(response);
+            // выводим отфильтрованные товары
+            // выводим счётчик количества товаров
+            $('.woocommerce-result-count').text(data.count);
+
+            $('.page-pagination-wrapper').html('');
+
+            $('#shop-page-wrapper').unblock();
+            $('.catalog__main-products').removeClass('loading');
+
+        }
+
+    });
+}
 $(document).ready(function () {
     $(document).on('click', '.catalog__main .single-sidebar-wrap:nth-child(3) .size-list li ', function () {
-        console.log(22);
         $(this).toggleClass('checked-color');
         $(this).find('input').prop('checked', !$(this).find('input').prop('checked'));
 
     })
-    //
-    // Перевіряємо, чи існує елемент з класом .wrapper.main__new
 
-    // $('.product-filter-sort a').click(function (event) {
-    //     const el = $(this);
-    //     const val = el.attr('href').replace('?orderby=', '');
-
-    //     $('.product-filter-sort a').removeClass('active');
-    //     el.addClass('active');
-
-    //     $('input[name="orderby"]').val(val);
-
-    //     $('#ajaxform').submit();
-    //     event.preventDefault();
-    // });
     // асинхронный запрос при отправке формы
     $(document).on('click', '.wrapper-btn-select .btn ', function () {
         const form = $('#ajaxform');
+        $('.catalog__main-products').addClass('loading');
 
         $.ajax({
             type: 'POST',
@@ -347,17 +392,21 @@ $(document).ready(function () {
                 $('.page-pagination-wrapper').html('');
 
                 $('#shop-page-wrapper').unblock();
+                $('.catalog__main-products').removeClass('loading');
+
             }
 
         });
     });
 
-    // отправляем форму при клике на чекбоксы также
-    // $('#ajaxform input[type="checkbox"]').change(function () {
-    //     $('#ajaxform').submit();
-    // });
 
-
+});
+$(document).ready(function () {
+    $(".single-sidebar-wrap").each(function () {
+        $(this).find("h3").click(function () {
+            $(this).parent().toggleClass("active");
+        });
+    });
 });
 function StartSlider() {
     $('#mainTopSlider').slick({
@@ -397,7 +446,6 @@ $(document).ready(function () {
         minPriceField = $("#min_price"),
         maxPriceField = $("#max_price"),
         form = $('#ajaxform');
-    console.log($(".price-range"));
 
     rangeSlider.slider({
         range: true,
@@ -423,10 +471,10 @@ function ScrollBtnFilter() {
         $block.addClass('btn-fixed');
 
         $(window).on('scroll', function () {
-            var scrollPosition = $(window).scrollTop() + $('.catalog__main-filters').height();
-            var documentHeight = $(document).height();
-            console.log(documentHeight - scrollPosition);
-            if (documentHeight - scrollPosition <= 390) {
+            var scrollPosition = $(window).height() + $(window).scrollTop();
+            var documentHeight = $('.catalog__main-filters').height() + $('.woocommerce-products-header__title.page-title').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
+            console.log(documentHeight, scrollPosition);
+            if (documentHeight < scrollPosition) {
                 $block.removeClass('btn-fixed');
             } else {
                 $block.addClass('btn-fixed');

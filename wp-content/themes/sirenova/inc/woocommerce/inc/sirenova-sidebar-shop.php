@@ -4,27 +4,19 @@
 </div>
 <div class="catalog__main-filters">
     <div class="product-config-area">
-        <div class="product-config-right">
-            <ul class="product-view-mode">
-                <li data-viewmode="grid-view" class="active"><i class="fa fa-th"></i></li>
-                <li data-viewmode="list-view"><i class="fa fa-list"></i></li>
-            </ul>
-            <ul class="product-filter-sort">
-                <li class="dropdown-show sort-by">
-                    <button class="arrow-toggle">Сортувати за</button>
-                    <ul class="dropdown-nav">
-                        <li><a href="?orderby=date"
-                                <?php if (isset($_GET['orderby']) && 'date' == $_GET['orderby']) : ?> class="active"
-                                <?php endif; ?>>За новизною</a></li>
-                        <li><a href="?orderby=price"
-                                <?php if (isset($_GET['orderby']) && 'price' == $_GET['orderby']) : ?> class="active"
-                                <?php endif; ?>>Від дешевих до дорогих</a></li>
-                        <li><a href="?orderby=price-desc"
-                                <?php if (isset($_GET['orderby']) && 'price-desc' == $_GET['orderby']) : ?>
-                                class="active" <?php endif; ?>>Від дорогих до дешевих</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="filters">
+            <h4>Сортувати:</h4>
+            <div class="filters__dropdown">
+                <input type="hidden" name="order" value="up">
+                <input type="hidden" name="orderby" value="date">
+                <a href="javascript:void(0);" id="dropdownFilterResult" data-dropdown-filter="product-date" class="">По новизні</a>
+                <ul id="dropdownFilterContent" style="display: none;">
+                    <li data-dropdown-filter="popular">За популярністю</li>
+                    <li data-dropdown-filter="product-date">По новизні</li>
+                    <li data-dropdown-filter="price-up">Ціна за зростом</li>
+                    <li data-dropdown-filter="price-down">Ціна за зниженням</li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -33,25 +25,22 @@
         <?php
         $product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
         if ($product_categories) : ?>
-        <!-- Start Single Sidebar -->
-        <div class="single-sidebar-wrap active">
-            <h3 class="product-title">Категорії товарів</h3>
-            <div class="sidebar-body">
-                <ul class="sidebar-list">
-                    <?php foreach ($product_categories as $product_category) : ?>
-                    <li class="<?php echo $product_category->parent=='0' ? 'parent-filter' : 'child-filter'; ?>">
-                        <input type="checkbox" name="product_cats[]"
-                            id="product-cat-<?php echo absint($product_category->term_id) ?>"
-                            value="<?php echo absint($product_category->term_id) ?>" />
-                        <label
-                            for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
-                            <span>(<?php echo absint($product_category->count) ?>)</span></label>
-                    </li>
-                    <?php endforeach; ?>
-                </ul>
+            <!-- Start Single Sidebar -->
+            <div class="single-sidebar-wrap active">
+                <h3 class="product-title">Категорії товарів</h3>
+                <div class="sidebar-body">
+                    <ul class="sidebar-list">
+                        <?php foreach ($product_categories as $product_category) : ?>
+                            <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
+                                <input type="checkbox" name="product_cats[]" id="product-cat-<?php echo absint($product_category->term_id) ?>" value="<?php echo absint($product_category->term_id) ?>" />
+                                <label for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
+                                    <span>(<?php echo absint($product_category->count) ?>)</span></label>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <!-- End Single Sidebar -->
+            <!-- End Single Sidebar -->
         <?php endif; ?>
 
         <!-- Start Single Sidebar -->
@@ -68,11 +57,13 @@
                     <div class="price-range" data-min="<?php echo $min_price; ?>" data-max="<?php echo $max_price; ?>">
                     </div>
                     <div class="range-slider">
-                        <input type="text" id="amount" value="" />
-                        <input type="hidden" id="min_price" name="min_price"
-                            value="<?php echo isset($_GET['min_price']) ? intval($_GET['min_price']) : $min_price; ?>" />
-                        <input type="hidden" id="max_price" name="max_price"
-                            value="<?php echo isset($_GET['max_price']) ? intval($_GET['max_price']) : $max_price; ?>" />
+                        <input type="hidden" id="amount" value="" />
+                        <div class="range-slider_label">
+                            <p>Мін</p>
+                            <p>Мах</p>
+                        </div>
+                        <input id="min_price" name="min_price" value="<?php echo isset($_GET['min_price']) ? intval($_GET['min_price']) : $min_price; ?>" />
+                        <input id="max_price" name="max_price" value="<?php echo isset($_GET['max_price']) ? intval($_GET['max_price']) : $max_price; ?>" />
                         <?php echo wc_query_string_form_fields(null, array('min_price', 'max_price', 'paged'), '', true); ?>
                     </div>
                 </div>
@@ -96,9 +87,10 @@
                 foreach ($terms as $term) {
                     $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
                     echo '<li>';
+                    echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>'; // Мітка без тексту
+
                     echo '<input type="checkbox" name="color" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . $color_hex . ';" />';
                     echo $term->name;
-                    echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>'; // Мітка без тексту
                     echo '</li>';
                 }
                 echo '</ul>';
@@ -128,7 +120,10 @@
     </form>
     <div class="wrapper-btn-select">
         <div class="wrapper-btn-select_btn">
-            <div class="btn">Застосувати</div>
+            <div class="wrapper-btn-select_btn-wrap">
+                <div class="btn">Застосувати</div>
+                <div class="btn-link">Скасувати всі фільтри</div>
+            </div>
         </div>
     </div>
 </div>

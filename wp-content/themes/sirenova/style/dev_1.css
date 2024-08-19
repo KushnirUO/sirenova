@@ -1209,7 +1209,7 @@
 
 .filters .filters__dropdown {
   position: relative;
-  padding: 2.6rem 1.5rem;
+  padding: 1.8rem 1.5rem;
   border: 1px solid #231942;
   background-color: #fff;
   font-weight: 500;
@@ -1217,8 +1217,9 @@
   line-height: 1.8rem;
   letter-spacing: 0.15rem;
   text-transform: uppercase;
-  margin-bottom: 4rem;
-  border-radius: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
 }
 
 .filters .filters__dropdown a {
@@ -1596,16 +1597,6 @@
   margin-right: 3rem !important;
 }
 
-.catalog__main-filters h4 {
-  margin-bottom: 1rem;
-  font-weight: 500;
-  font-size: 1.2rem;
-  line-height: 1.5rem;
-  letter-spacing: 0.15rem;
-  text-transform: uppercase;
-  color: #696969;
-}
-
 .catalog__main-products {
   position: relative;
   width: 100%;
@@ -1617,19 +1608,7 @@
   flex-wrap: wrap;
 }
 
-.catalog__main-products::before {
-  content: '';
-  width: 5rem;
-  height: 5rem;
-  position: absolute;
-  z-index: 3;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: url('../img/preloader-gif.gif') center / contain no-repeat;
-  transition: all .2s linear;
-  opacity: 0;
-}
+
 
 .catalog__main-products.loading::before {
   opacity: 1;
@@ -3877,7 +3856,7 @@
 }
 
 .single-sidebar-wrap h3 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   line-height: 3.6rem;
 }
 
@@ -3927,19 +3906,10 @@
 }
 
 
-.single-sidebar-wrap.active:nth-child(3) .size-list li label {
+.single-sidebar-wrap:nth-child(3) .size-list li label {
   height: 2rem !important;
   min-width: 2rem !important;
   border: 1px solid #dddddd !important;
-}
-
-.single-sidebar-wrap.active:nth-child(3) .size-list li input:checked+label:after {
-  position: absolute;
-  content: '';
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: .1rem solid #A0A0A0;
 }
 
 .dropdown-show.sort-by {
