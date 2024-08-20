@@ -1257,11 +1257,17 @@ hr {
 }
 
 .min-cart__total-wrapper .btn.disabledLink,
-.cart__total-wrapper .btn.disabledLink {
+.cart__total-wrapper .btn.disabledLink,
+.wrapper-btn-select .btn.disabledLink {
     pointer-events: none;
     border: 0.1rem solid #e1e1e1;
     color: #7f7b7b;
     background: #dbd7e0;
+}
+
+.wrapper-btn-select .btn-link.disabledLink {
+    pointer-events: none;
+    color: #7f7b7b49;
 }
 
 @media only screen and (min-width: 720px) {
@@ -1951,6 +1957,9 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     margin-bottom: 20px;
 }
 
+.wrapper-btn-select.mobile {
+    display: none;
+}
 
 .single-sidebar-wrap {
     overflow: hidden;
@@ -2144,13 +2153,13 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     margin: 0;
 }
 
-.catalog__main-filters .wrapper-btn-select {
+.wrapper-btn-select {
     height: 4rem;
     padding-top: 2rem;
     height: 10rem;
 }
 
-.catalog__main-filters .wrapper-btn-select .btn {
+.wrapper-btn-select .btn {
     max-width: 25rem;
     width: 100%;
     border: 0.1rem solid #9b72cf;
@@ -2161,7 +2170,13 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     cursor: pointer;
 }
 
-.catalog__main-filters .wrapper-btn-select_btn {
+.wrapper-btn-select .btn:hover {
+    color: white;
+    background: blueviolet;
+    border: 1px solid transparent;
+}
+
+.wrapper-btn-select_btn {
     margin: 0 auto;
     max-width: 114.2rem;
 }
@@ -2195,6 +2210,10 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     text-align: center;
     padding: 1rem 0 0;
     cursor: pointer;
+}
+
+.wrapper-btn-select_btn-wrap .btn-link:hover {
+    color: #9b72cf;
 }
 
 .checked-color {

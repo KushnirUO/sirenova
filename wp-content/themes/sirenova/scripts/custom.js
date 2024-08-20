@@ -1,5 +1,5 @@
 'use strict';
-
+var isMobile = window.innerWidth < 768;
 function closeMenu() {
     $('html, body').removeClass('overflow');
     $('.header__top').removeClass('open-menu');
@@ -195,20 +195,33 @@ function scrollToElement() {
 
 function burgerFilterCatalog() {
 
-    $('.filter-mobile-catalog').on('click', function () {
-        $(this).toggleClass('active');
-        $('.catalog__main-filters').addClass("open");
-    })
+    if ($('.catalog__main-filters').hasClass('open')) {
+        $('html, body').toggleClass('overflow');
+        $('.wrapper-btn-select.mobile').toggle();
+    }
+    else {
+        setTimeout(function () {
+            $('html, body').toggleClass('overflow');
+            $('html, body').animate({ scrollTop: 0 }, 0);
+
+        }, 1000);
+        setTimeout(function () {
+            $('.wrapper-btn-select.mobile').toggle();
+        }, 500);
+    }
+    $(this).toggleClass('active');
+    $('.catalog__main-filters').toggleClass("open");
+
+
 }
 
 function AccFooter() {
-    var isMobile = window.innerWidth < 768;
+
     $('.js-catalog__footer').on('click', function () {
         $('.js-toggle-catalog__footer').toggleClass('hide show');
         $(this).toggleClass('active');
     });
     if (isMobile) {
-        burgerFilterCatalog();
         $('.js-footer-category-toggle-btn').on('click', function () {
             var $parentBlock = $(this).closest('.js-footer-category-block');
             var $list = $parentBlock.find('.js-footer-category-list');
@@ -305,6 +318,7 @@ window.addEventListener('DOMContentLoaded', function () {
     ScrollBtnFilter();
     SendFilterClick();
 
+
 });
 $(document).on('click', ' .filters__dropdown ul li', function () {
     var $form = $(this).closest('.filters__dropdown');
@@ -345,16 +359,28 @@ $(document).ready(function () {
 function SendFilterClick() {
     $(document).on('click', '.wrapper-btn-select .btn ', function () {
         ajaxSendFilter();
+        if (isMobile) {
+            burgerFilterCatalog();
+        }
     });
     $(document).on('click', '.wrapper-btn-select .btn-link', function () {
         $('#ajaxform')[0].reset();
         ajaxSendFilter();
+        if (isMobile) {
+            burgerFilterCatalog();
+        }
     });
+    $(document).on('click', '.filter-mobile-catalog', function () {
+        burgerFilterCatalog();
+    })
+
 }
 function ajaxSendFilter() {
     // асинхронный запрос при отправке формы
     const form = $('#ajaxform');
     $('.catalog__main-products').addClass('loading');
+    $('.wrapper-btn-select .btn').addClass('disabledLink');
+    $('.wrapper-btn-select .btn-link').addClass('disabledLink');
 
     $.ajax({
         type: 'POST',
@@ -372,6 +398,10 @@ function ajaxSendFilter() {
 
             $('#shop-page-wrapper').unblock();
             $('.catalog__main-products').removeClass('loading');
+            $('.wrapper-btn-select .btn').removeClass('disabledLink');
+            $('.wrapper-btn-select .btn-link').removeClass('disabledLink');
+
+
 
         }
 
@@ -443,7 +473,6 @@ $(document).ready(function () {
 });
 
 function ScrollBtnFilter() {
-    var isMobile = window.innerWidth < 768;
     var $block = $('.wrapper-btn-select_btn'); // Замените на ваш селектор
     $block.addClass('btn-fixed');
     if (!isMobile) {

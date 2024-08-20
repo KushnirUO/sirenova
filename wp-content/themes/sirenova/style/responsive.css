@@ -571,7 +571,7 @@
   }
 
   .catalog {
-    margin-top: 6.9rem;
+    margin-top: 11.9rem;
     margin-bottom: 4rem;
   }
 
@@ -586,11 +586,6 @@
 
   .catalog h1 {
     margin: 2rem 0;
-  }
-
-  .catalog__main {
-    -ms-flex-direction: column;
-    flex-direction: column;
   }
 
   .catalog__main-filters {
@@ -977,7 +972,7 @@
   .catalog__main-filters {
     position: fixed;
     z-index: 10001;
-    top: 10rem;
+    top: 10.7rem;
     left: 0;
     background-color: #fff;
     width: 27.8rem;
@@ -988,6 +983,34 @@
     display: block;
     padding: 2rem;
     overflow: scroll;
+    padding-bottom: 20rem;
+  }
+
+  .wrapper-btn-select.desctop {
+    display: none;
+  }
+
+  .wrapper-btn-select.mobile {
+    display: none;
+  }
+
+  .wrapper-btn-select.mobile .btn-fixed {
+    max-width: 100%;
+    z-index: 100000;
+  }
+
+  .wrapper-btn-select.mobile .btn {
+    max-width: 100%;
+  }
+
+  .filter-mobile-catalog.btn {
+    position: fixed;
+    top: 5.4rem;
+    left: 0;
+    z-index: 10000;
+    background: #9b72cf;
+    color: white;
+    border-radius: unset;
   }
 
   .catalog__main .single-sidebar-wrap:nth-child(5) .size-list li label {

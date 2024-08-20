@@ -116,12 +116,20 @@
         ?>
         <input type="hidden" name="action" value="ajaxfilter" />
     </form>
-    <div class="wrapper-btn-select">
+    <div class="wrapper-btn-select desctop">
         <div class="wrapper-btn-select_btn">
             <div class="wrapper-btn-select_btn-wrap">
                 <div class="btn">Застосувати</div>
                 <div class="btn-link">Скинути фільтри</div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper-btn-select mobile">
+    <div class="wrapper-btn-select_btn btn-fixed">
+        <div class="wrapper-btn-select_btn-wrap">
+            <div class="btn">Застосувати</div>
+            <div class="btn-link">Скинути фільтри</div>
         </div>
     </div>
 </div>
