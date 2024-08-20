@@ -1,4 +1,12 @@
 <?php
+
+function get_min_cart_html()
+{
+    ob_start();
+    get_template_part('/inc/cart/sirenova-min-cart');
+    return ob_get_clean();
+}
+
 add_action('wp_ajax_add_to_cart', 'handle_ajax_add_to_cart');
 add_action('wp_ajax_nopriv_add_to_cart', 'handle_ajax_add_to_cart');
 
@@ -19,8 +27,12 @@ function handle_ajax_add_to_cart()
                 // Оновлюємо лічильник товарів в корзині
                 $cart_count = WC()->cart->get_cart_contents_count();
 
-                // Повертаємо відповідь для фронтенду
+                // Отримуємо HTML для міні-корзини
+                $min_cart_html = get_min_cart_html();
+
+                // Повертаємо JSON-відповідь
                 wp_send_json_success(array(
+                    'html' => $min_cart_html,
                     'message' => 'Товар успішно доданий в корзину!',
                     'cart_count' => $cart_count
                 ));
