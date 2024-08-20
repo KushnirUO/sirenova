@@ -62,7 +62,7 @@ do_action('woocommerce_shop_loop_header');
 			 *
 			 * @hooked woocommerce_pagination - 10
 			 */
-			do_action('woocommerce_after_shop_loop');
+			//do_action('woocommerce_after_shop_loop');
 		} else {
 			/**
 			 * Hook: woocommerce_no_products_found.
@@ -72,7 +72,9 @@ do_action('woocommerce_shop_loop_header');
 			do_action('woocommerce_no_products_found');
 		}
 		?>
+
 	</div>
+
 
 </div>
 
@@ -83,5 +85,9 @@ do_action('woocommerce_shop_loop_header');
  * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
 do_action('woocommerce_after_main_content');
+?>
+<div class="pagination products__pagination">
 
+</div>
+<?php
 get_footer();

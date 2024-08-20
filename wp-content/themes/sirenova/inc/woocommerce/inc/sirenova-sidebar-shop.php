@@ -115,6 +115,8 @@
         }
         ?>
         <input type="hidden" name="action" value="ajaxfilter" />
+        <input type="hidden" name="page" value="1" />
+
     </form>
     <div class="wrapper-btn-select desctop">
         <div class="wrapper-btn-select_btn">
