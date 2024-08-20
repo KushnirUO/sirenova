@@ -312,9 +312,15 @@ window.addEventListener('DOMContentLoaded', function () {
     miniCartPopup();
     ScrollBtnFilter();
     SendFilterClick();
-
-
+    checkRenderPagin();
 });
+function checkRenderPagin() {
+    if ($('.wrapper.catalog').length > 0) {
+        let count = $('[name="product_count"]').val();
+        console.log(count);
+        renderPagination(count);
+    }
+}
 $(document).on('click', ' .filters__dropdown ul li', function () {
     var $form = $(this).closest('.filters__dropdown');
     var filter_type = $(this).attr('data-dropdown-filter');
@@ -342,6 +348,7 @@ $(document).on('click', ' .filters__dropdown ul li', function () {
         }
 
     }
+    currentPage = 1;
     ajaxSendFilter();
 });
 $(document).ready(function () {
@@ -353,18 +360,21 @@ $(document).ready(function () {
 function SendFilterClick() {
     $(document).on('click', '.wrapper-btn-select .btn ', function () {
         ajaxSendFilter();
+        currentPage = 1;
         if (isMobile) {
             burgerFilterCatalog();
         }
     });
     $(document).on('click', '.wrapper-btn-select .btn-link', function () {
         $('#ajaxform')[0].reset();
+        currentPage = 1;
         ajaxSendFilter();
         if (isMobile) {
             burgerFilterCatalog();
         }
     });
     $(document).on('click', '.filter-mobile-catalog', function () {
+        currentPage = 1;
         burgerFilterCatalog();
     })
     $(document).on('click', '.pagination.products__pagination .page-numbers', function () {
@@ -380,6 +390,7 @@ function ajaxSendFilter() {
     $('.catalog__main-products').addClass('loading');
     $('.wrapper-btn-select .btn').addClass('disabledLink');
     $('.wrapper-btn-select .btn-link').addClass('disabledLink');
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
 
     $.ajax({
         type: 'POST',
@@ -391,6 +402,7 @@ function ajaxSendFilter() {
             $('.catalog__main-products').html(response.products);
             // выводим отфильтрованные товары
             // выводим счётчик количества товаров
+
             renderPagination(response.count);
             $('.page-pagination-wrapper').html('');
 
@@ -406,7 +418,7 @@ function ajaxSendFilter() {
 let currentPage = 1;
 function renderPagination(countNumber) {
     $('.pagination.products__pagination').html('');
-    let totalPages = Math.ceil(countNumber / 12);
+    let totalPages = Math.ceil(countNumber / 3);
     console.log(totalPages, countNumber);
     if (countNumber > 12) {
 

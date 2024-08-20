@@ -215,6 +215,7 @@ h3 {
   align-items: center;
   -ms-flex-pack: center;
   justify-content: center;
+  margin-bottom: 9rem;
 }
 
 .pagination * {
