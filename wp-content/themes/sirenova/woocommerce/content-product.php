@@ -56,7 +56,7 @@ if (empty($product) || !$product->is_visible()) {
             ?>
             <!-- Your existing product display code -->
 
-            <?php if ($is_new) : ?>
+            <?php if ($is_new): ?>
             <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
             <?php endif;
             /**
@@ -88,7 +88,7 @@ if (empty($product) || !$product->is_visible()) {
     // Отримання атрибутів продукту
     $attributes = $product->get_attributes();
 
-    if (isset($attributes['pa_size']) && $attributes['pa_size']->is_taxonomy()) :
+    if (isset($attributes['pa_size']) && $attributes['pa_size']->is_taxonomy()):
         $size_terms = get_terms(
             array(
                 'taxonomy' => $attributes['pa_size']->get_taxonomy(),
@@ -99,13 +99,13 @@ if (empty($product) || !$product->is_visible()) {
         // Виведення тільки термінів, що застосовуються до поточного продукту
         $product_size_terms = wp_get_post_terms($product->get_id(), $attributes['pa_size']->get_taxonomy());
 
-        if (!empty($product_size_terms)) :
-    ?>
+        if (!empty($product_size_terms)):
+            ?>
     <hr>
     <div class="product__sizes-like">
         <h4>Розмір:</h4>
         <div class="size">
-            <?php foreach ($product_size_terms as $term) : ?>
+            <?php foreach ($product_size_terms as $term): ?>
             <span class="size"><?php echo esc_html($term->name); ?></span>
             <?php endforeach; ?>
         </div>
@@ -114,55 +114,55 @@ if (empty($product) || !$product->is_visible()) {
             // Виведення тільки термінів, що застосовуються до поточного продукту
             $product_color_terms = wp_get_post_terms($product->get_id(), $attributes['pa_color']->get_taxonomy());
 
-            if (!empty($product_color_terms)) :
-            ?>
+            if (!empty($product_color_terms)):
+                ?>
     <div class="product__sizes-like">
         <h4>Колір:</h4>
         <div class="product__colors">
-            <?php foreach ($product_color_terms as $term) : ?>
+            <?php foreach ($product_color_terms as $term): ?>
             <?php
                             // Мета-дані кольору 
-                            $color = get_term_meta($term->term_id, 'attribute_color', true);
-                            ?>
+                            $color = get_term_meta($term->term_id, 'attribute_color', true); ?>
             <div data-color="<?php echo esc_attr($color); ?>">
                 <span style="background: <?php echo esc_attr($color); ?>;"></span>
             </div>
-            <?php endforeach; ?>
+            <?php
+                        endforeach; ?>
         </div>
         <?php
             endif;
 
-                ?>
+            ?>
     </div>
     <hr>
     <?php
         endif;
     endif;
-        ?>
+    ?>
 
     <?php
-        /**
-         * Hook: woocommerce_shop_loop_item_title.
-         *
-         * @hooked woocommerce_template_loop_product_title - 10
-         */
-        do_action('woocommerce_shop_loop_item_title');
+    /**
+     * Hook: woocommerce_shop_loop_item_title.
+     *
+     * @hooked woocommerce_template_loop_product_title - 10
+     */
+    do_action('woocommerce_shop_loop_item_title');
 
 
-        /**
-         * Hook: woocommerce_after_shop_loop_item_title.
-         *
-         * @hooked woocommerce_template_loop_rating - 5
-         * @hooked woocommerce_template_loop_price - 10
-         */
-        do_action('woocommerce_after_shop_loop_item_title');
+    /**
+     * Hook: woocommerce_after_shop_loop_item_title.
+     *
+     * @hooked woocommerce_template_loop_rating - 5
+     * @hooked woocommerce_template_loop_price - 10
+     */
+    do_action('woocommerce_after_shop_loop_item_title');
 
-        /**
-         * Hook: woocommerce_after_shop_loop_item.
-         *
-         * @hooked woocommerce_template_loop_product_link_close - 5
-         * @hooked woocommerce_template_loop_add_to_cart - 10
-         */
-        do_action('woocommerce_after_shop_loop_item');
-        ?>
+    /**
+     * Hook: woocommerce_after_shop_loop_item.
+     *
+     * @hooked woocommerce_template_loop_product_link_close - 5
+     * @hooked woocommerce_template_loop_add_to_cart - 10
+     */
+    do_action('woocommerce_after_shop_loop_item');
+    ?>
 </div>
