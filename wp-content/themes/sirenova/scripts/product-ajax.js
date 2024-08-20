@@ -80,6 +80,31 @@ jQuery(document).ready(function ($) {
             updateCartCounter();
         });
     }
+    function ajaxaddtocart() {
+        const form = $('#ajaxform');
+        $('.catalog__main-products').addClass('loading');
+
+        let data = {
+            action: 'add_to_cart',
+            quantity: $('.single__product-main [name="quantity"]').val(),
+            product_id: $('.single__product-main [name="product_id"]').val(),
+            color: $('.single__product-main [name="color"]').val(),
+            size: $('.single__product-main [name="size"]').val(),
+        }
+        $.ajax({
+            type: 'POST',
+            url: woocommerce_params.ajax_url,
+            data: data,
+
+            success: function (data) {
+                // const response = JSON.parse(data);
+                updateCartCounter();
+
+
+            }
+
+        });
+    }
 
     // Обробка кнопок "increase" та "decrease"
     $('.cart__counter .increase, .cart__counter .decrease').on('click', function () {
@@ -125,28 +150,3 @@ $(document).ready(function () {
 })
 
 
-function ajaxaddtocart() {
-    const form = $('#ajaxform');
-    $('.catalog__main-products').addClass('loading');
-
-    let data = {
-        action: 'add_to_cart',
-        quantity: $('.single__product-main [name="quantity"]').val(),
-        product_id: $('.single__product-main [name="product_id"]').val(),
-        color: $('.single__product-main [name="color"]').val(),
-        size: $('.single__product-main [name="size"]').val(),
-    }
-    $.ajax({
-        type: 'POST',
-        url: woocommerce_params.ajax_url,
-        data: data,
-
-        success: function (data) {
-            // const response = JSON.parse(data);
-            updateCartCounter();
-
-
-        }
-
-    });
-}
