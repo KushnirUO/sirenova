@@ -1,6 +1,7 @@
 <?php
-add_action("wp_ajax_ajaxfilter", "shop_filter_ajax");
-add_action("wp_ajax_nopriv_ajaxfilter", "shop_filter_ajax");
+add_action('wp_ajax_ajaxfilter', 'shop_filter_ajax');
+add_action('wp_ajax_nopriv_ajaxfilter', 'shop_filter_ajax');
+
 function shop_filter_ajax()
 {
     // Отримуємо параметри з запиту
@@ -10,12 +11,17 @@ function shop_filter_ajax()
     $color = isset($_POST['color']) ? sanitize_text_field($_POST['color']) : '';
     $size = isset($_POST['size']) ? sanitize_text_field($_POST['size']) : '';
     $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : '';
+    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1; // Параметр для пагінації
+
+    // Кількість товарів на сторінці
+    $products_per_page = 12;
 
     // Базовий масив аргументів для WP_Query
     $args = array(
         'post_type' => 'product',
-        'posts_per_page' => 12,
+        'posts_per_page' => $products_per_page,
         'post_status' => 'publish',
+        'paged' => $paged,
         'tax_query' => array('relation' => 'AND'),
         'meta_query' => array('relation' => 'AND'),
     );
@@ -88,13 +94,10 @@ function shop_filter_ajax()
     // Додавання сортування
     if ($orderby === 'price_up' || $orderby === 'price_down') {
         $order = ($orderby === 'price_up') ? 'ASC' : 'DESC';
-
-        // Застосуємо сортування за полем '_price', яке використовує WooCommerce для зберігання ціни
         $args['meta_key'] = '_price';
         $args['orderby'] = 'meta_value_num';
         $args['order'] = $order;
     } else {
-        // Інші типи сортування залишаються без змін
         switch ($orderby) {
             case 'popular':
                 $args['meta_key'] = 'total_sales';
@@ -111,8 +114,6 @@ function shop_filter_ajax()
                 break;
         }
     }
-
-
 
     // Виконуємо запит
     $query = new WP_Query($args);

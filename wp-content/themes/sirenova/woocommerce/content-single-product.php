@@ -135,5 +135,7 @@ if (empty($product) || !$product->is_visible()) {
 <div class="single__product-desc">
 </div>
 <section class="wrapper single__product-more">
-    <?php echo get_template_part('woocommerce/templates/sirenova-related-proudcts'); ?>
+    <div class="product__slider main__new-slider" id="mainTopSlider">
+        <?php echo get_template_part('woocommerce/templates/sirenova-related-proudcts'); ?>
+    </div>
 </section>

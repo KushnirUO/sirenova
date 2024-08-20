@@ -15,23 +15,23 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
 }
 
-get_header( 'shop' ); ?>
+get_header(); ?>
 
 <section class="wrapper single__product">
 
-    <?php while ( have_posts() ) : ?>
-    <?php the_post(); ?>
+    <?php while (have_posts()): ?>
+        <?php the_post(); ?>
 
-    <?php wc_get_template_part( 'content', 'single-product' ); ?>
+        <?php wc_get_template_part('content', 'single-product'); ?>
 
     <?php endwhile; // end of the loop. ?>
 
 </section>
 <?php
-get_footer( 'shop' );
+get_footer();
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */

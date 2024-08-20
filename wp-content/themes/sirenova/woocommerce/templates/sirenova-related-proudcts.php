@@ -56,12 +56,10 @@ if (!empty($categories)) {
     $query = new WP_Query($args);
 
     if ($query->have_posts()) {
-        echo '<div class="related-products">';
         while ($query->have_posts()) {
             $query->the_post();
             wc_get_template_part('content', 'product');
         }
-        echo '</div>';
     }
     wp_reset_postdata();
 }
