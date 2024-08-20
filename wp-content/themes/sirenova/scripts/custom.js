@@ -420,7 +420,7 @@ function renderPagination(countNumber) {
     $('.pagination.products__pagination').html('');
     let totalPages = Math.ceil(countNumber / 3);
     console.log(totalPages, countNumber);
-    if (countNumber > 12) {
+    if (countNumber > 3) {
 
         // Показываем первую страницу
         if (currentPage !== 1) {
