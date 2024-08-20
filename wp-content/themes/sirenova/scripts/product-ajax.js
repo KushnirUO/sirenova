@@ -97,8 +97,12 @@ jQuery(document).ready(function ($) {
             data: data,
 
             success: function (data) {
+                console.log(data.data);
                 // const response = JSON.parse(data);
                 updateCartCounter();
+                $('.cart-empty').remove();
+                $('.mini-cart-wrapper').replaceWith(data.data.html)
+
 
 
             }
@@ -107,7 +111,7 @@ jQuery(document).ready(function ($) {
     }
 
     // Обробка кнопок "increase" та "decrease"
-    $('.cart__counter .increase, .cart__counter .decrease').on('click', function () {
+    $('.min-cart__products .cart__counter .increase,.min-cart__products .cart__counter .decrease, .cart__products .cart__counter .increase,.cart__products .cart__counter .decrease').on('click', function () {
         var $input = $(this).siblings('input[name="quantity"]');
         var currentVal = parseInt($input.val());
         var newVal = $(this).hasClass('increase') ? currentVal + 1 : currentVal - 1;
@@ -118,7 +122,9 @@ jQuery(document).ready(function ($) {
 
     // Події для видалення товару та зміни кількості
     $(document).on('click', '.cart__delete, .min-cart__delete', handleRemoveItem);
-    $('.cart__counter input[name="quantity"]').on('change', handleQuantityChange);
+    $('.min-cart__products .cart__counter input[name="quantity"]').on('change', handleQuantityChange);
+    $('.cart__products .cart__counter input[name="quantity"]').on('change', handleQuantityChange);
+
 
     // Додати обробник події при додаванні товару в корзину
     $(document).on('added_to_cart', updateCartCounter);
