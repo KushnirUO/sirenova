@@ -5,7 +5,7 @@ add_action('wp_ajax_nopriv_add_to_cart', 'handle_ajax_add_to_cart');
 function handle_ajax_add_to_cart()
 {
     $product_id = intval($_POST['product_id']);
-    $quantity = intval($_POST['count']);
+    $quantity = intval($_POST['quantity']);
     $size = sanitize_text_field($_POST['size']);
     $color = sanitize_text_field($_POST['color']);
 

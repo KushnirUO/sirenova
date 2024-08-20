@@ -317,7 +317,6 @@ window.addEventListener('DOMContentLoaded', function () {
 function checkRenderPagin() {
     if ($('.wrapper.catalog').length > 0) {
         let count = $('[name="product_count"]').val();
-        console.log(count);
         renderPagination(count);
     }
 }
@@ -415,12 +414,13 @@ function ajaxSendFilter() {
     });
 
 }
+
 let currentPage = 1;
 function renderPagination(countNumber) {
     $('.pagination.products__pagination').html('');
-    let totalPages = Math.ceil(countNumber / 3);
+    let totalPages = Math.ceil(countNumber / 12);
     console.log(totalPages, countNumber);
-    if (countNumber > 3) {
+    if (countNumber > 12) {
 
         // Показываем первую страницу
         if (currentPage !== 1) {
@@ -524,7 +524,13 @@ $(document).ready(function () {
 
 function ScrollBtnFilter() {
     var $block = $('.wrapper-btn-select_btn'); // Замените на ваш селектор
-    $block.addClass('btn-fixed');
+    var scrollPosition = $(window).height() + $(window).scrollTop();
+    var documentHeight = $('.catalog__main-filters').height() + $('.woocommerce-products-header__title.page-title').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
+    if (documentHeight < scrollPosition) {
+        $block.removeClass('btn-fixed');
+    } else {
+        $block.addClass('btn-fixed');
+    }
     if (!isMobile) {
         if ($('.catalog__main-filters').length > 0) {
 

@@ -97,6 +97,8 @@ jQuery(document).ready(function ($) {
 
     // Додати обробник події при додаванні товару в корзину
     $(document).on('added_to_cart', updateCartCounter);
+
+    $(document).on('click', '.btn.info__btns-cart', ajaxaddtocart);
 });
 
 function StartLoader(element) {
@@ -123,3 +125,28 @@ $(document).ready(function () {
 })
 
 
+function ajaxaddtocart() {
+    const form = $('#ajaxform');
+    $('.catalog__main-products').addClass('loading');
+
+    let data = {
+        action: 'add_to_cart',
+        quantity: $('.single__product-main [name="quantity"]').val(),
+        product_id: $('.single__product-main [name="product_id"]').val(),
+        color: $('.single__product-main [name="color"]').val(),
+        size: $('.single__product-main [name="size"]').val(),
+    }
+    $.ajax({
+        type: 'POST',
+        url: woocommerce_params.ajax_url,
+        data: data,
+
+        success: function (data) {
+            // const response = JSON.parse(data);
+            updateCartCounter();
+
+
+        }
+
+    });
+}
