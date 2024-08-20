@@ -33,12 +33,16 @@ require_once get_template_directory() . '/inc/search/sirenova-search-ajax.php';
 require_once get_template_directory() . '/inc/search/sirenova-shop-search.php';
 // Корзина та міні-корзина
 require_once get_template_directory() . '/inc/cart/sirenova-cart-ajax.php';
+// Додати товару в корзину
+require_once get_template_directory() . '/inc/woocommerce/sirenova-add-to-cart-ajax.php';
 // Кастомний формат цін
 require_once get_template_directory() . '/inc/woocommerce/sirenova-custom-format-price.php';
 // Кастомне поле цін
 require_once get_template_directory() . '/inc/woocommerce/sirenova-custom-prices.php';
 // AJAX на фільтр магазину
 require_once get_template_directory() . '/inc/woocommerce/sirenova-shop-filter-ajax.php';
+// Отримати кількість товарів в магазині і категорії
+require_once get_template_directory() . '/inc/woocommerce/sirenova-get-products-count.php';
 // Дозвіл загружати і відображати SVG
 require_once get_template_directory() . '/inc/sirenova-allow-svg.php';
 // AJAX сортування магазину

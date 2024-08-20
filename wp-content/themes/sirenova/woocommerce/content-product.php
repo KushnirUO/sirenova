@@ -57,7 +57,7 @@ if (empty($product) || !$product->is_visible()) {
             <!-- Your existing product display code -->
 
             <?php if ($is_new): ?>
-            <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
+                <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
             <?php endif;
             /**
              * Hook: woocommerce_before_shop_loop_item_title.
@@ -101,41 +101,41 @@ if (empty($product) || !$product->is_visible()) {
 
         if (!empty($product_size_terms)):
             ?>
-    <hr>
-    <div class="product__sizes-like">
-        <h4>Розмір:</h4>
-        <div class="size">
-            <?php foreach ($product_size_terms as $term): ?>
-            <span class="size"><?php echo esc_html($term->name); ?></span>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <?php
+            <hr>
+            <div class="product__sizes-like">
+                <h4>Розмір:</h4>
+                <div class="size">
+                    <?php foreach ($product_size_terms as $term): ?>
+                        <span class="size"><?php echo esc_html($term->name); ?></span>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php
             // Виведення тільки термінів, що застосовуються до поточного продукту
             $product_color_terms = wp_get_post_terms($product->get_id(), $attributes['pa_color']->get_taxonomy());
 
             if (!empty($product_color_terms)):
                 ?>
-    <div class="product__sizes-like">
-        <h4>Колір:</h4>
-        <div class="product__colors">
-            <?php foreach ($product_color_terms as $term): ?>
-            <?php
+                <div class="product__sizes-like">
+                    <h4>Колір:</h4>
+                    <div class="product__colors">
+                        <?php foreach ($product_color_terms as $term): ?>
+                            <?php
                             // Мета-дані кольору 
                             $color = get_term_meta($term->term_id, 'attribute_color', true); ?>
-            <div data-color="<?php echo esc_attr($color); ?>">
-                <span style="background: <?php echo esc_attr($color); ?>;"></span>
-            </div>
-            <?php
+                            <div data-color="<?php echo esc_attr($color); ?>">
+                                <span style="background: <?php echo esc_attr($color); ?>;"></span>
+                            </div>
+                            <?php
                         endforeach; ?>
-        </div>
-        <?php
+                    </div>
+                    <?php
             endif;
 
             ?>
-    </div>
-    <hr>
-    <?php
+            </div>
+            <hr>
+            <?php
         endif;
     endif;
     ?>

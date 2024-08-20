@@ -22,9 +22,11 @@ woocommerce_breadcrumb();
  * @hooked woocommerce_product_taxonomy_archive_header - 10
  */
 do_action('woocommerce_shop_loop_header');
+
 ?>
 
 <div class="catalog__main">
+	<input type="hidden" name="product_count" value="<?php echo get_total_products_count(); ?>">
 	<?php get_template_part('inc/woocommerce/inc/sirenova-sidebar-shop');
 	?>
 	<div class="catalog__main-products">
