@@ -14,6 +14,7 @@ if (function_exists('acf_add_options_page')) {
 }
 ;
 
+
 // Підключення скриптів та стилів
 require_once get_template_directory() . '/inc/theme-enqueue.php';
 // Реєстрація списків меню

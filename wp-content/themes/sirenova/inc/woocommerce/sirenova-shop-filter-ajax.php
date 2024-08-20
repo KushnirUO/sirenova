@@ -14,7 +14,7 @@ function shop_filter_ajax()
     // Базовий масив аргументів для WP_Query
     $args = array(
         'post_type' => 'product',
-        'posts_per_page' => -1,
+        'posts_per_page' => 12,
         'post_status' => 'publish',
         'tax_query' => array('relation' => 'AND'),
         'meta_query' => array('relation' => 'AND'),
@@ -87,23 +87,14 @@ function shop_filter_ajax()
 
     // Додавання сортування
     if ($orderby === 'price_up' || $orderby === 'price_down') {
-        add_filter('posts_clauses', function ($clauses, $query) use ($orderby) {
-            global $wpdb;
-            if ($query->get('orderby') === 'price') {
-                $order = ($orderby === 'price_up') ? 'ASC' : 'DESC';
-                $clauses['fields'] .= ", COALESCE(
-                    CAST( (SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id = {$wpdb->posts}.ID AND meta_key = 'sirenova_sale_price') AS DECIMAL(10,2) ),
-                    CAST( (SELECT meta_value FROM {$wpdb->postmeta} WHERE post_id = {$wpdb->posts}.ID AND meta_key = 'sirenova_price') AS DECIMAL(10,2) )
-                ) AS sort_price";
-                $clauses['orderby'] = "sort_price $order";
-            }
-            return $clauses;
-        }, 10, 2);
+        $order = ($orderby === 'price_up') ? 'ASC' : 'DESC';
 
-        // Установити мета-ключ для сортування
-        $args['meta_key'] = 'sort_price';
+        // Застосуємо сортування за полем '_price', яке використовує WooCommerce для зберігання ціни
+        $args['meta_key'] = '_price';
         $args['orderby'] = 'meta_value_num';
+        $args['order'] = $order;
     } else {
+        // Інші типи сортування залишаються без змін
         switch ($orderby) {
             case 'popular':
                 $args['meta_key'] = 'total_sales';
@@ -120,6 +111,8 @@ function shop_filter_ajax()
                 break;
         }
     }
+
+
 
     // Виконуємо запит
     $query = new WP_Query($args);
