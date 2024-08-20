@@ -194,7 +194,6 @@ function scrollToElement() {
 
 
 function burgerFilterCatalog() {
-
     if ($('.catalog__main-filters').hasClass('open')) {
         $('html, body').toggleClass('overflow');
         $('.wrapper-btn-select.mobile').toggle();
@@ -211,12 +210,9 @@ function burgerFilterCatalog() {
     }
     $(this).toggleClass('active');
     $('.catalog__main-filters').toggleClass("open");
-
-
 }
 
 function AccFooter() {
-
     $('.js-catalog__footer').on('click', function () {
         $('.js-toggle-catalog__footer').toggleClass('hide show');
         $(this).toggleClass('active');
@@ -233,7 +229,6 @@ function AccFooter() {
     else {
         $('.js-footer-category-list').removeClass('hide');
     }
-
 }
 function addSlowScroll() {
     // const scroll = new LocomotiveScroll({
@@ -353,7 +348,6 @@ $(document).ready(function () {
     $(document).on('click', '.catalog__main .single-sidebar-wrap:nth-child(4) .size-list li ', function () {
         $(this).toggleClass('checked-color');
         $(this).find('input').prop('checked', !$(this).find('input').prop('checked'));
-
     })
 });
 function SendFilterClick() {
@@ -379,9 +373,6 @@ function SendFilterClick() {
         currentPage = curPage;
         ajaxSendFilter();
     })
-
-
-
 }
 function ajaxSendFilter() {
     // асинхронный запрос при отправке формы
@@ -400,19 +391,13 @@ function ajaxSendFilter() {
             $('.catalog__main-products').html(response.products);
             // выводим отфильтрованные товары
             // выводим счётчик количества товаров
-            if (response.count >= 12) {
-                renderPagination(response.count);
-            }
-
+            renderPagination(response.count);
             $('.page-pagination-wrapper').html('');
 
             $('#shop-page-wrapper').unblock();
             $('.catalog__main-products').removeClass('loading');
             $('.wrapper-btn-select .btn').removeClass('disabledLink');
             $('.wrapper-btn-select .btn-link').removeClass('disabledLink');
-
-
-
         }
 
     });
@@ -421,46 +406,44 @@ function ajaxSendFilter() {
 let currentPage = 1;
 function renderPagination(countNumber) {
     $('.pagination.products__pagination').html('');
-    let totalPages = countNumber % 12;
-    // for (let i = 1; i <= n; i++) {
-    //     $('.pagination.products__pagination').append(`<a class="page-numbers">${i}</a>`);
-    // }
-    // $('.pagination.products__pagination .page-numbers:nth-child(' + currentPage + ')').addClass('current');
+    let totalPages = Math.ceil(countNumber / 12);
+    console.log(totalPages, countNumber);
+    if (countNumber > 12) {
 
-    // Показываем первую страницу
-    if (currentPage !== 1) {
-        $('.pagination.products__pagination').append(`<a class="page-numbers">1</a>`);
+        // Показываем первую страницу
+        if (currentPage !== 1) {
+            $('.pagination.products__pagination').append(`<a class="page-numbers">1</a>`);
 
+        }
+
+        // Если текущая страница больше чем 3, добавляем "..."
+        if (currentPage > 3) {
+            $('.pagination.products__pagination').append(`<span class="dots">...</span>`);
+        }
+
+        // Показываем предыдущие страницы перед текущей
+        if (currentPage > 2) {
+            $('.pagination.products__pagination').append(`<a class="page-numbers">${currentPage - 1}</a>`);
+        }
+
+        // Показываем текущую страницу
+        $('.pagination.products__pagination').append(`<a class="page-numbers current">${currentPage}</a>`);
+
+        // Показываем следующую страницу после текущей
+        if (currentPage < totalPages - 1) {
+            $('.pagination.products__pagination').append(`<a class="page-numbers">${currentPage + 1}</a>`);
+        }
+
+        // Если текущая страница меньше чем totalPages - 2, добавляем "..."
+        if (currentPage < totalPages - 2) {
+            $('.pagination.products__pagination').append(`<span class="dots">...</span>`);
+        }
+
+        // Показываем последнюю страницу
+        if (totalPages > 1 && currentPage !== totalPages) {
+            $('.pagination.products__pagination').append(`<a class="page-numbers">${totalPages}</a>`);
+        }
     }
-
-    // Если текущая страница больше чем 3, добавляем "..."
-    if (currentPage > 3) {
-        $('.pagination.products__pagination').append(`<span class="dots">...</span>`);
-    }
-
-    // Показываем предыдущие страницы перед текущей
-    if (currentPage > 2) {
-        $('.pagination.products__pagination').append(`<a class="page-numbers">${currentPage - 1}</a>`);
-    }
-
-    // Показываем текущую страницу
-    $('.pagination.products__pagination').append(`<a class="page-numbers current">${currentPage}</a>`);
-
-    // Показываем следующую страницу после текущей
-    if (currentPage < totalPages - 1) {
-        $('.pagination.products__pagination').append(`<a class="page-numbers">${currentPage + 1}</a>`);
-    }
-
-    // Если текущая страница меньше чем totalPages - 2, добавляем "..."
-    if (currentPage < totalPages - 2) {
-        $('.pagination.products__pagination').append(`<span class="dots">...</span>`);
-    }
-
-    // Показываем последнюю страницу
-    if (totalPages > 1 && currentPage !== totalPages) {
-        $('.pagination.products__pagination').append(`<a class="page-numbers">${totalPages}</a>`);
-    }
-
 
 }
 $(document).ready(function () {
