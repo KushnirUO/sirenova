@@ -4,56 +4,63 @@
  * Template Name: About
  */
 
+$about_page_id = get_the_ID();
+$subtitle = get_field('subtitle', $about_page_id);
+$sec_subtitle = get_field('block-2_title', $about_page_id);
+$block_2_img = get_field('block-2_img', $about_page_id);
+$block_2_text = get_field('block-2_text', $about_page_id);
+$block_3_title = get_field('block-3_title', $about_page_id);
+$block_3_img = get_field('block-3_img', $about_page_id);
+$block_3_text = get_field('block-3_text', $about_page_id);
+$block_4_title = get_field('block-4_title', $about_page_id);
+$block_4_text = get_field('block-4_text', $about_page_id);
 get_header();
 ?>
 
 
 <section class="about__first">
     <div class="about__first-wrap">
-        <img src="https://sirenova.com.ua/wp-content/uploads/2024/02/background-1.png" alt="">
+        <?php echo get_the_post_thumbnail(); ?>
     </div>
     <div class="wrapper about__first-info">
-
-        <div class="bredacrumbs">
-
-        </div>
-        <h1>Про нас</h1>
+        <?php woocommerce_breadcrumb(); ?>
+        <h1><?php the_title(); ?></h1>
         <svg width="48" height="12" viewBox="0 0 48 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="5.82683" cy="5.82659" r="5.32659" stroke="#9152C5"></circle>
-            <path d="M29.4621 5.82659C29.4621 8.75736 27.0264 11.1532 23.9968 11.1532C20.9672 11.1532 18.5315 8.75736 18.5315 5.82659C18.5315 2.89582 20.9672 0.5 23.9968 0.5C27.0264 0.5 29.4621 2.89582 29.4621 5.82659Z" stroke="#9152C5"></path>
+            <path
+                d="M29.4621 5.82659C29.4621 8.75736 27.0264 11.1532 23.9968 11.1532C20.9672 11.1532 18.5315 8.75736 18.5315 5.82659C18.5315 2.89582 20.9672 0.5 23.9968 0.5C27.0264 0.5 29.4621 2.89582 29.4621 5.82659Z"
+                stroke="#9152C5"></path>
             <circle cx="42.1706" cy="5.82659" r="5.32659" stroke="#9152C5"></circle>
         </svg>
-        <p>Хто ми такі та чому нам варто довіряти?</p>
+        <p><?php echo $subtitle; ?></p>
     </div>
 </section>
 <section class="wrapper about__info">
-    <h2>Наші переваги</h2>
+    <h2><?php echo $sec_subtitle; ?></h2>
     <div class="about__info-experience">
         <div class="experience__wrap">
-            <img src="https://sirenova.com.ua/wp-content/uploads/2024/02/photo1705653425.jpeg" alt="">
+            <img src="<?php echo $block_2_img['url']; ?>" alt="">
         </div>
         <div class="experience__block">
-            <h2></h2>
-            <p>Ми на ринку білизни працюємо вже довгий час і набули значного досвіду в цій галузі. За цей час ми зрозуміли, як важливо підбирати правильний розмір та якісні матеріали для наших клієнтів.</p>
-            <p>Наші фахівці добре орієнтуються у світі білизни та моди. Вони завжди готові надати вам консультацію та допомогу у виборі товару, що найкраще підходить саме вам.</p>
-
+            <?php foreach ($block_2_text as $content): ?>
+            <p><?php echo $content['block-2_content']; ?></p>
+            <?php endforeach; ?>
         </div>
     </div>
     <div class="about__info-price1">
         <div class="price1__info">
-            <h2><strong>Зручне замовлення</strong></h2>
-            <p>Наш інтернет-магазин працює цілодобово, щоб ви могли замовити білизну в будь-який час, коли це зручно для вас. Ми пропонуємо простий та інтуїтивно зрозумілий процес замовлення.</p>
-            <p>Ми працюємо з надійними службами доставки, щоб ваші замовлення були доставлені якнайшвидше. Ми намагаємося відправити ваше замовлення в той же день, якщо воно зроблене до певного часу.</p>
-            <p>Ми приймаємо різноманітні способи оплати, включаючи оплату при отриманні, онлайн-платежі та інші. Ми стежимо за новітніми технологіями, щоб забезпечити вашу безпеку під час оплати.</p>
+            <h2><strong><?php echo $block_3_title; ?></strong></h2>
+            <?php foreach ($block_3_text as $content): ?>
+            <p><?php echo $content['block-3_content']; ?></p>
+            <?php endforeach; ?>
         </div>
         <div class="price1__wrap">
-            <img src="https://sirenova.com.ua/wp-content/uploads/2024/02/photo1706642060-1.jpeg" alt="">
+            <img src="<?php echo $block_3_img['url']; ?>" alt="">
         </div>
     </div>
     <div class="about__info-price2">
-        <h2>Ваші відгуки нашої праці</h2>
-        <p>Ми пишаємося нашими задоволеними клієнтами, які залишають нам позитивні відгуки та рекомендації. Ми завжди раді чути ваші враження від покупки і стараємося зробити кожне замовлення особливим.</p>
-        <p>&nbsp;</p>
+        <h2><?php echo $block_4_title; ?></h2>
+        <p><?php echo $block_4_text; ?></p>
     </div>
 </section>
 <? get_footer();
