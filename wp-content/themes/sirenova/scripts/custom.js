@@ -398,7 +398,7 @@ function ajaxSendFilter() {
 
         success: function (data) {
             const response = JSON.parse(data);
-            $('.catalog__main-products').html(response.products);
+            $('.catalog_products').html(response.products);
             // выводим отфильтрованные товары
             // выводим счётчик количества товаров
 

@@ -26,11 +26,12 @@ do_action('woocommerce_shop_loop_header');
 ?>
 
 <div class="catalog__main">
-	<input type="hidden" name="product_count" value="<?php echo get_total_products_count(); ?>">
-	<?php get_template_part('inc/woocommerce/inc/sirenova-sidebar-shop');
+    <input type="hidden" name="product_count" value="<?php echo get_total_products_count(); ?>">
+    <?php get_template_part('inc/woocommerce/inc/sirenova-sidebar-shop');
 	?>
-	<div class="catalog__main-products">
-		<?php
+    <div class="catalog__main-products">
+        <div class="catalog_products">
+            <?php
 		if (woocommerce_product_loop()) {
 
 			/**
@@ -74,8 +75,11 @@ do_action('woocommerce_shop_loop_header');
 			do_action('woocommerce_no_products_found');
 		}
 		?>
+        </div>
+        <div class="pagination products__pagination">
 
-	</div>
+        </div>
+    </div>
 
 
 </div>
@@ -87,9 +91,5 @@ do_action('woocommerce_shop_loop_header');
  * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
 do_action('woocommerce_after_main_content');
-?>
-<div class="pagination products__pagination">
 
-</div>
-<?php
 get_footer();
