@@ -14,6 +14,15 @@ if (function_exists('acf_add_options_page')) {
 }
 ;
 
+function set_sale_page_flag()
+{
+    if (is_page_template('template-sale.php')) {
+        global $is_sale_page;
+        $is_sale_page = true;
+    }
+}
+add_action('wp', 'set_sale_page_flag');
+
 
 // Підключення скриптів та стилів
 require_once get_template_directory() . '/inc/theme-enqueue.php';

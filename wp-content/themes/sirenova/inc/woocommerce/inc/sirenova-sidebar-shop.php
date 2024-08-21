@@ -12,7 +12,8 @@
                 <div class="filters__dropdown">
                     <input type="hidden" name="order" value="up">
                     <input type="hidden" name="orderby" value="new">
-                    <a href="javascript:void(0);" id="dropdownFilterResult" data-dropdown-filter="product-date" class="">По новизні</a>
+                    <a href="javascript:void(0);" id="dropdownFilterResult" data-dropdown-filter="product-date"
+                        class="">По новизні</a>
                     <ul id="dropdownFilterContent" style="display: none;">
                         <li data-dropdown-filter="product-date">По новизні</li>
                         <li data-dropdown-filter="popular">За популярністю</li>
@@ -24,16 +25,20 @@
         </div>
         <?php
         $product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
-        if ($product_categories) : ?>
+        if ($product_categories): ?>
             <!-- Start Single Sidebar -->
             <div class="single-sidebar-wrap active">
-                <h3 class="product-title">Категорії товарів</h3>
-                <div class="sidebar-body">
+                <h3 class="product-title" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">Категорії
+                    товарів</h3>
+                <div class="sidebar-body" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">
                     <ul class="sidebar-list">
-                        <?php foreach ($product_categories as $product_category) : ?>
+                        <?php foreach ($product_categories as $product_category): ?>
                             <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
-                                <input type="checkbox" name="product_cats[]" id="product-cat-<?php echo absint($product_category->term_id) ?>" value="<?php echo absint($product_category->term_id) ?>" />
-                                <label for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
+                                <input type="checkbox" name="product_cats[]"
+                                    id="product-cat-<?php echo absint($product_category->term_id) ?>"
+                                    value="<?php echo absint($product_category->term_id) ?>" />
+                                <label
+                                    for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
                                     <span>(<?php echo absint($product_category->count) ?>)</span></label>
                             </li>
                         <?php endforeach; ?>
@@ -62,8 +67,10 @@
                             <p>Мін</p>
                             <p>Мах</p>
                         </div>
-                        <input id="min_price" name="min_price" value="<?php echo isset($_GET['min_price']) ? intval($_GET['min_price']) : $min_price; ?>" />
-                        <input id="max_price" name="max_price" value="<?php echo isset($_GET['max_price']) ? intval($_GET['max_price']) : $max_price; ?>" />
+                        <input id="min_price" name="min_price"
+                            value="<?php echo isset($_GET['min_price']) ? intval($_GET['min_price']) : $min_price; ?>" />
+                        <input id="max_price" name="max_price"
+                            value="<?php echo isset($_GET['max_price']) ? intval($_GET['max_price']) : $max_price; ?>" />
                         <?php echo wc_query_string_form_fields(null, array('min_price', 'max_price', 'paged'), '', true); ?>
                     </div>
                 </div>
@@ -88,7 +95,7 @@
                     $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
                     echo '<li>';
                     echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>'; // Мітка без тексту
-
+        
                     echo '<input type="checkbox" name="color" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . $color_hex . ';" />';
                     echo $term->name;
                     echo '</li>';
