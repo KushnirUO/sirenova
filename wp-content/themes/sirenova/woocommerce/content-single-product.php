@@ -25,10 +25,38 @@ if (empty($product) || !$product->is_visible()) {
     return;
 }
 ?>
-<div class="single__product-main">
+<div class="single__product-main sale-single-product">
+    <!-- Додати до блока вище клас sale-single-product якщо він є на сейлі  -->
     <input type="hidden" name="product_id" value="<?php echo $product->get_id(); ?>">
 
-    <div class="slider">
+    <div class="">
+        <div class="slider-wrapper">
+            <div class="slider-cart-wrapper">
+                <button type="button" class="nav-up"></button>
+                <div class="slider-product-cart-nav">
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                </div>
+                <button type="button" class="nav-down"></button>
+            </div>
+            <div class="slider-product-cart">
+                <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt="">
+                </a>
+                <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt="">
+                </a>
+                <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt="">
+                </a>
+
+            </div>
+        </div>
         <?php
         if (!$product) {
             $product = wc_get_product(get_the_ID());
@@ -79,10 +107,11 @@ if (empty($product) || !$product->is_visible()) {
                         foreach ($colors as $color_slug) {
                             $term = get_term_by('slug', $color_slug, 'pa_color');
                             $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
-
+                            echo '<div class="pallete-one">';
                             echo '<input type="radio" name="color" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . ';" />';
                             echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>'; // Мітка без тексту
                             echo $term->name;
+                            echo '</div>';
                         }
                         echo '</div>';
                     }
@@ -105,10 +134,10 @@ if (empty($product) || !$product->is_visible()) {
                         foreach ($sizes as $size_slug) {
                             $term = get_term_by('slug', $size_slug, 'pa_size');
                             if ($term) {
-                                echo '<label>';
+                                echo "<div class='sizes-single'>";
                                 echo '<input type="radio" name="size" id="size-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
                                 echo '<label for="size-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
-                                echo '</label>';
+                                echo '</div>';
                             }
                         }
                         echo '</div>';

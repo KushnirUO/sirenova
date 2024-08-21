@@ -313,7 +313,35 @@ window.addEventListener('DOMContentLoaded', function () {
     ScrollBtnFilter();
     SendFilterClick();
     checkRenderPagin();
+    initSliderProduct();
 });
+function initSliderProduct() {
+
+    $('.slider-product-cart').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-product-cart-nav'
+    });
+    $('.slider-product-cart-nav').slick({
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        asNavFor: '.slider-product-cart',
+        dots: false,
+        // centerMode: true,
+        focusOnSelect: true,
+        vertical: true,
+        arrows: false
+    });
+    $('.nav-up').click(function () {
+        $('.slider-product-cart-nav').slick('slickPrev');
+    });
+
+    $('.nav-down').click(function () {
+        $('.slider-product-cart-nav').slick('slickNext');
+    });
+}
 function checkRenderPagin() {
     if ($('.wrapper.catalog').length > 0) {
         let count = $('[name="product_count"]').val();
@@ -351,9 +379,25 @@ $(document).on('click', ' .filters__dropdown ul li', function () {
     ajaxSendFilter();
 });
 $(document).ready(function () {
-    $(document).on('click', '.catalog__main .single-sidebar-wrap:nth-child(4) .size-list li ', function () {
+    $(document).on('click', '.catalog__main .single-sidebar-wrap:nth-child(4) .size-list li', function () {
         $(this).toggleClass('checked-color');
         $(this).find('input').prop('checked', !$(this).find('input').prop('checked'));
+    })
+
+
+    if ($('.single__product-main').length > 0) {
+        $('.pallete-one:first-child').find('input[type="radio"]').prop('checked', true);
+        $('.pallete-one:first-child').addClass('checked-color');
+
+        $('.sizes-single:first-child').find('input[type="radio"]').prop('checked', true);
+
+        // size то саме
+
+    }
+    $(document).on('click', '.pallete-one', function () {
+        $('.pallete-one').removeClass('checked-color');
+        $(this).addClass('checked-color');
+        $(this).find('input[type="radio"]').prop('checked', true);
     })
 });
 function SendFilterClick() {

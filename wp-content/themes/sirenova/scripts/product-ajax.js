@@ -88,9 +88,10 @@ jQuery(document).ready(function ($) {
             action: 'add_to_cart',
             quantity: $('.single__product-main [name="quantity"]').val(),
             product_id: $('.single__product-main [name="product_id"]').val(),
-            color: $('.single__product-main [name="color"]').val(),
-            size: $('.single__product-main [name="size"]').val(),
+            color: $('.single__product-main [name="color"]:checked').val(),
+            size: $('.single__product-main [name="size"]:checked').val(),
         }
+        console.log($('.single__product-main [name="color"]'));
         $.ajax({
             type: 'POST',
             url: woocommerce_params.ajax_url,
