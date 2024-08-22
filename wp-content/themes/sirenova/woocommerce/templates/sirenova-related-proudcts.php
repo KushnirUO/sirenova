@@ -15,7 +15,7 @@ if (!empty($categories)) {
             // Виклик товарів для категорії 1
             $args = array(
                 'post_type' => 'product',
-                'posts_per_page' => 4,
+                'posts_per_page' => -1,
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'product_cat',
