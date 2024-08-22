@@ -11,20 +11,48 @@ function shop_filter_ajax()
     $color = isset($_POST['color']) ? sanitize_text_field($_POST['color']) : '';
     $size = isset($_POST['size']) ? sanitize_text_field($_POST['size']) : '';
     $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : '';
-    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1; // Параметр для пагінації
+    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $sale = isset($_POST['sale-page']);
 
     // Кількість товарів на сторінці
     $products_per_page = 12;
 
-    // Базовий масив аргументів для WP_Query
-    $args = array(
-        'post_type' => 'product',
-        'posts_per_page' => $products_per_page,
-        'post_status' => 'publish',
-        'paged' => $paged,
-        'tax_query' => array('relation' => 'AND'),
-        'meta_query' => array('relation' => 'AND'),
-    );
+    // Отримуємо всі ID товарів на знижці
+    $sale_product_ids = wc_get_product_ids_on_sale();
+    // Якщо ми на сторінці розпродажу
+    if ($sale == 'sale') {
+        // Перевірка наявності ID товарів на знижці
+        if (empty($sale_product_ids)) {
+            echo json_encode(array(
+                'products' => '<p>Товари не знайдено</p>',
+                'count' => 0,
+            ));
+            wp_die();
+        }
+
+
+        // Основний масив аргументів для WP_Query
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => $products_per_page,
+            'post_status' => 'publish',
+            'paged' => $paged,
+            'post__in' => $sale_product_ids, // Використовуємо тільки товари на знижці
+            'orderby' => 'post__in', // Сортування по ID
+            'tax_query' => array('relation' => 'AND'),
+            'meta_query' => array('relation' => 'AND'),
+        );
+    } else {
+        // Основний масив аргументів для WP_Query без обмеження ID
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => $products_per_page,
+            'post_status' => 'publish',
+            'paged' => $paged,
+            'tax_query' => array('relation' => 'AND'),
+            'meta_query' => array('relation' => 'AND'),
+        );
+    }
 
     // Фільтр за категоріями
     if (!empty($product_cats)) {
@@ -94,7 +122,7 @@ function shop_filter_ajax()
     // Додавання сортування
     if ($orderby === 'price_up' || $orderby === 'price_down') {
         $order = ($orderby === 'price_up') ? 'ASC' : 'DESC';
-        $args['meta_key'] = '_price';
+        $args['meta_key'] = 'sirenova_price';
         $args['orderby'] = 'meta_value_num';
         $args['order'] = $order;
     } else {
