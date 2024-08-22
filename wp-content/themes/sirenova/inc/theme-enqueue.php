@@ -11,6 +11,8 @@ function sirenova_scripts()
     wp_enqueue_style('dev_0_basic', get_template_directory_uri() . '/style/dev_0_basic.css');
     wp_enqueue_style('dev_1', get_template_directory_uri() . '/style/dev_1.css');
     wp_enqueue_style('slick', get_template_directory_uri() . '/style/slick.css');
+    wp_enqueue_style('fancyboxcss', get_template_directory_uri() . '/style/fancybox.css');
+
     wp_enqueue_style('customcss', get_template_directory_uri() . '/style/custom.css');
     wp_enqueue_style('responsive', get_template_directory_uri() . '/style/responsive.css');
 

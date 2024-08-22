@@ -126,6 +126,10 @@
     margin-right: 2.6rem;
   }
 
+  .single__product-main .info {
+    padding-left: 3rem;
+  }
+
   .main__insta {
     width: 100%;
     max-width: 99rem;
@@ -646,7 +650,7 @@
   }
 
   .single__product-main {
-    margin-top: 2rem;
+    margin-top: 8rem;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
@@ -969,6 +973,23 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .slider-wrapper {
+    max-width: 100%;
+    width: 92vw;
+  }
+
+  .single__product-main .info {
+    padding-left: 0rem;
+  }
+
+  .slider-product-cart {
+    width: 81%;
+  }
+
+  .single__product-main .new-badge {
+    right: 0;
+  }
+
   .catalog__main-filters {
     position: fixed;
     z-index: 10001;

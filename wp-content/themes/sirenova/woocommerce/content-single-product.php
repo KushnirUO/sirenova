@@ -28,6 +28,24 @@ if (empty($product) || !$product->is_visible()) {
 <div class="single__product-main sale-single-product">
     <!-- Додати до блока вище клас sale-single-product якщо він є на сейлі  -->
     <input type="hidden" name="product_id" value="<?php echo $product->get_id(); ?>">
+    <?php
+    if (!$product) {
+        $product = wc_get_product(get_the_ID());
+    }
+
+    // Get the product publish date
+    $publish_date = $product->get_date_created();
+    $now = new DateTime();
+    $publish_date_obj = new DateTime($publish_date);
+    $interval = $now->diff($publish_date_obj);
+
+    $days_since_publish = $interval->days;
+
+    // Check if the product is within the last 30 days
+    $is_new = $days_since_publish <= 30;
+
+    ?>
+    <!-- Your existing product display code -->
 
     <div class="">
         <div class="slider-wrapper">
@@ -48,7 +66,7 @@ if (empty($product) || !$product->is_visible()) {
                 <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt="">
                 </a>
-                <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
+                <a href="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt="">
                 </a>
                 <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
@@ -56,33 +74,16 @@ if (empty($product) || !$product->is_visible()) {
                 </a>
 
             </div>
+            <?php if ($is_new) : ?>
+                <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
+            <?php endif;
+            if ($product->is_on_sale()) {
+                echo '<div class="sale-flash">' . wc_get_template_html('woocommerce/loop/sale-flash.php') . '</div>';
+            }
+            ?>
         </div>
-        <?php
-        if (!$product) {
-            $product = wc_get_product(get_the_ID());
-        }
 
-        // Get the product publish date
-        $publish_date = $product->get_date_created();
-        $now = new DateTime();
-        $publish_date_obj = new DateTime($publish_date);
-        $interval = $now->diff($publish_date_obj);
 
-        $days_since_publish = $interval->days;
-
-        // Check if the product is within the last 30 days
-        $is_new = $days_since_publish <= 30;
-
-        ?>
-        <!-- Your existing product display code -->
-
-        <?php if ($is_new) : ?>
-            <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
-        <?php endif;
-        if ($product->is_on_sale()) {
-            echo '<div class="sale-flash">' . wc_get_template_html('woocommerce/loop/sale-flash.php') . '</div>';
-        }
-        ?>
     </div>
     <div class="info">
         <h2><?php the_title(); ?></h2>

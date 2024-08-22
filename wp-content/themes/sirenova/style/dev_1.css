@@ -2371,6 +2371,7 @@
   display: flex;
   -ms-flex-align: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .single__product-main .info__colors .pallete input {

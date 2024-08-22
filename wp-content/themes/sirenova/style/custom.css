@@ -357,7 +357,8 @@
     position: relative;
 }
 
-.product .onsale {
+.product .onsale,
+.single__product-main .onsale {
     position: absolute;
     background: red;
     color: white;
@@ -366,7 +367,14 @@
     border-radius: 2rem 0;
 }
 
-.product .new-badge {
+.single__product-main .onsale {
+    border-radius: 0 0 2rem 0;
+    left: 7rem;
+    top: 0;
+}
+
+.product .new-badge,
+.single__product-main .new-badge {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -375,6 +383,14 @@
     padding: 0.3rem 1rem;
     font-size: 1.5rem;
     border-radius: 0 2rem 0 0;
+}
+
+.single__product-main .new-badge {
+    right: -0.5rem;
+    left: unset;
+    bottom: unset;
+    top: 0;
+    border-radius: 0 0 0 2rem;
 }
 
 .footer {
@@ -2359,11 +2375,14 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     justify-content: center;
 }
 
+
+
 .slider-wrapper {
     display: flex;
     width: 100%;
     max-width: 54rem;
     align-items: center;
+    position: relative;
 }
 
 .slider-product-cart-nav {

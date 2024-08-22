@@ -399,6 +399,12 @@ $(document).ready(function () {
         $(this).addClass('checked-color');
         $(this).find('input[type="radio"]').prop('checked', true);
     })
+
+    $('[data-fancybox="productGallery"]').fancybox({
+        buttons: [
+            "close"
+        ]
+    });
 });
 function SendFilterClick() {
     $(document).on('click', '.wrapper-btn-select .btn ', function () {
