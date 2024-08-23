@@ -65,39 +65,29 @@ echo implode(' ', $classes);
             <div class="slider-cart-wrapper">
                 <button type="button" class="nav-up"></button>
                 <div class="slider-product-cart-nav">
-                    <div class="slider-product-cart-nav-wrapp"><img
-                            src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
-                    <div class="slider-product-cart-nav-wrapp"><img
-                            src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
-                    <div class="slider-product-cart-nav-wrapp"><img
-                            src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
-                    <div class="slider-product-cart-nav-wrapp"><img
-                            src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
-                    <div class="slider-product-cart-nav-wrapp"><img
-                            src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
-                    <div class="slider-product-cart-nav-wrapp"><img
-                            src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
-                    <div class="slider-product-cart-nav-wrapp"><img
-                            src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt=""></div>
                 </div>
                 <button type="button" class="nav-down"></button>
             </div>
             <div class="slider-product-cart">
-                <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery"
-                    class=" slider-product-cart-single">
+                <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt="">
                 </a>
-                <a href="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" data-fancybox="productGallery"
-                    class=" slider-product-cart-single">
+                <a href="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt="">
                 </a>
-                <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery"
-                    class=" slider-product-cart-single">
+                <a href="https://sirenova.com.ua/wp-content/uploads/2024/03/IMG_3005.jpg" data-fancybox="productGallery" class=" slider-product-cart-single">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/post-img1.jpg" alt="">
                 </a>
 
             </div>
-            <?php if ($is_new): ?>
+            <?php if ($is_new) : ?>
                 <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
             <?php endif;
             if ($product->is_on_sale()) {
@@ -173,9 +163,7 @@ echo implode(' ', $classes);
         <div class="info__btns">
             <div class="info__btns-like">
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M11.9369 1.59554C11.2645 0.872795 10.3222 0.461561 9.33508 0.460037C8.34712 0.46118 7.40392 0.872196 6.73047 1.59508L6.50095 1.83761L6.27143 1.59508C4.93513 0.156852 2.68589 0.0742567 1.24769 1.41056C1.18396 1.4698 1.12241 1.53132 1.06317 1.59508C-0.354391 3.1241 -0.354391 5.48713 1.06317 7.01614L6.16366 12.3949C6.34012 12.5812 6.63418 12.5892 6.82047 12.4127C6.82657 12.407 6.8325 12.401 6.83827 12.3949L11.9369 7.01614C13.3544 5.48729 13.3544 3.1244 11.9369 1.59554ZM11.2646 6.37637H11.2641L6.50095 11.4002L1.73733 6.37637C0.654391 5.20806 0.654391 3.4027 1.73733 2.23439C2.72077 1.16849 4.38212 1.10166 5.44801 2.0851C5.49977 2.13285 5.54956 2.18264 5.59731 2.23439L6.16366 2.83188C6.3503 3.01733 6.65163 3.01733 6.83827 2.83188L7.40463 2.23485C8.38806 1.16896 10.0494 1.10212 11.1153 2.08556C11.1671 2.13331 11.2169 2.1831 11.2646 2.23485C12.357 3.40501 12.365 5.21367 11.2646 6.37637Z"
-                        fill="black"></path>
+                    <path d="M11.9369 1.59554C11.2645 0.872795 10.3222 0.461561 9.33508 0.460037C8.34712 0.46118 7.40392 0.872196 6.73047 1.59508L6.50095 1.83761L6.27143 1.59508C4.93513 0.156852 2.68589 0.0742567 1.24769 1.41056C1.18396 1.4698 1.12241 1.53132 1.06317 1.59508C-0.354391 3.1241 -0.354391 5.48713 1.06317 7.01614L6.16366 12.3949C6.34012 12.5812 6.63418 12.5892 6.82047 12.4127C6.82657 12.407 6.8325 12.401 6.83827 12.3949L11.9369 7.01614C13.3544 5.48729 13.3544 3.1244 11.9369 1.59554ZM11.2646 6.37637H11.2641L6.50095 11.4002L1.73733 6.37637C0.654391 5.20806 0.654391 3.4027 1.73733 2.23439C2.72077 1.16849 4.38212 1.10166 5.44801 2.0851C5.49977 2.13285 5.54956 2.18264 5.59731 2.23439L6.16366 2.83188C6.3503 3.01733 6.65163 3.01733 6.83827 2.83188L7.40463 2.23485C8.38806 1.16896 10.0494 1.10212 11.1153 2.08556C11.1671 2.13331 11.2169 2.1831 11.2646 2.23485C12.357 3.40501 12.365 5.21367 11.2646 6.37637Z" fill="black"></path>
                 </svg>
             </div>
             <button class="btn info__btns-cart">Додати в кошик</button>
@@ -190,6 +178,8 @@ echo implode(' ', $classes);
             <li class="sir-tab" data-tab="tab-2">Характеристики</li>
             <li class="sir-tab" data-tab="tab-3">Розмірна сітка</li>
             <li class="sir-tab" data-tab="tab-4">Доставка</li>
+            <li class="sir-tab" data-tab="tab-5">Обмін та повернення</li>
+
         </ul>
 
         <div class="sir-tab-content sir-active" id="tab-1">
@@ -327,10 +317,25 @@ echo implode(' ', $classes);
                     — Накладним платежем (оплата при отриманні) Новою поштою</p>
             </div>
         </div>
+        <div class="sir-tab-content" id="tab-5">
+            <h3 class="sir-accordion-title">Обмін та повернення</h3>
+            <div class="sir-accordion-content">
+                <p>Обмін та повернення протягом 14 днів з моменту отримання замовлення.</p>
+                <p>❗️Білизна обміну й поверненню не підлягають, окрім браку</p>
+                <p>Як виглядає весь процес? Якщо коротко:</p>
+                <ol>
+                    <li>Напишіть нам в інстаграм або вайбер, телеграм, що хочете зробити обмін чи повернення?</li>
+                    <li>Вкажіть причину, додайте фото товару (якщо це брак)</li>
+                    <li>Менеджер перевірить вашу заявку та надасть подальшу інструкцію</li>
+                </ol>
+            </div>
+        </div>
     </div>
+</div>
 
 </div>
 <section class="wrapper single__product-more">
+    <h2>Доповни свій образ</h2>
     <div class="product__slider main__new-slider" id="mainTopSlider">
         <?php echo get_template_part('woocommerce/templates/sirenova-related-proudcts'); ?>
     </div>

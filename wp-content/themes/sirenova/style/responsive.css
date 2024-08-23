@@ -1599,8 +1599,9 @@
   }
 
   .single__product-main .info h2 {
-    font-size: 3.1rem;
-    line-height: 4.1rem;
+    font-size: 2.6rem;
+    line-height: 120%;
+    margin-bottom: 2rem;
   }
 
   .single__product-main .info__prices {
@@ -1790,7 +1791,7 @@
 
 
   .single__product-main .info__btns-cart {
-    max-width: 17rem;
+    max-width: unset;
     height: 5rem;
     padding: 1.4rem .5rem;
     font-size: 1.4rem;

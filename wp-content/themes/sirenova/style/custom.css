@@ -2635,6 +2635,10 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     border-radius: 1rem;
 }
 
+.sir-tab:hover {
+    color: #9B72CF;
+}
+
 .sir-tab.sir-active {
     border-color: #9B72CF;
     background-color: #9B72CF;
@@ -2660,6 +2664,7 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     background-color: white;
     border: 1px solid #dddddd;
     border-radius: 1rem;
+    position: relative;
 }
 
 .sir-title-active {
@@ -2699,6 +2704,84 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     width: 30%;
 }
 
+
+
+.sir-accordion-content table {
+    border: 1px solid #8080803b;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.sir-accordion-content table td,
+.sir-accordion-content table th {
+    padding: .5rem 0;
+}
+
+.hit-single-product .info h2::after {
+    content: 'ХIT';
+    font-size: 1.7rem;
+    color: white;
+    display: flex;
+    width: 6.3rem;
+    height: 6rem;
+    top: -1.8rem;
+    right: -7rem;
+    background-image: url(../img/star.png);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0 0;
+}
+
+.sir-accordion-content ol {
+    font-size: 1.6rem;
+    font-weight: 100;
+}
+
+
+.sir-accordion-title::after {
+    content: "\25BC";
+    color: #8080803b;
+    position: absolute;
+    top: 1.7rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    line-height: 100%;
+    transform: rotate(0deg);
+    transition: transform .3s;
+}
+
+.sir-accordion-title.sir-title-active::after {
+    content: "\25BC";
+    color: white;
+    position: absolute;
+    top: 1.3rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    transform: rotate(180deg);
+    transition: transform .3s;
+}
+
+.single__product-more h2 {
+    margin-bottom: 2rem;
+    font-weight: 100;
+}
+
+.availability::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #2626267b;
+    top: 0;
+    left: 0;
+    border-radius: 2rem;
+    z-index: 10000;
+
+}
+
 @media (max-width: 768px) {
     .sir-tabs-menu {
         display: none;
@@ -2722,5 +2805,9 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     .sir-tab-content {
         border: none;
         margin: 0;
+    }
+
+    .hit-single-product .info h2::after {
+        right: -4rem;
     }
 }

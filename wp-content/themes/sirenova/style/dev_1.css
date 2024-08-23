@@ -2270,6 +2270,11 @@
   font-size: 2.6rem;
   line-height: 3.6rem;
   text-align: left;
+  position: relative;
+  width: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 90%;
 }
 
 .single__product-main .info__prices {
@@ -2511,9 +2516,10 @@
 }
 
 .single__product-desc {
-  padding-top: 5rem;
-  margin-bottom: 3rem;
+  padding: 5rem 0;
+  margin-bottom: 4rem;
   border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: justify;
@@ -2522,7 +2528,7 @@
 
 .single__product-desc div {
   width: 100%;
-  max-width: 63rem;
+  max-width: 87rem;
 }
 
 .single__product-desc div:first-child {
@@ -2571,7 +2577,7 @@
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding-bottom: 10rem;
+  padding-bottom: 1rem;
 }
 
 .single__product-more h2 {
