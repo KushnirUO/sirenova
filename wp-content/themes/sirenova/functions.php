@@ -48,6 +48,8 @@ require_once get_template_directory() . '/inc/woocommerce/sirenova-add-to-cart-a
 require_once get_template_directory() . '/inc/woocommerce/sirenova-custom-format-price.php';
 // Кастомне поле цін
 require_once get_template_directory() . '/inc/woocommerce/sirenova-custom-prices.php';
+// Знижка на всі товари
+require_once get_template_directory() . '/inc/woocommerce/sirenova-discount-products.php';
 // AJAX на фільтр магазину
 require_once get_template_directory() . '/inc/woocommerce/sirenova-shop-filter-ajax.php';
 // Отримати кількість товарів в магазині і категорії
