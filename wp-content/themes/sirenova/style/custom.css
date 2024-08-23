@@ -2596,7 +2596,9 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     color: #fff !important;
 }
 
-.size__dropdown .size__dropdown-content {}
+.size__dropdown .size__dropdown-content {
+    max-width: unset;
+}
 
 .sizes-single input {
     display: none;
@@ -2615,4 +2617,110 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
 
 .single__product-main .cart__counter {
     margin: 2rem 0;
+}
+
+.sir-tabs-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.sir-tab {
+    cursor: pointer;
+    padding: 1rem 2rem;
+    background-color: white;
+    border: 1px solid #dddddd;
+    border-radius: 1rem;
+}
+
+.sir-tab.sir-active {
+    border-color: #9B72CF;
+    background-color: #9B72CF;
+    color: white;
+}
+
+.sir-tab-content {
+    display: none;
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid #8080803b;
+    border-radius: 1rem;
+}
+
+.sir-tab-content.sir-active {
+    display: block;
+}
+
+.sir-accordion-title {
+    display: none;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    background-color: white;
+    border: 1px solid #dddddd;
+    border-radius: 1rem;
+}
+
+.sir-title-active {
+    border-color: #9B72CF;
+    background-color: #9B72CF;
+    color: white;
+}
+
+.sir-accordion-content {
+    padding: 2rem;
+}
+
+#tab-2 .sir-accordion-content {
+    padding: 0;
+}
+
+.sir-accordion-char {
+    width: 100% !important;
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    border-bottom: 0.1rem solid #80808036;
+}
+
+.sir-accordion-char:nth-child(2n+1) {
+    background-color: #80808036;
+}
+
+.sir-accordion-char p {
+    width: 70%;
+    text-align: center;
+    margin-bottom: 0 !important;
+}
+
+.sir-accordion-char p:first-child {
+    text-align: left;
+    width: 30%;
+}
+
+@media (max-width: 768px) {
+    .sir-tabs-menu {
+        display: none;
+    }
+
+    .sir-accordion-content {
+        display: none;
+        border: 1px solid #8080803b;
+        margin-top: 1rem;
+        border-radius: 1rem;
+    }
+
+    .sir-accordion-title {
+        display: block;
+    }
+
+    .sir-accordion-content.sir-active {
+        display: block;
+    }
+
+    .sir-tab-content {
+        border: none;
+        margin: 0;
+    }
 }

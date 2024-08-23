@@ -2522,7 +2522,7 @@
 
 .single__product-desc div {
   width: 100%;
-  max-width: 54rem;
+  max-width: 63rem;
 }
 
 .single__product-desc div:first-child {
@@ -2538,8 +2538,8 @@
 
 .single__product-desc div p {
   font-weight: 300;
-  font-size: 2rem;
-  line-height: 2.6rem;
+  font-size: 1.6rem;
+  line-height: 2rem;
   margin-bottom: 2rem;
 }
 

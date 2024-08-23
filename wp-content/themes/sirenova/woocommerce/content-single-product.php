@@ -157,9 +157,152 @@ if (empty($product) || !$product->is_visible()) {
         </div>
 
     </div>
-
 </div>
 <div class="single__product-desc">
+    <div class="sir-tabs-container">
+        <ul class="sir-tabs-menu">
+            <li class="sir-tab sir-active" data-tab="tab-1">Опис</li>
+            <li class="sir-tab" data-tab="tab-2">Характеристики</li>
+            <li class="sir-tab" data-tab="tab-3">Розмірна сітка</li>
+            <li class="sir-tab" data-tab="tab-4">Доставка</li>
+        </ul>
+
+        <div class="sir-tab-content sir-active" id="tab-1">
+            <h3 class="sir-accordion-title">Опис</h3>
+            <div class="sir-accordion-content">
+                <p>❤️🌹 Комплект Білизни – Заразіть своє Серце Романтикою! 🌹❤️
+
+                    Прийди в найбільш чутливий святковий настрій з нашим вишуканим комплектом білизни «Любовна Атмосфера», створеним спеціально до Дня Святого Валентина.
+
+                    ✨ Особливості комплекту:
+                    – Вогняний червоний колір, що символізує страсть та любов.
+                    – Елементи сердечок, які додають комплекту ніжності та романтичності.
+                    – Трусики-бразильяни для особливого шарму.
+
+                </p>
+            </div>
+        </div>
+        <div class="sir-tab-content" id="tab-2">
+            <h3 class="sir-accordion-title">Характеристики</h3>
+            <div class="sir-accordion-content">
+                <div class="sir-accordion-char">
+                    <p>Матеріал:</p>
+                    <p>Бавовна</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Країна виробництва:</p>
+                    <p>Китай</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Комплектація:</p>
+                    <p>Ліф, трусики</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Чашка:</p>
+                    <p>на кісточках, ущільнена</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Вид трусів:</p>
+                    <p>Стрінги</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Особливості:</p>
+                    <p>комбінований колір, підкладка з бавовни</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Посадка (талія):</p>
+                    <p>низька</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Повнота розміру:</p>
+                    <p>повнорозмірний</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Особливості прання:</p>
+                    <p>ручне прання за температури води до 40 °C</p>
+                </div>
+                <div class="sir-accordion-char">
+                    <p>Сезон:</p>
+                    <p>Весна-літо, Осінь-зима</p>
+                </div>
+            </div>
+        </div>
+        <div class="sir-tab-content" id="tab-3">
+            <h3 class="sir-accordion-title">Розмірна сітка</h3>
+            <div class="sir-accordion-content">
+                <table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1">
+                    <colgroup>
+                        <col width="100" />
+                        <col width="100" />
+                        <col width="100" />
+                        <col width="100" />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Розмір&quot;}">Розмір</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Груди&quot;}">Груди</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Талія&quot;}">Талія</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Стегна&quot;}">Стегна</td>
+                        </tr>
+                        <tr>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;S&quot;}">S</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;81-86&quot;}">81-86</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;58-64&quot;}">58-64</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;86-91&quot;}">86-91</td>
+                        </tr>
+                        <tr>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;M&quot;}">M</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;86-94&quot;}">86-94</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;64-71&quot;}">64-71</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;91-99&quot;}">91-99</td>
+                        </tr>
+                        <tr>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;L&quot;}">L</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;94-102&quot;}">94-102</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;71-79&quot;}">71-79</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;99-104&quot;}">99-104</td>
+                        </tr>
+                        <tr>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;XL&quot;}">XL</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;102-107&quot;}">102-107</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;79-86&quot;}">79-86</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;104-112&quot;}">104-112</td>
+                        </tr>
+                        <tr>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;2XL&quot;}">2XL</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;107-114&quot;}">107-114</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;86-94&quot;}">86-94</td>
+                            <td data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;112-120&quot;}">112-120</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="sir-tab-content" id="tab-4">
+            <h3 class="sir-accordion-title">Доставка</h3>
+            <div class="sir-accordion-content">
+                <p>Сроки комплектації замовлень
+                    Стандартна комплектація і відправка товару протягом 1-2 днів.
+
+                    Якщо замовлення оформлено до 12:00 – відправка буде того ж дня.
+
+                    В іншому випадку відправка буде наступного дня.
+
+                    Несемо за собою право затримати відправку за технічних чи інших причин до 3 днів.
+
+                    Доставка по Україні Новою Поштою/ безкоштовно на роздрібні замовлення від 1000 грн.
+                    Вартість доставки по тарифам перевізника Нова Пошта.
+
+                    Оплата
+                    — На рахунок/ картку Приватбанку/ Монобанку
+
+                    — Карткою Visa або MasterCard онлайн
+
+                    — Накладним платежем (оплата при отриманні) Новою поштою</p>
+            </div>
+        </div>
+    </div>
+
 </div>
 <section class="wrapper single__product-more">
     <div class="product__slider main__new-slider" id="mainTopSlider">

@@ -540,7 +540,7 @@ function StartSlider() {
 
 }
 $(document).ready(function () {
-    if ($('.wrapper.main__new').length > 0) {
+    if ($('.wrapper.main__new').length > 0 || $('.wrapper.single__product').length > 0) {
         // Видаляємо div з класом woocommerce columns-4
         $('.wrapper.main__new .woocommerce.columns-4').contents().unwrap();
         StartSlider();
@@ -599,3 +599,36 @@ function ScrollBtnFilter() {
 
 }
 
+$(document).ready(function () {
+    // Tabs functionality for desktop
+    $('.sir-tab').click(function () {
+        var tabId = $(this).data('tab');
+
+        $('.sir-tab').removeClass('sir-active');
+        $(this).addClass('sir-active');
+
+        $('.sir-tab-content').removeClass('sir-active');
+        $('#' + tabId).addClass('sir-active');
+    });
+
+    // Accordion functionality for mobile
+    $('.sir-accordion-title').click(function () {
+        var tabContent = $(this).next('.sir-accordion-content');
+        $('.sir-accordion-title').removeClass('sir-title-active');
+        if (tabContent.is(':visible')) {
+            tabContent.slideUp();
+        } else {
+            $('.sir-accordion-content').slideUp();
+            tabContent.slideDown();
+            $(this).addClass('sir-title-active');
+
+        }
+    });
+    if ($(window).width() <= 768) {
+        $('.sir-tab-content.sir-active').find('.sir-accordion-content').addClass('sir-active').show();
+        $('#tab-1 .sir-accordion-title').addClass('sir-title-active');
+
+        $('.sir-tab-content').addClass('sir-active').show();
+
+    }
+});
