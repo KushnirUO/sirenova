@@ -123,6 +123,16 @@
         ?>
         <input type="hidden" name="action" value="ajaxfilter" />
         <input type="hidden" name="page" value="1" />
+        <?php if (is_product_category()):
+            $category = get_queried_object();
+            $category_id = $category->term_id;
+            ?>
+            <input type="hidden" name="product_cats[]:" value="<?php echo $category_id; ?>">
+        <?php endif; ?>
+        <?php if (is_page('sale')):
+            ?>
+            <input type="hidden" name="sale-page" value="<?php echo 'sale'; ?>">
+        <?php endif; ?>
 
     </form>
     <div class="wrapper-btn-select desctop">
