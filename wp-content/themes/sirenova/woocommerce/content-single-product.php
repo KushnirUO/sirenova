@@ -204,66 +204,12 @@ echo implode(' ', $classes);
             <div class="sir-tab-content" id="tab-2">
                 <h3 class="sir-accordion-title">Характеристики</h3>
                 <div class="sir-accordion-content">
-                    <?php if ($harakterystyky['material']): ?>
+                    <?php foreach ($harakterystyky as $harakterystyka): ?>
                         <div class="sir-accordion-char">
-                            <p>Матеріал:</p>
-                            <p><?php echo $harakterystyky['material']; ?></p>
+                            <p><?php echo $harakterystyka['tajtl']; ?></p>
+                            <p><?php echo $harakterystyka['opys']; ?></p>
                         </div>
-                    <?php endif;
-                    if ($harakterystyky['krayina_vyrobnycztva']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Країна виробництва:</p>
-                            <p><?php echo $harakterystyky['krayina_vyrobnycztva']; ?></p>
-                        </div>
-                    <?php endif;
-                    if ($harakterystyky['komplektacziya']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Комплектація:</p>
-                            <p><?php echo $harakterystyky['komplektacziya']; ?></p>
-                        </div>
-                    <?php endif;
-                    if ($harakterystyky['chashka']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Чашка:</p>
-                            <p><?php echo $harakterystyky['chashka']; ?></p>
-                        </div>
-                    <?php endif;
-                    if ($harakterystyky['vyd_trusiv']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Вид трусів:</p>
-                            <p><?php echo $harakterystyky['vyd_trusiv']; ?></p>
-                        </div>
-                    <?php endif;
-                    if ($harakterystyky['osoblyvosti']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Особливості:</p>
-                            <p><?php echo $harakterystyky['osoblyvosti']; ?></p>
-                        </div>
-                    <?php endif;
-                    if ($harakterystyky['posadka_taliya']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Посадка (талія):</p>
-                            <p><?php echo $harakterystyky['posadka_taliya']; ?></p>
-                        </div>
-                    <?php endif;
-                    if ($harakterystyky['povnota_rozmiru']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Повнота розміру:</p>
-                            <p><?php echo $harakterystyky['povnota_rozmiru']; ?></p>
-                        </div>
-                    <?php endif;
-                    if ($harakterystyky['osoblyvosti_prannya']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Особливості прання:</p>
-                            <p><?php echo $harakterystyky['osoblyvosti_prannya']; ?></p>
-                        </div>
-                    <?php endif;
-                    if ($harakterystyky['sezon']): ?>
-                        <div class="sir-accordion-char">
-                            <p>Сезон:</p>
-                            <p><?php echo $harakterystyky['sezon']; ?></p>
-                        </div>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         <?php endif;
