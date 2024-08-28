@@ -10,6 +10,7 @@ function menuFilters() {
     function openMenu() {
         closeFindForm();
         closeCart();
+        burgerFilterCatalog(1);
         $('html, body').addClass('overflow');
         $('.header__top').addClass('open-menu');
         $('.black__bg').addClass('show__bg');
@@ -61,6 +62,7 @@ function FindForm() {
     function openFindForm() {
         closeMenu();
         closeCart();
+        burgerFilterCatalog(1);
         $('#findForm').addClass('open').slideDown('slow');
         $('.black__bg').addClass('show__bg');
         $('html, body').addClass('overflow');
@@ -193,23 +195,31 @@ function scrollToElement() {
 
 
 
-function burgerFilterCatalog() {
-    if ($('.catalog__main-filters').hasClass('open')) {
-        $('html, body').toggleClass('overflow');
+function burgerFilterCatalog(close) {
+    if (close == 1) {
+        $('html, body').removeClass('overflow');
         $('.wrapper-btn-select.mobile').toggle();
+        $('.catalog__main-filters').removeClass("open");
     }
     else {
-        setTimeout(function () {
+        if ($('.catalog__main-filters').hasClass('open')) {
             $('html, body').toggleClass('overflow');
-            $('html, body').animate({ scrollTop: 0 }, 0);
-
-        }, 1000);
-        setTimeout(function () {
             $('.wrapper-btn-select.mobile').toggle();
-        }, 500);
+        }
+        else {
+            setTimeout(function () {
+                $('html, body').toggleClass('overflow');
+                $('html, body').animate({ scrollTop: 0 }, 0);
+
+            }, 1000);
+            setTimeout(function () {
+                $('.wrapper-btn-select.mobile').toggle();
+            }, 500);
+        }
+        $(this).toggleClass('active');
+        $('.catalog__main-filters').toggleClass("open");
     }
-    $(this).toggleClass('active');
-    $('.catalog__main-filters').toggleClass("open");
+
 }
 
 function AccFooter() {
@@ -276,6 +286,7 @@ function miniCartPopup() {
     function openCart() {
         closeMenu();
         closeFindForm();
+        burgerFilterCatalog(1);
         $('html, body').addClass('overflow');
         $('.header__top').addClass('open-cart');
         $('.black__bg').addClass('show__bg');
