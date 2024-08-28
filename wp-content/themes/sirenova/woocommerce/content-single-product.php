@@ -61,7 +61,8 @@ echo implode(' ', $classes);
     $pr_cocntent = get_the_content();
     $size_table = get_field('sizes_table', $product->get_id());
     $harakterystyky = get_field('harakterystyky', $product->get_id());
-
+    $dostavka_tovaru = get_field('dostavka_tovaru', 'options');
+    $obmin_ta_povernennya = get_field('obmin_ta_povernennya', 'options');
     ?>
 
     <div class="">
@@ -182,14 +183,19 @@ echo implode(' ', $classes);
         <ul class="sir-tabs-menu">
             <?php if ($pr_cocntent): ?>
                 <li class="sir-tab sir-active" data-tab="tab-1">Опис</li>
-            <?php endif; ?>
-            <li class="sir-tab" data-tab="tab-2">Характеристики</li>
-            <?php if ($size_table): ?>
+            <?php endif;
+            if ($harakterystyky): ?>
+                <li class="sir-tab" data-tab="tab-2">Характеристики</li>
+            <?php endif;
+            if ($size_table): ?>
                 <li class="sir-tab" data-tab="tab-3">Розмірна сітка</li>
+            <?php endif;
+            if ($dostavka_tovaru): ?>
+                <li class="sir-tab" data-tab="tab-4">Доставка</li>
+            <?php endif;
+            if ($obmin_ta_povernennya): ?>
+                <li class="sir-tab" data-tab="tab-5">Обмін та повернення</li>
             <?php endif; ?>
-            <li class="sir-tab" data-tab="tab-4">Доставка</li>
-            <li class="sir-tab" data-tab="tab-5">Обмін та повернення</li>
-
         </ul>
 
         <?php if ($pr_cocntent): ?>
@@ -220,43 +226,25 @@ echo implode(' ', $classes);
                     <?php echo $size_table; ?>
                 </div>
             </div>
+        <?php endif;
+        if ($dostavka_tovaru): ?>
+            <div class="sir-tab-content" id="tab-4">
+                <h3 class="sir-accordion-title">Доставка</h3>
+                <div class="sir-accordion-content">
+                    <p><?php echo $dostavka_tovaru; ?></p>
+                </div>
+            </div>
+        <?php endif;
+        if ($obmin_ta_povernennya): ?>
+            <div class="sir-tab-content" id="tab-5">
+                <h3 class="sir-accordion-title">Обмін та повернення</h3>
+                <div class="sir-accordion-content">
+                    <p>
+                        <?php echo $obmin_ta_povernennya; ?>
+                    </p>
+                </div>
+            </div>
         <?php endif; ?>
-        <div class="sir-tab-content" id="tab-4">
-            <h3 class="sir-accordion-title">Доставка</h3>
-            <div class="sir-accordion-content">
-                <p>Сроки комплектації замовлень
-                    Стандартна комплектація і відправка товару протягом 1-2 днів.
-
-                    Якщо замовлення оформлено до 12:00 – відправка буде того ж дня.
-
-                    В іншому випадку відправка буде наступного дня.
-
-                    Несемо за собою право затримати відправку за технічних чи інших причин до 3 днів.
-
-                    Доставка по Україні Новою Поштою/ безкоштовно на роздрібні замовлення від 1000 грн.
-                    Вартість доставки по тарифам перевізника Нова Пошта.
-
-                    Оплата
-                    — На рахунок/ картку Приватбанку/ Монобанку
-
-                    — Карткою Visa або MasterCard онлайн
-
-                    — Накладним платежем (оплата при отриманні) Новою поштою</p>
-            </div>
-        </div>
-        <div class="sir-tab-content" id="tab-5">
-            <h3 class="sir-accordion-title">Обмін та повернення</h3>
-            <div class="sir-accordion-content">
-                <p>Обмін та повернення протягом 14 днів з моменту отримання замовлення.</p>
-                <p>❗️Білизна обміну й поверненню не підлягають, окрім браку</p>
-                <p>Як виглядає весь процес? Якщо коротко:</p>
-                <ol>
-                    <li>Напишіть нам в інстаграм або вайбер, телеграм, що хочете зробити обмін чи повернення?</li>
-                    <li>Вкажіть причину, додайте фото товару (якщо це брак)</li>
-                    <li>Менеджер перевірить вашу заявку та надасть подальшу інструкцію</li>
-                </ol>
-            </div>
-        </div>
     </div>
 </div>
 
