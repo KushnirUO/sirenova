@@ -12,10 +12,12 @@ if (!empty($categories)) {
     // Виконуємо switch на основі першої категорії
     switch ($category->slug) {
         case 'komplekty-bilyzny':
-            // Виклик товарів для категорії 1
+            // Виклик товарів для категорії komplekty-bilyzny
             $args = array(
                 'post_type' => 'product',
                 'posts_per_page' => -1,
+                'orderby' => 'rand',
+                'post__not_in' => array($product->get_id()), // Виключаємо поточний товар
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'product_cat',
@@ -26,16 +28,86 @@ if (!empty($categories)) {
             );
             break;
 
-        case 'category-slug-2':
-            // Виклик товарів для категорії 2
+        case 'trusyky':
+            // Виклик товарів для категорії trusyky
             $args = array(
                 'post_type' => 'product',
-                'posts_per_page' => 4,
+                'posts_per_page' => -1,
+                'orderby' => 'rand',
+                'post__not_in' => array($product->get_id()), // Виключаємо поточний товар
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'product_cat',
                         'field' => 'slug',
-                        'terms' => 'category-slug-2',
+                        'terms' => 'trusyky',
+                    ),
+                ),
+            );
+            break;
+
+        case 'pizhamy':
+            // Виклик товарів для категорії pizhamy
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+                'orderby' => 'rand',
+                'post__not_in' => array($product->get_id()), // Виключаємо поточний товар
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field' => 'slug',
+                        'terms' => 'pizhamy',
+                    ),
+                ),
+            );
+            break;
+
+        case 'lify':
+            // Виклик товарів для категорії lify
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+                'orderby' => 'rand',
+                'post__not_in' => array($product->get_id()), // Виключаємо поточний товар
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field' => 'slug',
+                        'terms' => 'trusyky',
+                    ),
+                ),
+            );
+            break;
+
+        case 'kupalnyky':
+            // Виклик товарів для категорії kupalnyky
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+                'orderby' => 'rand',
+                'post__not_in' => array($product->get_id()), // Виключаємо поточний товар
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field' => 'slug',
+                        'terms' => 'kupalnyky',
+                    ),
+                ),
+            );
+            break;
+
+        case 'inshe':
+            // Виклик товарів для категорії inshe
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+                'orderby' => 'rand',
+                'post__not_in' => array($product->get_id()), // Виключаємо поточний товар
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field' => 'slug',
+                        'terms' => 'inshe',
                     ),
                 ),
             );
@@ -46,8 +118,9 @@ if (!empty($categories)) {
             // Виклик товарів для інших категорій або загальних товарів
             $args = array(
                 'post_type' => 'product',
-                'posts_per_page' => 4,
+                'posts_per_page' => 12,
                 'orderby' => 'rand',
+                'post__not_in' => array($product->get_id()), // Виключаємо поточний товар
             );
             break;
     }
