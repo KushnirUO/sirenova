@@ -1,7 +1,7 @@
 <?php
 
 // Hide admin bar
-show_admin_bar(true);
+show_admin_bar(false);
 
 // Custom Theme decklaration
 add_action('after_setup_theme', function () {
