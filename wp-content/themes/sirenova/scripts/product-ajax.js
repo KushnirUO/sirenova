@@ -83,6 +83,7 @@ jQuery(document).ready(function ($) {
     function ajaxaddtocart() {
         const form = $('#ajaxform');
         $('.catalog__main-products').addClass('loading');
+        $('.btn.info__btns-cart').prop('disabled', true);
 
         let data = {
             action: 'add_to_cart',
@@ -91,19 +92,25 @@ jQuery(document).ready(function ($) {
             color: $('.single__product-main [name="color"]:checked').val(),
             size: $('.single__product-main [name="size"]:checked').val(),
         }
-        console.log($('.single__product-main [name="color"]'));
         $.ajax({
             type: 'POST',
             url: woocommerce_params.ajax_url,
             data: data,
 
             success: function (data) {
-                console.log(data.data);
-                // const response = JSON.parse(data);
                 updateCartCounter();
                 $('.cart-empty').remove();
                 $('.mini-cart-wrapper').replaceWith(data.data.html)
+                console.log(data.success);
+                if (data.success) {
+                    $('.product__success-add').addClass('active');
+                    setTimeout(function () { $('.product__success-add').removeClass('active') }, 5000);
+                }
+                else {
+                    $.fancybox.open(data.data.message);
+                }
 
+                $('.btn.info__btns-cart').prop('disabled', false);
 
 
             }

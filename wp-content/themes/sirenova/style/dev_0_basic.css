@@ -191,22 +191,13 @@ h3 {
   color: black;
 }
 
-.woocommerce-breadcrumb *:not(:last-child) {
-  padding-right: 1.6rem;
-}
+
 
 .woocommerce-breadcrumb *:not(:last-child):hover {
   color: #231942;
 }
 
-.woocommerce-breadcrumb *:not(:last-child)::after {
-  content: '/';
-  position: absolute;
-  right: .35rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #A0A0A0;
-}
+
 
 .pagination {
   display: -ms-flexbox;

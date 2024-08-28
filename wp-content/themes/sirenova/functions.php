@@ -1,7 +1,7 @@
 <?php
 
 // Hide admin bar
-show_admin_bar(true);
+show_admin_bar(false);
 
 // Custom Theme decklaration
 add_action('after_setup_theme', function () {
@@ -11,8 +11,7 @@ add_action('after_setup_theme', function () {
 // Add ACF Option page
 if (function_exists('acf_add_options_page')) {
     acf_add_options_page();
-}
-;
+};
 
 function set_sale_page_flag()
 {

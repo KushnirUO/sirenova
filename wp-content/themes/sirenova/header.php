@@ -48,6 +48,7 @@ $cart_count = WC()->cart->get_cart_contents_count();
 
         <!-- Start Mobile top header -->
         <header class="header">
+
             <!-- Start Mobile top header -->
             <div class="header__top-wrap">
                 <div class="wrapper header__top">
@@ -216,9 +217,16 @@ $cart_count = WC()->cart->get_cart_contents_count();
                 </div>
 
             </div>
+        </header>
+        <div class="product__success-add">
+            <img src="https://sirenova.com.ua/wp-content/themes/v2.3/img/i-big-shopping-cart.svg" alt="">
+            <p>Товар успішно доданий </p>
+            <a href="/cart">В кошик!</a>
+        </div>
+
     </div>
+
     <!-- End Desktop header -->
-    </header>
 
 
     <!-- Start Mobile header -->
