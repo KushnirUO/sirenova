@@ -71,29 +71,29 @@ echo implode(' ', $classes);
                 <button type="button" class="nav-up"></button>
                 <div class="slider-product-cart-nav">
                     <?php foreach ($gallery_image_ids as $image_id): ?>
-                        <?php
+                    <?php
                         $image_url = wp_get_attachment_image_url($image_id, 'full');
                         ?>
-                        <div class="slider-product-cart-nav-wrapp"><img src="<?php echo esc_url($image_url); ?>" alt="">
-                        </div>
+                    <div class="slider-product-cart-nav-wrapp"><img src="<?php echo esc_url($image_url); ?>" alt="">
+                    </div>
                     <?php endforeach; ?>
                 </div>
                 <button type="button" class="nav-down"></button>
             </div>
             <div class="slider-product-cart">
                 <?php foreach ($gallery_image_ids as $image_id): ?>
-                    <?php
+                <?php
                     // Отримуємо URL зображення для відображення
                     $image_url_full = wp_get_attachment_image_url($image_id, 'full'); // URL для повнорозмірного зображення
                     ?>
-                    <a href="<?php echo esc_url($image_url_full); ?>" data-fancybox="productGallery"
-                        class="slider-product-cart-single">
-                        <img src="<?php echo esc_url($image_url_full); ?>" alt="">
-                    </a>
+                <a href="<?php echo esc_url($image_url_full); ?>" data-fancybox="productGallery"
+                    class="slider-product-cart-single">
+                    <img src="<?php echo esc_url($image_url_full); ?>" alt="">
+                </a>
                 <?php endforeach; ?>
             </div>
             <?php if ($is_new): ?>
-                <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
+            <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
             <?php endif;
             if ($product->is_on_sale()) {
                 echo '<div class="sale-flash">' . wc_get_template_html('woocommerce/loop/sale-flash.php') . '</div>';
@@ -114,29 +114,44 @@ echo implode(' ', $classes);
         </div>
         <div class="info__colors">
             <?php
-            if ($product->is_type('variable')) {
-                $attributes = $product->get_variation_attributes();
+    if ($product->is_type('variable')) {
+        $available_variations = $product->get_available_variations();
+        $attributes = $product->get_variation_attributes();
 
-                if (isset($attributes['pa_color'])) {
-                    $colors = $attributes['pa_color'];
+        // Массив для збереження залишків
+        $stock_data = [];
 
-                    if (!empty($colors)) {
-                        echo '<span>КОЛІР:</span>';
-                        echo '<div class="pallete">';
-                        foreach ($colors as $color_slug) {
-                            $term = get_term_by('slug', $color_slug, 'pa_color');
-                            $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
-                            echo '<div class="pallete-one">';
-                            echo '<input type="radio" name="color" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . ';" />';
-                            echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>'; // Мітка без тексту
-                            echo $term->name;
-                            echo '</div>';
+        if (isset($attributes['pa_color'])) {
+            $colors = $attributes['pa_color'];
+
+            if (!empty($colors)) {
+                echo '<span>КОЛІР:</span>';
+                echo '<div class="pallete">';
+                foreach ($colors as $color_slug) {
+                    $term = get_term_by('slug', $color_slug, 'pa_color');
+                    $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
+
+                    // Перевірка залишків для кожної варіації
+                    foreach ($available_variations as $variation) {
+                        if ($variation['attributes']['attribute_pa_color'] == $color_slug) {
+                            $stock_quantity = $variation['stock_quantity'];
+                            $variation_id = $variation['variation_id'];
+                            $stock_data[$variation_id] = $stock_quantity;
+                            break;
                         }
-                        echo '</div>';
                     }
+
+                    echo '<div class="pallete-one">';
+                    echo '<input type="radio" name="color" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . ';" />';
+                    echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>';
+                    echo $term->name;
+                    echo '</div>';
                 }
+                echo '</div>';
             }
-            ?>
+        }
+    }
+    ?>
         </div>
 
         <div class="size__dropdown">
@@ -153,6 +168,16 @@ echo implode(' ', $classes);
                         foreach ($sizes as $size_slug) {
                             $term = get_term_by('slug', $size_slug, 'pa_size');
                             if ($term) {
+                                // Перевірка залишків для кожної варіації
+                                foreach ($available_variations as $variation) {
+                                    if ($variation['attributes']['attribute_pa_size'] == $size_slug) {
+                                        $stock_quantity = $variation['stock_quantity'];
+                                        $variation_id = $variation['variation_id'];
+                                        $stock_data[$variation_id] = $stock_quantity;
+                                        break;
+                                    }
+                                }
+
                                 echo "<div class='sizes-single'>";
                                 echo '<input type="radio" name="size" id="size-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
                                 echo '<label for="size-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
@@ -165,6 +190,11 @@ echo implode(' ', $classes);
             }
             ?>
         </div>
+
+        <script>
+        var stockData = <?php echo json_encode($stock_data); ?>;
+        </script>
+
         <div class="info__btns">
             <div class="info__btns-like">
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -182,68 +212,68 @@ echo implode(' ', $classes);
     <div class="sir-tabs-container">
         <ul class="sir-tabs-menu">
             <?php if ($pr_cocntent): ?>
-                <li class="sir-tab sir-active" data-tab="tab-1">Опис</li>
+            <li class="sir-tab sir-active" data-tab="tab-1">Опис</li>
             <?php endif;
             if ($harakterystyky): ?>
-                <li class="sir-tab" data-tab="tab-2">Характеристики</li>
+            <li class="sir-tab" data-tab="tab-2">Характеристики</li>
             <?php endif;
             if ($size_table): ?>
-                <li class="sir-tab" data-tab="tab-3">Розмірна сітка</li>
+            <li class="sir-tab" data-tab="tab-3">Розмірна сітка</li>
             <?php endif;
             if ($dostavka_tovaru): ?>
-                <li class="sir-tab" data-tab="tab-4">Доставка</li>
+            <li class="sir-tab" data-tab="tab-4">Доставка</li>
             <?php endif;
             if ($obmin_ta_povernennya): ?>
-                <li class="sir-tab" data-tab="tab-5">Обмін та повернення</li>
+            <li class="sir-tab" data-tab="tab-5">Обмін та повернення</li>
             <?php endif; ?>
         </ul>
 
         <?php if ($pr_cocntent): ?>
-            <div class="sir-tab-content sir-active" id="tab-1">
-                <h3 class="sir-accordion-title">Опис</h3>
-                <div class="sir-accordion-content">
-                    <p><?php the_content(); ?></p>
-                </div>
+        <div class="sir-tab-content sir-active" id="tab-1">
+            <h3 class="sir-accordion-title">Опис</h3>
+            <div class="sir-accordion-content">
+                <p><?php the_content(); ?></p>
             </div>
+        </div>
         <?php endif;
         if ($harakterystyky): ?>
-            <div class="sir-tab-content" id="tab-2">
-                <h3 class="sir-accordion-title">Характеристики</h3>
-                <div class="sir-accordion-content">
-                    <?php foreach ($harakterystyky as $harakterystyka): ?>
-                        <div class="sir-accordion-char">
-                            <p><?php echo $harakterystyka['tajtl']; ?></p>
-                            <p><?php echo $harakterystyka['opys']; ?></p>
-                        </div>
-                    <?php endforeach; ?>
+        <div class="sir-tab-content" id="tab-2">
+            <h3 class="sir-accordion-title">Характеристики</h3>
+            <div class="sir-accordion-content">
+                <?php foreach ($harakterystyky as $harakterystyka): ?>
+                <div class="sir-accordion-char">
+                    <p><?php echo $harakterystyka['tajtl']; ?></p>
+                    <p><?php echo $harakterystyka['opys']; ?></p>
                 </div>
+                <?php endforeach; ?>
             </div>
+        </div>
         <?php endif;
         if ($size_table): ?>
-            <div class="sir-tab-content" id="tab-3">
-                <h3 class="sir-accordion-title">Розмірна сітка</h3>
-                <div class="sir-accordion-content">
-                    <?php echo $size_table; ?>
-                </div>
+        <div class="sir-tab-content" id="tab-3">
+            <h3 class="sir-accordion-title">Розмірна сітка</h3>
+            <div class="sir-accordion-content">
+                <?php echo $size_table; ?>
             </div>
+        </div>
         <?php endif;
         if ($dostavka_tovaru): ?>
-            <div class="sir-tab-content" id="tab-4">
-                <h3 class="sir-accordion-title">Доставка</h3>
-                <div class="sir-accordion-content">
-                    <p><?php echo $dostavka_tovaru; ?></p>
-                </div>
+        <div class="sir-tab-content" id="tab-4">
+            <h3 class="sir-accordion-title">Доставка</h3>
+            <div class="sir-accordion-content">
+                <p><?php echo $dostavka_tovaru; ?></p>
             </div>
+        </div>
         <?php endif;
         if ($obmin_ta_povernennya): ?>
-            <div class="sir-tab-content" id="tab-5">
-                <h3 class="sir-accordion-title">Обмін та повернення</h3>
-                <div class="sir-accordion-content">
-                    <p>
-                        <?php echo $obmin_ta_povernennya; ?>
-                    </p>
-                </div>
+        <div class="sir-tab-content" id="tab-5">
+            <h3 class="sir-accordion-title">Обмін та повернення</h3>
+            <div class="sir-accordion-content">
+                <p>
+                    <?php echo $obmin_ta_povernennya; ?>
+                </p>
             </div>
+        </div>
         <?php endif; ?>
     </div>
 </div>

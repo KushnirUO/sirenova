@@ -643,3 +643,47 @@ $(document).ready(function () {
 
     }
 });
+
+// Блокування варіаційі без залишків на товарів
+document.addEventListener('DOMContentLoaded', function () {
+    const colorInputs = document.querySelectorAll('input[name="color"]');
+    const sizeInputs = document.querySelectorAll('input[name="size"]');
+
+    function updateStockStatus() {
+        colorInputs.forEach(colorInput => {
+            sizeInputs.forEach(sizeInput => {
+                const variationId = getVariationId(colorInput.value, sizeInput.value);
+                if (stockData[variationId] <= 0) {
+                    colorInput.disabled = true;
+                    sizeInput.disabled = true;
+                } else {
+                    colorInput.disabled = false;
+                    sizeInput.disabled = false;
+                }
+            });
+        });
+    }
+
+    function getVariationId(color, size) {
+        for (const id in stockData) {
+            if (stockData.hasOwnProperty(id)) {
+                const variation = stockData[id];
+                if (variation.color === color && variation.size === size) {
+                    return id;
+                }
+            }
+        }
+        return null;
+    }
+
+    colorInputs.forEach(colorInput => {
+        colorInput.addEventListener('change', updateStockStatus);
+    });
+
+    sizeInputs.forEach(sizeInput => {
+        sizeInput.addEventListener('change', updateStockStatus);
+    });
+
+    updateStockStatus();
+});
+
