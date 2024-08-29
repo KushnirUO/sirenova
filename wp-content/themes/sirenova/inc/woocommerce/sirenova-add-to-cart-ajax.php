@@ -23,9 +23,10 @@ function handle_ajax_add_to_cart()
         if ($variation_id) {
             $product = wc_get_product($variation_id);
             $stock_quantity = $product->get_stock_quantity();
+            $manage_stock = $product->get_manage_stock(); // Перевіряємо, чи увімкнено керування запасами
 
             // Перевірка кількості наявного запасу
-            if ($quantity > $stock_quantity) {
+            if ($manage_stock && $quantity > $stock_quantity) {
                 wp_send_json_error([
                     'message' => "На складі залишилось $stock_quantity одиниць цього товару."
                 ]);

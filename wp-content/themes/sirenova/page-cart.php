@@ -23,6 +23,8 @@ get_header()
                 foreach ($cart_items as $cart_item_key => $cart_item) {
                     // Отримуємо об'єкт продукту
                     $product = $cart_item['data'];
+                    $stock_quantity = $product->get_stock_quantity();
+                    $manage_stock = $product->get_manage_stock(); // Перевіряємо, чи увімкнено керування запасами
                     // Отримуємо назву продукту
                     $product_name = $product->get_title();
                     // Отримуємо URL до сторінки продукту
@@ -91,6 +93,9 @@ get_header()
                                     <div class="cart__counter">
                                         <span>К-сть:</span>
                                         <input type="number" name="quantity" value="<?php echo $quantity; ?>">
+                                        <?php if($manage_stock) : ?>
+                                        <input type="hidden" name="stock" value="<?php echo $stock_quantity; ?>">
+                                        <?php endif; ?>
                                         <span class="increase"></span>
                                         <span class="decrease"></span>
                                     </div>
