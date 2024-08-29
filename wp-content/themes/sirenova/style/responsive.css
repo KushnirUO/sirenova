@@ -352,9 +352,9 @@
     right: -1.1rem;
   }
 
-  .product {
+  /* .product {
     max-width: 20.5rem;
-  }
+  } */
 
   .product__img-wrap {
     margin-bottom: 1rem;
@@ -1454,7 +1454,7 @@
     line-height: 2.6rem;
   }
 
-  .product {
+  .catalog__main .product {
     max-width: 47%;
   }
 

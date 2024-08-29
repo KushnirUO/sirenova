@@ -198,7 +198,7 @@ function scrollToElement() {
 function burgerFilterCatalog(close) {
     if (close == 1) {
         $('html, body').removeClass('overflow');
-        $('.wrapper-btn-select.mobile').toggle();
+        $('.wrapper-btn-select.mobile').hide();
         $('.catalog__main-filters').removeClass("open");
     }
     else {
@@ -325,6 +325,7 @@ window.addEventListener('DOMContentLoaded', function () {
     SendFilterClick();
     checkRenderPagin();
     initSliderProduct();
+    StartVariationProduct();
 });
 function initSliderProduct() {
 
@@ -395,16 +396,6 @@ $(document).ready(function () {
         $(this).find('input').prop('checked', !$(this).find('input').prop('checked'));
     })
 
-
-    if ($('.single__product-main').length > 0) {
-        $('.pallete-one:first-child').find('input[type="radio"]').prop('checked', true);
-        $('.pallete-one:first-child').addClass('checked-color');
-
-        $('.sizes-single:first-child').find('input[type="radio"]').prop('checked', true);
-
-        // size то саме
-
-    }
     $(document).on('click', '.pallete-one', function () {
         $('.pallete-one').removeClass('checked-color');
         $(this).addClass('checked-color');
@@ -644,46 +635,109 @@ $(document).ready(function () {
     }
 });
 
-// Блокування варіаційі без залишків на товарів
-document.addEventListener('DOMContentLoaded', function () {
-    const colorInputs = document.querySelectorAll('input[name="color"]');
-    const sizeInputs = document.querySelectorAll('input[name="size"]');
 
-    function updateStockStatus() {
-        colorInputs.forEach(colorInput => {
-            sizeInputs.forEach(sizeInput => {
-                const variationId = getVariationId(colorInput.value, sizeInput.value);
-                if (stockData[variationId] <= 0) {
-                    colorInput.disabled = true;
-                    sizeInput.disabled = true;
-                } else {
-                    colorInput.disabled = false;
-                    sizeInput.disabled = false;
-                }
-            });
-        });
-    }
 
-    function getVariationId(color, size) {
-        for (const id in stockData) {
-            if (stockData.hasOwnProperty(id)) {
-                const variation = stockData[id];
-                if (variation.color === color && variation.size === size) {
-                    return id;
-                }
+function StartVariationProduct() {
+
+    hideUnavailableSizesOnStart();
+    // При выборе цвета обновляем доступные размеры
+    // $('.pallete-one input').on('change', function () {
+    //     var selectedColor = $(this).val();
+    //     updateSizes(selectedColor);
+    // });
+
+    // При выборе размера обновляем доступные цвета
+    $('.sizes-single input').on('click', function () {
+        var selectedSize = $(this).val();
+        updateColors(selectedSize);
+    });
+
+    // Первоначальная настройка (например, если выбран первый цвет или размер)
+
+
+
+
+
+}
+// Функция для обновления доступности размеров
+function updateSizes(color) {
+    $('.sizes-single').each(function () {
+        var size = $(this).find('input').val();
+        var available = false;
+
+        // Проверяем количество для выбранного цвета и размера
+        $.each(stockData, function (key, value) {
+            console.log(value.color, color, 'color');
+            console.log(value.size, size, 'size');
+            console.log(value.stock_quantity, 'stock_quantity');
+
+            if (value.color === color && value.size === size && value.stock_quantity > 0) {
+                available = true;
             }
+        });
+
+        // Скрываем или показываем размер в зависимости от доступности
+        if (available) {
+            $(this).show();
+        } else {
+            $(this).hide();
         }
-        return null;
+    });
+
+}
+
+// Функция для обновления доступности цветов
+function updateColors(size) {
+    $('.pallete-one').each(function () {
+        var color = $(this).find('input').val();
+        var available = false;
+
+        // Проверяем количество для выбранного цвета и размера
+        $.each(stockData, function (key, value) {
+            if (value.size === size && value.color === color && (value.stock_quantity > 0 || value.stock_quantity == null)) {
+                available = true;
+            }
+        });
+
+        // Скрываем или показываем цвет в зависимости от доступности
+        if (available) {
+            $(this).show();
+            $(this).addClass('available-product');
+        } else {
+            $(this).hide();
+            $(this).removeClass('available-product');
+        }
+    });
+    var firstAvailableColor = $('.pallete-one.available-product:first input');
+    if (firstAvailableColor.length > 0) {
+        firstAvailableColor.prop('checked', true);
+        $('.pallete-one').removeClass('checked-color');
+        firstAvailableColor.closest('.pallete-one').addClass('checked-color');
     }
+}
 
-    colorInputs.forEach(colorInput => {
-        colorInput.addEventListener('change', updateStockStatus);
+function hideUnavailableSizesOnStart() {
+    $('.sizes-single').each(function () {
+        var size = $(this).find('input').val();
+        var available = false;
+
+        // Перевіряємо наявність розміру в будь-якому кольорі
+        $.each(stockData, function (key, value) {
+            if (value.size === size && (value.stock_quantity > 0 || value.stock_quantity == null)) {
+                available = true;
+            }
+        });
+
+        // Сховати розмір, якщо він недоступний в жодному кольорі
+        if (!available) {
+            $(this).hide();
+        }
     });
-
-    sizeInputs.forEach(sizeInput => {
-        sizeInput.addEventListener('change', updateStockStatus);
-    });
-
-    updateStockStatus();
-});
-
+    var firstAvailableSize = $('.sizes-single:visible:first input');
+    console.log('firstAvailableSize', firstAvailableSize)
+    if (firstAvailableSize.length > 0) {
+        firstAvailableSize.prop('checked', true);
+    }
+    var initialColor = firstAvailableSize.val();
+    updateColors(initialColor);
+}
