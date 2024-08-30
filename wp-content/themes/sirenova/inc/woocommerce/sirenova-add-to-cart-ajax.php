@@ -26,29 +26,35 @@ function handle_ajax_add_to_cart()
             $manage_stock = $product->get_manage_stock(); // Перевіряємо, чи увімкнено керування запасами
 
             // Перевірка кількості наявного запасу
-            if ($manage_stock && $quantity > $stock_quantity) {
-                wp_send_json_error([
-                    'message' => "На складі залишилось $stock_quantity одиниць цього товару."
+            if ($manage_stock) {
+                if ($stock_quantity <= 0) {
+                    wp_send_json_error([
+                        'message' => 'Товар розпродано!'
+                    ]);
+                } elseif ($quantity > $stock_quantity) {
+                    wp_send_json_error([
+                        'message' => "На складі залишилось $stock_quantity одиниць цього товару."
+                    ]);
+                }
+            }
+
+            $cart_item_key = WC()->cart->add_to_cart($product_id, $quantity, $variation_id);
+
+            if ($cart_item_key) {
+                // Оновлюємо лічильник товарів в корзині
+                $cart_count = WC()->cart->get_cart_contents_count();
+
+                // Отримуємо HTML для міні-корзини
+                $min_cart_html = get_min_cart_html();
+
+                // Повертаємо JSON-відповідь
+                wp_send_json_success([
+                    'html' => $min_cart_html,
+                    'message' => 'Товар успішно доданий в корзину!',
+                    'cart_count' => $cart_count
                 ]);
             } else {
-                $cart_item_key = WC()->cart->add_to_cart($product_id, $quantity, $variation_id);
-
-                if ($cart_item_key) {
-                    // Оновлюємо лічильник товарів в корзині
-                    $cart_count = WC()->cart->get_cart_contents_count();
-
-                    // Отримуємо HTML для міні-корзини
-                    $min_cart_html = get_min_cart_html();
-
-                    // Повертаємо JSON-відповідь
-                    wp_send_json_success([
-                        'html' => $min_cart_html,
-                        'message' => 'Товар успішно доданий в корзину!',
-                        'cart_count' => $cart_count
-                    ]);
-                } else {
-                    wp_send_json_error(['message' => 'Не вдалося додати товар в корзину.']);
-                }
+                wp_send_json_error(['message' => 'Не вдалося додати товар в корзину.']);
             }
         } else {
             wp_send_json_error(['message' => 'Не вдалося знайти відповідну варіацію.']);
