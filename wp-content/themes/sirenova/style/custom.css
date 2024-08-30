@@ -2708,6 +2708,14 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     padding: 2rem;
 }
 
+.sir-accordion-content a {
+    color: #9B72CF;
+}
+
+.sir-accordion-content a:hover {
+    text-decoration: underline;
+}
+
 #tab-2 .sir-accordion-content {
     padding: 0;
 }
@@ -2850,11 +2858,13 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
         border: 1px solid #8080803b;
         margin-top: 1rem;
         border-radius: 1rem;
+        overflow: auto;
     }
 
     .sir-accordion-title {
         display: block;
     }
+
 
     .sir-accordion-content.sir-active {
         display: block;

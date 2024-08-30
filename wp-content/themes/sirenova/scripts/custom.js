@@ -337,7 +337,7 @@ function miniCartPopup() {
     $(document).on('click', '.black__bg.show__bg', closeCart);
 
 }
-window.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
     menuFilters();
     FindForm();
     dropdownFilters();
@@ -350,9 +350,12 @@ window.addEventListener('DOMContentLoaded', function () {
     ScrollBtnFilter();
     SendFilterClick();
     checkRenderPagin();
-    initSliderProduct();
     StartVariationProduct();
+
 });
+$(window).on('load', function () {
+    initSliderProduct();
+})
 function initSliderProduct() {
 
     $('.slider-product-cart').slick({
@@ -603,7 +606,7 @@ $(document).ready(function () {
 function ScrollBtnFilter() {
     var $block = $('.wrapper-btn-select_btn'); // Замените на ваш селектор
     var scrollPosition = $(window).height() + $(window).scrollTop();
-    var documentHeight = $('.catalog__main-filters').height() + $('.woocommerce-products-header__title.page-title').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
+    var documentHeight = $('.catalog__main-filters').height() + $('.wrapper.catalog h1').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
     if (documentHeight < scrollPosition) {
         $block.removeClass('btn-fixed');
     } else {
@@ -613,7 +616,7 @@ function ScrollBtnFilter() {
         if ($('.catalog__main-filters').length > 0) {
             $(window).on('scroll', function () {
                 var scrollPosition = $(window).height() + $(window).scrollTop();
-                var documentHeight = $('.catalog__main-filters').height() + $('.woocommerce-products-header__title.page-title').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
+                var documentHeight = $('.catalog__main-filters').height() + $('.wrapper.catalog h1').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
                 if (documentHeight < scrollPosition) {
                     $block.removeClass('btn-fixed');
                 } else {
