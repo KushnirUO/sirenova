@@ -52,7 +52,7 @@ if ($product->is_type('variable')) {
     $has_stock = !$product->get_manage_stock() || $product->is_in_stock();
 }
 ?>
-<div <?php wc_product_class($has_stock ? '' : 'availability', $product, ); ?>>
+<div <?php wc_product_class($has_stock ? '' : 'availability', $product,); ?>>
     <?php
     /**
      * Hook: woocommerce_before_shop_loop_item.
@@ -127,7 +127,7 @@ if ($product->is_type('variable')) {
         $product_size_terms = wp_get_post_terms($product->get_id(), $attributes['pa_size']->get_taxonomy());
 
         if (!empty($product_size_terms)):
-            ?>
+    ?>
             <hr>
             <div class="product__sizes-like">
                 <h4>Розмір:</h4>
@@ -142,7 +142,7 @@ if ($product->is_type('variable')) {
             $product_color_terms = wp_get_post_terms($product->get_id(), $attributes['pa_color']->get_taxonomy());
 
             if (!empty($product_color_terms)):
-                ?>
+            ?>
                 <div class="product__sizes-like">
                     <h4>Колір:</h4>
                     <div class="product__colors">
@@ -153,47 +153,47 @@ if ($product->is_type('variable')) {
                             <div data-color="<?php echo esc_attr($color); ?>">
                                 <span style="background: <?php echo esc_attr($color); ?>;"></span>
                             </div>
-                            <?php
+                        <?php
                         endforeach; ?>
                     </div>
-                    <?php
+                <?php
             endif;
 
-            ?>
-            </div>
-            <hr>
-            <?php
+                ?>
+                </div>
+                <hr>
+        <?php
         endif;
     endif;
-    ?>
+        ?>
 
-    <?php
-    /**
-     * Hook: woocommerce_shop_loop_item_title.
-     *
-     * @hooked woocommerce_template_loop_product_title - 10
-     */
-    do_action('woocommerce_shop_loop_item_title');
-
-    if ($has_stock):
+        <?php
         /**
-         * Hook: woocommerce_after_shop_loop_item_title.
+         * Hook: woocommerce_shop_loop_item_title.
          *
-         * @hooked woocommerce_template_loop_rating - 5
-         * @hooked woocommerce_template_loop_price - 10
+         * @hooked woocommerce_template_loop_product_title - 10
          */
-        do_action('woocommerce_after_shop_loop_item_title');
+        do_action('woocommerce_shop_loop_item_title');
 
-        /**
-         * Hook: woocommerce_after_shop_loop_item.
-         *
-         * @hooked woocommerce_template_loop_product_link_close - 5
-         * @hooked woocommerce_template_loop_add_to_cart - 10
-         */
-        do_action('woocommerce_after_shop_loop_item');
+        if ($has_stock):
+            /**
+             * Hook: woocommerce_after_shop_loop_item_title.
+             *
+             * @hooked woocommerce_template_loop_rating - 5
+             * @hooked woocommerce_template_loop_price - 10
+             */
+            do_action('woocommerce_after_shop_loop_item_title');
 
-    else: ?>
-        <p>Товару немає в наявності</p>
-    <?php endif;
-    ?>
+            /**
+             * Hook: woocommerce_after_shop_loop_item.
+             *
+             * @hooked woocommerce_template_loop_product_link_close - 5
+             * @hooked woocommerce_template_loop_add_to_cart - 10
+             */
+            do_action('woocommerce_after_shop_loop_item');
+
+        else: ?>
+            <p>Немає в наявності</p>
+        <?php endif;
+        ?>
 </div>

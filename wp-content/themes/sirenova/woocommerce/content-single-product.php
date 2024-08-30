@@ -253,7 +253,7 @@ echo implode(' ', $classes);
                 <button class="btn info__btns-cart">Додати в кошик</button>
             </div>
         <?php else: ?>
-            <p>Товару немає в наявності</p>
+            <p>Немає в наявності</p>
         <?php endif; ?>
     </div>
 </div>

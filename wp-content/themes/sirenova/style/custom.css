@@ -421,6 +421,10 @@ hr {
     padding: 0.4rem 0 0;
 }
 
+.product.featured.availability::after {
+    content: unset;
+}
+
 .product.sale {
     box-shadow: 0 0.2rem 1.2rem 0.2rem #ff030370;
 }
@@ -2199,7 +2203,7 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
 
 .btn-fixed {
     position: fixed;
-    z-index: 1000;
+    z-index: 9;
     max-width: 28rem;
     width: 100%;
     bottom: 0;
@@ -2796,7 +2800,7 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     font-weight: 100;
 }
 
-.availability::after {
+.availability::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -2805,8 +2809,35 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     top: 0;
     left: 0;
     border-radius: 2rem;
-    z-index: 10000;
+    z-index: 1000;
 
+}
+
+.availability {
+    padding-bottom: 1.9rem;
+}
+
+.single__product-main .info>p {
+    text-decoration: underline;
+    padding-top: 2rem;
+    font-size: 2.5rem;
+}
+
+.availability>p {
+    text-align: center;
+    padding-top: .5rem;
+}
+
+.availability .new-badge,
+.availability .onsale {
+    display: none;
+
+}
+
+.product.sale.availability,
+.product.featured.availability {
+    box-shadow: unset;
+    background: unset;
 }
 
 @media (max-width: 768px) {
