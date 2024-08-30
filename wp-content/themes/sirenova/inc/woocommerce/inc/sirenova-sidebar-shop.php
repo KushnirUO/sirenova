@@ -17,8 +17,8 @@
                     <ul id="dropdownFilterContent" style="display: none;">
                         <li data-dropdown-filter="product-date">По новизні</li>
                         <li data-dropdown-filter="popular">За популярністю</li>
-                        <li data-dropdown-filter="price-up">Ціна за зростом</li>
-                        <li data-dropdown-filter="price-down">Ціна за зниженням</li>
+                        <li data-dropdown-filter="price-up">Спочатку дешевші</li>
+                        <li data-dropdown-filter="price-down">Спочатку дорожчі</li>
                     </ul>
                 </div>
             </div>
