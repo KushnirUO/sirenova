@@ -63,6 +63,30 @@ echo implode(' ', $classes);
     $harakterystyky = get_field('harakterystyky', $product->get_id());
     $dostavka_tovaru = get_field('dostavka_tovaru', 'options');
     $obmin_ta_povernennya = get_field('obmin_ta_povernennya', 'options');
+
+    // Перевірка товарів на складі
+    $st_quantity = 0;
+    $manage_stock = $product->get_manage_stock();
+    if ($product->is_type('variable')) {
+        $variations = $product->get_available_variations();
+
+        if (count($variations) == 1) {
+            // Якщо тільки одна варіація
+            $variation_obj = wc_get_product($variations[0]['variation_id']);
+            $st_quantity = $variation_obj->get_stock_quantity();
+        } else {
+            // Якщо кілька варіацій
+            foreach ($variations as $variation) {
+                $variation_obj = wc_get_product($variation['variation_id']);
+                if ($variation_obj->get_stock_quantity() > 0) {
+                    $st_quantity = $variation_obj->get_stock_quantity();
+                    break;
+                }
+            }
+        }
+    } else {
+        $st_quantity = $product->get_stock_quantity();
+    }
     ?>
 
     <div class="">
@@ -105,7 +129,9 @@ echo implode(' ', $classes);
     </div>
     <div class="info">
         <h2><?php the_title(); ?></h2>
-        <?php wc_get_template_part('loop/price-single'); ?>
+        <?php
+        if (!$manage_stock || $st_quantity > 0):
+            wc_get_template_part('loop/price-single'); ?>
         <div class="cart__counter">
             <span>К-сть:</span>
             <input type="number" name="quantity" value="1">
@@ -114,97 +140,97 @@ echo implode(' ', $classes);
         </div>
         <div class="info__colors">
             <?php
-    if ($product->is_type('variable')) {
-        $available_variations = $product->get_available_variations();
-        $attributes = $product->get_variation_attributes();
+                if ($product->is_type('variable')) {
+                    $available_variations = $product->get_available_variations();
+                    $attributes = $product->get_variation_attributes();
 
-        // Масив для збереження залишків
-        $stock_data = [];
+                    // Масив для збереження залишків
+                    $stock_data = [];
 
-        if (isset($attributes['pa_color'])) {
-            $colors = $attributes['pa_color'];
+                    if (isset($attributes['pa_color'])) {
+                        $colors = $attributes['pa_color'];
 
-            if (!empty($colors)) {
-                echo '<span>КОЛІР:</span>';
-                echo '<div class="pallete">';
-                foreach ($colors as $color_slug) {
-                    $term = get_term_by('slug', $color_slug, 'pa_color');
-                    $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
+                        if (!empty($colors)) {
+                            echo '<span>КОЛІР:</span>';
+                            echo '<div class="pallete">';
+                            foreach ($colors as $color_slug) {
+                                $term = get_term_by('slug', $color_slug, 'pa_color');
+                                $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
 
-                    foreach ($available_variations as $variation) {
-                        // Перевірка наявності обох атрибутів
-                        if (isset($variation['attributes']['attribute_pa_color']) && $variation['attributes']['attribute_pa_color'] == $color_slug) {
-                            $variation_obj = new WC_Product_Variation($variation['variation_id']);
-                            $stock_quantity = $variation_obj->get_stock_quantity();
-                            $variation_id = $variation['variation_id'];
+                                foreach ($available_variations as $variation) {
+                                    // Перевірка наявності обох атрибутів
+                                    if (isset($variation['attributes']['attribute_pa_color']) && $variation['attributes']['attribute_pa_color'] == $color_slug) {
+                                        $variation_obj = new WC_Product_Variation($variation['variation_id']);
+                                        $stock_quantity = $variation_obj->get_stock_quantity();
+                                        $variation_id = $variation['variation_id'];
 
-                            // Перевірка чи варіація зберігається вже в масиві $stock_data
-                            if (!isset($stock_data[$variation_id])) {
-                                $stock_data[$variation_id] = [
-                                    'color' => $color_slug,
-                                    'size' => isset($variation['attributes']['attribute_pa_size']) ? $variation['attributes']['attribute_pa_size'] : '',
-                                    'stock_quantity' => $stock_quantity
-                                ];
+                                        // Перевірка чи варіація зберігається вже в масиві $stock_data
+                                        if (!isset($stock_data[$variation_id])) {
+                                            $stock_data[$variation_id] = [
+                                                'color' => $color_slug,
+                                                'size' => isset($variation['attributes']['attribute_pa_size']) ? $variation['attributes']['attribute_pa_size'] : '',
+                                                'stock_quantity' => $stock_quantity
+                                            ];
+                                        }
+                                    }
+                                }
+
+                                echo '<div class="pallete-one">';
+                                echo '<input type="radio" name="color" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . ';" />';
+                                echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>';
+                                echo $term->name;
+                                echo '</div>';
                             }
+                            echo '</div>';
                         }
                     }
-
-                    echo '<div class="pallete-one">';
-                    echo '<input type="radio" name="color" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . ';" />';
-                    echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>';
-                    echo $term->name;
-                    echo '</div>';
                 }
-                echo '</div>';
-            }
-        }
-    }
-    ?>
+                ?>
         </div>
 
         <div class="size__dropdown">
             <?php
-          if ($product->is_type('variable')) {
-              $attributes = $product->get_variation_attributes();
+                if ($product->is_type('variable')) {
+                    $attributes = $product->get_variation_attributes();
 
-              if (isset($attributes['pa_size'])) {
-                  $sizes = $attributes['pa_size'];
+                    if (isset($attributes['pa_size'])) {
+                        $sizes = $attributes['pa_size'];
 
-                  if (!empty($sizes)) {
-                      echo '<span>РОЗМІР:</span>';
-                      echo '<div class="size__dropdown-content">';
-                      foreach ($sizes as $size_slug) {
-                          $term = get_term_by('slug', $size_slug, 'pa_size');
-                          if ($term) {
-                              foreach ($available_variations as $variation) {
-                                  // Перевірка наявності обох атрибутів
-                                  if (isset($variation['attributes']['attribute_pa_size']) && $variation['attributes']['attribute_pa_size'] == $size_slug) {
-                                      $variation_obj = new WC_Product_Variation($variation['variation_id']);
-                                      $stock_quantity = $variation_obj->get_stock_quantity();
-                                      $variation_id = $variation['variation_id'];
+                        if (!empty($sizes)) {
+                            echo '<span>РОЗМІР:</span>';
+                            echo '<div class="size__dropdown-content">';
+                            foreach ($sizes as $size_slug) {
+                                $term = get_term_by('slug', $size_slug, 'pa_size');
+                                if ($term) {
+                                    foreach ($available_variations as $variation) {
+                                        // Перевірка наявності обох атрибутів
+                                        if (isset($variation['attributes']['attribute_pa_size']) && $variation['attributes']['attribute_pa_size'] == $size_slug) {
+                                            $variation_obj = new WC_Product_Variation($variation['variation_id']);
+                                            $stock_quantity = $variation_obj->get_stock_quantity();
+                                            $variation_id = $variation['variation_id'];
 
-                                      // Перевірка чи варіація зберігається вже в масиві $stock_data
-                                      if (!isset($stock_data[$variation_id])) {
-                                          $stock_data[$variation_id] = [
-                                              'color' => isset($variation['attributes']['attribute_pa_color']) ? $variation['attributes']['attribute_pa_color'] : '',
-                                              'size' => $size_slug,
-                                              'stock_quantity' => $stock_quantity
-                                          ];
-                                      }
-                                  }
-                              }
+                                            // Перевірка чи варіація зберігається вже в масиві $stock_data
+                                            if (!isset($stock_data[$variation_id])) {
+                                                $stock_data[$variation_id] = [
+                                                    'color' => isset($variation['attributes']['attribute_pa_color']) ? $variation['attributes']['attribute_pa_color'] : '',
+                                                    'size' => $size_slug,
+                                                    'stock_quantity' => $stock_quantity
+                                                ];
+                                            }
+                                        }
+                                    }
 
-                              echo "<div class='sizes-single'>";
-                              echo '<input type="radio" name="size" id="size-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
-                              echo '<label for="size-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
-                              echo '</div>';
-                          }
-                      }
-                      echo '</div>';
-                  }
-              }
-          }
-          ?>
+                                    echo "<div class='sizes-single'>";
+                                    echo '<input type="radio" name="size" id="size-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
+                                    echo '<label for="size-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
+                                    echo '</div>';
+                                }
+                            }
+                            echo '</div>';
+                        }
+                    }
+                }
+                ?>
         </div>
 
         <script>
@@ -223,7 +249,9 @@ echo implode(' ', $classes);
             </div>
             <button class="btn info__btns-cart">Додати в кошик</button>
         </div>
-
+        <?php else: ?>
+        <p>Товару немає в наявності</p>
+        <?php endif; ?>
     </div>
 </div>
 <div class="single__product-desc">

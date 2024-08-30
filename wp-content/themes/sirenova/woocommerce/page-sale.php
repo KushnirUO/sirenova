@@ -5,16 +5,19 @@
 
 defined('ABSPATH') || exit;
 
+$total_discounted_products = get_total_discounted_products_count();
+
 get_header();
 
 do_action('woocommerce_before_main_content');
 woocommerce_breadcrumb();
+var_dump($on_sale_products);
 ?>
 <h1><?php the_title(); ?></h1>
 
 
 <div class="catalog__main">
-    <input type="hidden" name="product_count" value="<?php echo get_total_products_count(); ?>">
+    <input type="hidden" name="product_count" value="<?php echo $total_discounted_products; ?>">
     <?php get_template_part('inc/woocommerce/inc/sirenova-sidebar-shop'); ?>
     <div class="catalog__main-products">
         <div class="catalog_products">
