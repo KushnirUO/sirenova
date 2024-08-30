@@ -23,7 +23,6 @@ get_header();
         <?php echo get_the_post_thumbnail(); ?>
     </div>
     <div class="wrapper about__first-info">
-        <?php woocommerce_breadcrumb(); ?>
         <h1><?php the_title(); ?></h1>
         <svg width="48" height="12" viewBox="0 0 48 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="5.82683" cy="5.82659" r="5.32659" stroke="#9152C5"></circle>
@@ -43,7 +42,7 @@ get_header();
         </div>
         <div class="experience__block">
             <?php foreach ($block_2_text as $content): ?>
-            <p><?php echo $content['block-2_content']; ?></p>
+                <p><?php echo $content['block-2_content']; ?></p>
             <?php endforeach; ?>
         </div>
     </div>
@@ -51,7 +50,7 @@ get_header();
         <div class="price1__info">
             <h2><strong><?php echo $block_3_title; ?></strong></h2>
             <?php foreach ($block_3_text as $content): ?>
-            <p><?php echo $content['block-3_content']; ?></p>
+                <p><?php echo $content['block-3_content']; ?></p>
             <?php endforeach; ?>
         </div>
         <div class="price1__wrap">

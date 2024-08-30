@@ -25,14 +25,17 @@ function sirenova_scripts()
 
     wp_enqueue_script('jquery-ui', 'https://code.jquery.com/ui/1.14.0/jquery-ui.js');
 
+    wp_enqueue_script('jquery-ui-touch-punch', 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js');
+
     wp_enqueue_script('slick', get_template_directory_uri() . '/scripts/slick.min.js');
     wp_enqueue_script('fancybox', get_template_directory_uri() . '/scripts/fancybox.min.js');
 
     wp_enqueue_script('slider-config', get_template_directory_uri() . '/scripts/develop/slider-config.js');
-    wp_enqueue_script('customjs', get_template_directory_uri() . '/scripts/custom.js');
+
 
     // AJAX на товарі
     wp_enqueue_script('product-ajax', get_template_directory_uri() . '/scripts/product-ajax.js');
     // AJAX на пошук
     wp_enqueue_script('form-find-ajax', get_template_directory_uri() . '/scripts/form-find-ajax.js');
+    wp_enqueue_script('customjs', get_template_directory_uri() . '/scripts/custom.js');
 }

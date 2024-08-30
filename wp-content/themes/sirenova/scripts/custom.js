@@ -207,6 +207,7 @@ function burgerFilterCatalog(close) {
             $('.wrapper-btn-select.mobile').toggle();
         }
         else {
+            $('.wrapper-btn-select_btn').addClass('btn-fixed');
             setTimeout(function () {
                 $('html, body').toggleClass('overflow');
                 $('html, body').animate({ scrollTop: 0 }, 0);
@@ -248,6 +249,8 @@ function addSlowScroll() {
 }
 
 function cartSetProductCount() {
+    $('.cart__counter input[type="number"]').prop('readonly', true);
+
     var invalidChars = ["-", "e", "+", "E"];
 
     $(document).on('keydown', 'input[type="number"]', function (e) {
@@ -258,22 +261,45 @@ function cartSetProductCount() {
 
     $(document).on('input', 'input[type="number"]', function () {
         var inputTypeValue = $(this).val();
-        $(this).closest('.cart__counter').find('input').attr('value', inputTypeValue);
+        $(this).closest('.cart__counter').find('input[type="number"]').attr('value', inputTypeValue);
     });
 
     $(document).on('click', '.increase', function () {
-        var inputValue = $(this).closest('.cart__counter').find('input').attr('value');
-        inputValue++;
-        $(this).closest('.cart__counter').find('input').attr('value', inputValue);
-        $(this).closest('.cart__counter').find('input').val(inputValue);
+        let quanProduct = 999;
+        if ($(this).closest('.min-cart__product-wrapp').length > 0 || $(this).closest('.cart__product-wrapp').length > 0) {
+            quanProduct = $(this).closest('.cart__counter').find('input[name="stock"]').val();
+            if (quanProduct == undefined) quanProduct = 999;
+
+        }
+
+        var inputValue = $(this).closest('.cart__counter').find('input[type="number"]').attr('value');
+
+        if (inputValue < parseInt(quanProduct)) inputValue++;
+        else inputValue = parseInt(quanProduct);
+
+        $(this).closest('.cart__counter').find('input[type="number"]').attr('value', inputValue);
+        $(this).closest('.cart__counter').find('input[type="number"]').val(inputValue);
+
+        if ($(this).closest('.min-cart__product-wrapp').length > 0 || $(this).closest('.cart__product-wrapp').length > 0) {
+            var inputElement = $(this).closest('.cart__counter').find('input[type="number"]');
+
+            if (inputElement.length > 0) {
+                inputElement.val(inputValue);
+                const event = new Event('change', { bubbles: true });
+                inputElement[0].dispatchEvent(event);
+            }
+        }
     });
     $(document).on('click', '.decrease', function () {
-        var inputValue = $(this).closest('.cart__counter').find('input').attr('value');
+        var inputValue = $(this).closest('.cart__counter').find('input[type="number"]').attr('value');
         if (1 >= inputValue) return;
 
         inputValue--;
-        $(this).closest('.cart__counter').find('input').attr('value', inputValue);
-        $(this).closest('.cart__counter').find('input').val(inputValue);
+        $(this).closest('.cart__counter').find('input[type="number"]').attr('value', inputValue);
+        $(this).closest('.cart__counter').find('input[type="number"]').val(inputValue);
+        if ($(this).closest('.min-cart__product-wrapp').length > 0 || $(this).closest('.cart__product-wrapp').length > 0) {
+            $(this).closest('.cart__counter').find('input[type="number"]').val(inputValue).trigger('change');
+        }
     });
 }
 function closeCart() {
@@ -471,7 +497,6 @@ let currentPage = 1;
 function renderPagination(countNumber) {
     $('.pagination.products__pagination').html('');
     let totalPages = Math.ceil(countNumber / 12);
-    console.log(totalPages, countNumber);
     if (countNumber > 12) {
 
         // Показываем первую страницу
@@ -560,6 +585,7 @@ $(document).ready(function () {
         range: true,
         min: minPrice,
         max: maxPrice,
+        tooltips: true,
         values: [minPriceField.val(), maxPriceField.val()],
         slide: function (event, ui) {
             amount.val(ui.values[0] + " UAH - " + ui.values[1] + " UAH");
@@ -585,8 +611,6 @@ function ScrollBtnFilter() {
     }
     if (!isMobile) {
         if ($('.catalog__main-filters').length > 0) {
-
-
             $(window).on('scroll', function () {
                 var scrollPosition = $(window).height() + $(window).scrollTop();
                 var documentHeight = $('.catalog__main-filters').height() + $('.woocommerce-products-header__title.page-title').height() + $('.woocommerce-breadcrumb').height() + $('.header').height() + 100;
@@ -640,24 +664,11 @@ $(document).ready(function () {
 function StartVariationProduct() {
 
     hideUnavailableSizesOnStart();
-    // При выборе цвета обновляем доступные размеры
-    // $('.pallete-one input').on('change', function () {
-    //     var selectedColor = $(this).val();
-    //     updateSizes(selectedColor);
-    // });
 
-    // При выборе размера обновляем доступные цвета
     $('.sizes-single input').on('click', function () {
         var selectedSize = $(this).val();
         updateColors(selectedSize);
     });
-
-    // Первоначальная настройка (например, если выбран первый цвет или размер)
-
-
-
-
-
 }
 // Функция для обновления доступности размеров
 function updateSizes(color) {
@@ -734,7 +745,6 @@ function hideUnavailableSizesOnStart() {
         }
     });
     var firstAvailableSize = $('.sizes-single:visible:first input');
-    console.log('firstAvailableSize', firstAvailableSize)
     if (firstAvailableSize.length > 0) {
         firstAvailableSize.prop('checked', true);
     }

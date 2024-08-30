@@ -99,12 +99,14 @@ jQuery(document).ready(function ($) {
 
             success: function (data) {
                 updateCartCounter();
-                $('.cart-empty').remove();
-                $('.mini-cart-wrapper').replaceWith(data.data.html)
-                console.log(data.success);
+
                 if (data.success) {
+                    $('.cart-empty').remove();
+                    $('.mini-cart-wrapper').replaceWith(data.data.html);
                     $('.product__success-add').addClass('active');
                     setTimeout(function () { $('.product__success-add').removeClass('active') }, 5000);
+                    $('.min-cart__products .cart__counter input[name="quantity"]').on('change', handleQuantityChange);
+                    $('.cart__products .cart__counter input[name="quantity"]').on('change', handleQuantityChange);
                 }
                 else {
                     $.fancybox.open(data.data.message);
@@ -117,16 +119,6 @@ jQuery(document).ready(function ($) {
 
         });
     }
-
-    // Обробка кнопок "increase" та "decrease"
-    $('.min-cart__products .cart__counter .increase,.min-cart__products .cart__counter .decrease, .cart__products .cart__counter .increase,.cart__products .cart__counter .decrease').on('click', function () {
-        var $input = $(this).siblings('input[name="quantity"]');
-        var currentVal = parseInt($input.val());
-        var newVal = $(this).hasClass('increase') ? currentVal + 1 : currentVal - 1;
-        if (newVal > 0) {
-            $input.val(newVal).trigger('change');
-        }
-    });
 
     // Події для видалення товару та зміни кількості
     $(document).on('click', '.cart__delete, .min-cart__delete', handleRemoveItem);
