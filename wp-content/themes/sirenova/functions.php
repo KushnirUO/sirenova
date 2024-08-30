@@ -11,7 +11,8 @@ add_action('after_setup_theme', function () {
 // Add ACF Option page
 if (function_exists('acf_add_options_page')) {
     acf_add_options_page();
-};
+}
+;
 
 function set_sale_page_flag()
 {
@@ -57,3 +58,24 @@ require_once get_template_directory() . '/inc/woocommerce/sirenova-get-products-
 require_once get_template_directory() . '/inc/sirenova-allow-svg.php';
 // AJAX сортування магазину
 require_once get_template_directory() . '/inc/woocommerce/sirenova-ordering-ajax.php';
+
+
+// Отримати кількість товарів зі знижкою
+function get_total_discounted_products_count()
+{
+    // Отримуємо ID всіх товарів, які зараз на знижці
+    $on_sale_products = wc_get_product_ids_on_sale();
+
+    // Фільтруємо тільки батьківські продукти
+    $parent_products_count = 0;
+
+    foreach ($on_sale_products as $product_id) {
+        $product = wc_get_product($product_id);
+
+        if ($product && $product->is_type('simple') || $product->is_type('variable')) {
+            $parent_products_count++;
+        }
+    }
+
+    return $parent_products_count;
+}
