@@ -26,26 +26,26 @@
         <?php
         $product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
         if ($product_categories): ?>
-            <!-- Start Single Sidebar -->
-            <div class="single-sidebar-wrap active">
-                <h3 class="product-title" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">Категорії
-                    товарів</h3>
-                <div class="sidebar-body" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">
-                    <ul class="sidebar-list">
-                        <?php foreach ($product_categories as $product_category): ?>
-                            <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
-                                <input type="checkbox" name="product_cats[]"
-                                    id="product-cat-<?php echo absint($product_category->term_id) ?>"
-                                    value="<?php echo absint($product_category->term_id) ?>" />
-                                <label
-                                    for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
-                                    <span>(<?php echo absint($product_category->count) ?>)</span></label>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
+        <!-- Start Single Sidebar -->
+        <div class="single-sidebar-wrap active">
+            <h3 class="product-title" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">Категорії
+                товарів</h3>
+            <div class="sidebar-body" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">
+                <ul class="sidebar-list">
+                    <?php foreach ($product_categories as $product_category): ?>
+                    <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
+                        <input type="checkbox" name="product_cats[]"
+                            id="product-cat-<?php echo absint($product_category->term_id) ?>"
+                            value="<?php echo absint($product_category->term_id) ?>" />
+                        <label
+                            for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
+                            <span>(<?php echo absint($product_category->count) ?>)</span></label>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
-            <!-- End Single Sidebar -->
+        </div>
+        <!-- End Single Sidebar -->
         <?php endif; ?>
 
         <!-- Start Single Sidebar -->
@@ -127,11 +127,11 @@
             $category = get_queried_object();
             $category_id = $category->term_id;
             ?>
-            <input type="hidden" name="product_cats[]:" value="<?php echo $category_id; ?>">
+        <input type="hidden" name="product_cats[]:" value="<?php echo $category_id; ?>">
         <?php endif; ?>
         <?php if (is_page('sale')):
             ?>
-            <input type="hidden" name="sale-page" value="<?php echo 'sale'; ?>">
+        <input type="hidden" name="sale-page" value="<?php echo 'sale'; ?>">
         <?php endif; ?>
 
     </form>
