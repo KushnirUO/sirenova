@@ -60,6 +60,7 @@ require_once get_template_directory() . '/inc/sirenova-allow-svg.php';
 require_once get_template_directory() . '/inc/woocommerce/sirenova-ordering-ajax.php';
 
 
+// Отримати кількість товарів зі знижкою
 function get_total_discounted_products_count()
 {
     // Отримуємо ID всіх товарів, які зараз на знижці

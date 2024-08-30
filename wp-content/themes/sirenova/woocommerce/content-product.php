@@ -24,8 +24,35 @@ global $product;
 if (empty($product) || !$product->is_visible()) {
     return;
 }
+
+// Перевірка товарів на складі
+$has_stock = false;
+
+// Якщо продукт варіативний
+if ($product->is_type('variable')) {
+    $variation_ids = $product->get_children(); // Отримуємо ID всіх варіацій
+
+    foreach ($variation_ids as $variation_id) {
+        $variation = wc_get_product($variation_id);
+
+        if ($variation->get_manage_stock()) {
+            // Перевіряємо, чи є на складі хоча б одна варіація з кількістю більше 0
+            if ($variation->get_stock_quantity() > 0) {
+                $has_stock = true;
+                break;
+            }
+        } elseif ($variation->is_in_stock()) {
+            // Якщо керування запасами вимкнено, перевіряємо статус на складі
+            $has_stock = true;
+            break;
+        }
+    }
+} else {
+    // Для простого продукту
+    $has_stock = !$product->get_manage_stock() || $product->is_in_stock();
+}
 ?>
-<div <?php wc_product_class('', $product); ?>>
+<div <?php wc_product_class($has_stock ? '' : 'availability', $product, ); ?>>
     <?php
     /**
      * Hook: woocommerce_before_shop_loop_item.
@@ -56,7 +83,7 @@ if (empty($product) || !$product->is_visible()) {
             ?>
             <!-- Your existing product display code -->
 
-            <?php if ($is_new) : ?>
+            <?php if ($is_new): ?>
                 <span class="new-badge"><?php esc_html_e('New', 'woocommerce'); ?></span>
             <?php endif;
             /**
@@ -88,7 +115,7 @@ if (empty($product) || !$product->is_visible()) {
     // Отримання атрибутів продукту
     $attributes = $product->get_attributes();
 
-    if (isset($attributes['pa_size']) && $attributes['pa_size']->is_taxonomy()) :
+    if (isset($attributes['pa_size']) && $attributes['pa_size']->is_taxonomy()):
         $size_terms = get_terms(
             array(
                 'taxonomy' => $attributes['pa_size']->get_taxonomy(),
@@ -99,13 +126,13 @@ if (empty($product) || !$product->is_visible()) {
         // Виведення тільки термінів, що застосовуються до поточного продукту
         $product_size_terms = wp_get_post_terms($product->get_id(), $attributes['pa_size']->get_taxonomy());
 
-        if (!empty($product_size_terms)) :
-    ?>
+        if (!empty($product_size_terms)):
+            ?>
             <hr>
             <div class="product__sizes-like">
                 <h4>Розмір:</h4>
                 <div class="size">
-                    <?php foreach ($product_size_terms as $term) : ?>
+                    <?php foreach ($product_size_terms as $term): ?>
                         <span class="size"><?php echo esc_html($term->name); ?></span>
                     <?php endforeach; ?>
                 </div>
@@ -114,41 +141,41 @@ if (empty($product) || !$product->is_visible()) {
             // Виведення тільки термінів, що застосовуються до поточного продукту
             $product_color_terms = wp_get_post_terms($product->get_id(), $attributes['pa_color']->get_taxonomy());
 
-            if (!empty($product_color_terms)) :
-            ?>
+            if (!empty($product_color_terms)):
+                ?>
                 <div class="product__sizes-like">
                     <h4>Колір:</h4>
                     <div class="product__colors">
-                        <?php foreach ($product_color_terms as $term) : ?>
+                        <?php foreach ($product_color_terms as $term): ?>
                             <?php
                             // Мета-дані кольору 
                             $color = get_term_meta($term->term_id, 'attribute_color', true); ?>
                             <div data-color="<?php echo esc_attr($color); ?>">
                                 <span style="background: <?php echo esc_attr($color); ?>;"></span>
                             </div>
-                        <?php
+                            <?php
                         endforeach; ?>
                     </div>
-                <?php
+                    <?php
             endif;
 
-                ?>
-                </div>
-                <hr>
-        <?php
+            ?>
+            </div>
+            <hr>
+            <?php
         endif;
     endif;
-        ?>
+    ?>
 
-        <?php
-        /**
-         * Hook: woocommerce_shop_loop_item_title.
-         *
-         * @hooked woocommerce_template_loop_product_title - 10
-         */
-        do_action('woocommerce_shop_loop_item_title');
+    <?php
+    /**
+     * Hook: woocommerce_shop_loop_item_title.
+     *
+     * @hooked woocommerce_template_loop_product_title - 10
+     */
+    do_action('woocommerce_shop_loop_item_title');
 
-
+    if ($has_stock):
         /**
          * Hook: woocommerce_after_shop_loop_item_title.
          *
@@ -164,5 +191,9 @@ if (empty($product) || !$product->is_visible()) {
          * @hooked woocommerce_template_loop_add_to_cart - 10
          */
         do_action('woocommerce_after_shop_loop_item');
-        ?>
+
+    else: ?>
+        <p>Товару немає в наявності</p>
+    <?php endif;
+    ?>
 </div>
