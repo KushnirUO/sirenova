@@ -122,26 +122,12 @@ function shop_filter_ajax()
     // Додавання сортування
     if ($orderby === 'price_up' || $orderby === 'price_down') {
         $order = ($orderby === 'price_up') ? 'ASC' : 'DESC';
-        $args['meta_key'] = 'sirenova_price';
+    
+        $args['meta_key'] = '_price';
         $args['orderby'] = 'meta_value_num';
         $args['order'] = $order;
-    } else {
-        switch ($orderby) {
-            case 'popular':
-                $args['meta_key'] = 'total_sales';
-                $args['orderby'] = 'meta_value_num';
-                $args['order'] = 'DESC';
-                break;
-            case 'new':
-                $args['orderby'] = 'date';
-                $args['order'] = 'DESC';
-                break;
-            default:
-                $args['orderby'] = 'date';
-                $args['order'] = 'DESC';
-                break;
-        }
     }
+    
 
     // Виконуємо запит
     $query = new WP_Query($args);
