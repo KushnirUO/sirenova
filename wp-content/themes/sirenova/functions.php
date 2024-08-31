@@ -58,6 +58,8 @@ require_once get_template_directory() . '/inc/woocommerce/sirenova-get-products-
 require_once get_template_directory() . '/inc/sirenova-allow-svg.php';
 // AJAX сортування магазину
 require_once get_template_directory() . '/inc/woocommerce/sirenova-ordering-ajax.php';
+// AJAX wishlist
+require_once get_template_directory() . '/inc/woocommerce/sirenova-wishlist-ajax.php';
 
 
 // Отримати кількість товарів зі знижкою
