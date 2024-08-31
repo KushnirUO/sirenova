@@ -688,6 +688,96 @@ function addSlowScroll() {
     //     smooth: true
     // });
 }
+
+// --- favorite page
+
+// Функція для отримання значення з куки
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+// Функція для встановлення куки
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+// Функція для додавання/видалення ID товару з куки
+function toggleFavorite(productId) {
+    let favorites = getCookie('favorites');
+    favorites = favorites ? JSON.parse(favorites) : [];
+
+    if (favorites.includes(productId)) {
+        favorites = favorites.filter(id => id !== productId);
+    } else {
+        favorites.push(productId);
+    }
+
+    setCookie('favorites', JSON.stringify(favorites), 30); // 30 днів зберігання
+    console.log('Оновлений список улюблених:', favorites);
+}
+
+// Функція для отримання масиву ID з куки
+function getFavoriteIds() {
+    let favorites = getCookie('favorites');
+    return favorites ? JSON.parse(favorites) : [];
+}
+
+// Функція рендерингу отриманих товарів (приклад)
+function renderFavorites(products) {
+    products.forEach(product => {
+        $('.favorites__products').append(product);
+        console.log('Товар:', product);
+    });
+}
+function updateFavoriteIcons() {
+    const favoriteIds = getFavoriteIds();
+
+    if ($('.info__btns-like').length > 0) {
+        $('.info__btns-like').each(function () {
+            const productId = $(this).closest('.single__product-main').find('input[name="product_id"]').val();
+            if (favoriteIds.includes(productId)) {
+                $(this).addClass('active');
+            } else {
+                $(this).removeClass('active');
+            }
+        });
+    }
+    if ($('.like__icon').length > 0) {
+        $('.like__icon').each(function () {
+            const productId = $(this).closest('.product').find('input[name="product_id"]').val();
+            if (favoriteIds.includes(productId)) {
+                $(this).closest('.icons.like').find('input').prop('checked', true);
+            } else {
+                $(this).closest('.icons.like').find('input').prop('checked', false);
+            }
+        });
+    }
+
+}
+
+function StartAddFavorites() {
+    $('.like__icon').on('click', function () {
+        const productId = $(this).closest('.product').find('input[name="product_id"]').val();
+        toggleFavorite(productId);
+    });
+    $('.info__btns-like').on('click', function () {
+        const productId = $(this).closest('.single__product-main').find('input[name="product_id"]').val();
+        toggleFavorite(productId);
+        $(this).toggleClass('active');
+    });
+    updateFavoriteIcons();
+}
+
+
 $(document).ready(function () {
     menuFilters();
     FindForm();
@@ -706,6 +796,8 @@ $(document).ready(function () {
     TabProduct();
     AnotherFunc();
     AccFooter();
+    StartAddFavorites();
+    ajaxGetFavorites();
 });
 $(window).on('load', function () {
     initSliderProduct();
@@ -742,4 +834,26 @@ function ajaxSendFilter() {
 
     });
 
+}
+
+function ajaxGetFavorites() {
+    if (location.pathname == '/wishlist/') {
+        const favoriteIds = getFavoriteIds();
+
+        if (favoriteIds.length > 0) {
+            $.ajax({
+                url: woocommerce_params.ajax_url,
+                method: 'POST',
+                data: { product_ids: favoriteIds, action: 'wishlist' },
+                success: function (response) {
+                    renderFavorites(response.data);
+                },
+                error: function (error) {
+                    console.error('Помилка отримання улюблених товарів:', error);
+                }
+            });
+        } else {
+            console.log('У вас немає улюблених товарів.');
+        }
+    }
 }
