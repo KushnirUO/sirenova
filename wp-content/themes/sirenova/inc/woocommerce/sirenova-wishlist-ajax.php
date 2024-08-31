@@ -1,4 +1,4 @@
-<?php
+<?php 
 add_action('wp_ajax_wishlist', 'wishlist_ajax');
 add_action('wp_ajax_nopriv_wishlist', 'wishlist_ajax');
 
@@ -23,7 +23,10 @@ function wishlist_ajax() {
                 // Завантажуємо шаблон content-product.php
                 wc_get_template_part('content', 'product');
                 
-                $response[] = ob_get_clean(); // Додаємо розмітку в масив і очищаємо буфер
+                $html = ob_get_clean(); // Отримуємо розмітку продукту з буфера
+
+                // Додаємо HTML до масиву відповіді
+                $response[] = $html;
             }
         }
 
