@@ -25,6 +25,7 @@ if (empty($product) || !$product->is_visible()) {
     return;
 }
 
+$product_id = get_the_ID();
 // Перевірка товарів на складі
 $has_stock = false;
 
@@ -53,6 +54,7 @@ if ($product->is_type('variable')) {
 }
 ?>
 <div <?php wc_product_class($has_stock ? '' : 'availability', $product,); ?>>
+    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
     <?php
     /**
      * Hook: woocommerce_before_shop_loop_item.
