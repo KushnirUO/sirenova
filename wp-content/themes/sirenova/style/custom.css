@@ -2860,6 +2860,19 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     background-color: #9b72cf29 !important
 }
 
+.favorites__products {
+    position: relative;
+    width: 100%;
+    gap: 2rem;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: flex-start;
+}
+
+.favorites h1 {}
 
 @media (max-width: 768px) {
     .sir-tabs-menu {
