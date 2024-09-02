@@ -432,8 +432,9 @@ h3 {
 
 .product__img-wrap .product__delete {
   position: absolute;
+  z-index: 10000;
   right: 1rem;
-  top: 1rem;
+  top: 20rem;
   padding: 0;
   width: 5rem;
   height: 5rem;

@@ -161,6 +161,7 @@
 .mobile__menu ul li ul {
   margin-top: 2rem;
   margin-bottom: 0;
+  padding-left: 2rem;
 }
 
 .mobile__menu-info {
@@ -3252,13 +3253,15 @@
 }
 
 .favorites {
-  min-height: calc(100vh - 15.6rem);
-  margin-top: 11.7rem;
-  margin-bottom: 7rem;
+  margin-top: 7.68rem;
+  margin-bottom: 2rem;
 }
 
 .favorites h1 {
-  margin: 6.7rem 0 5rem;
+  margin: 1.7rem 0 3rem 0;
+  font-weight: 300;
+  font-size: 3.8rem;
+  line-height: 5.2rem;
 }
 
 .favorites__products {

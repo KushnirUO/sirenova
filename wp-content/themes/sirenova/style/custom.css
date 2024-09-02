@@ -2860,10 +2860,60 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     background-color: #9b72cf29 !important
 }
 
+.favorites__products .product__sizes-like .icons div.like__icon {
+    background-image: unset;
+}
+
+.favorites__products .product {
+    margin: unset;
+}
+
+
+.mobile__menu-signin-wrap {
+    display: none;
+}
+
+.wrapp-sale-show {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    padding: 2rem 0rem;
+}
+
+.wrapp-sale-show .footer-sale-btn {
+    padding: 1rem 2rem;
+    width: 48%;
+    text-align: center;
+}
+
+.wrapp-sale-show .footer-sale-btn:hover {
+    color: mediumvioletred !important;
+    border: .2rem solid mediumvioletred;
+    animation: none;
+}
+
+.mobile__menu-signinn {
+    display: none;
+}
+
+.mobile-shop-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    color: #9B72CF !important;
+    background-color: unset;
+    border: .2rem solid #9B72CF;
+    border-radius: .5rem;
+    cursor: pointer;
+    outline: none;
+    width: 48%;
+    text-align: center;
+}
+
 .favorites__products {
     position: relative;
     width: 100%;
-    gap: 2rem;
+    gap: 3rem;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;

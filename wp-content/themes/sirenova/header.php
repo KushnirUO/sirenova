@@ -248,7 +248,10 @@ $cart_count = WC()->cart->get_cart_contents_count();
                     Особистий кабінет
                 </a>
             </div>
-
+            <div class="wrapp-sale-show">
+                <a href="http://localhost:8000/shop/" class="mobile-shop-btn">У магазин</a>
+                <a href="http://localhost:8000/sale/" class="footer-sale-btn">SALE</a>
+            </div>
             <ul>
                 <?php wp_nav_menu(
                     array(
