@@ -749,7 +749,10 @@ function getFavoriteIds() {
 
 // Функція рендерингу отриманих товарів (приклад)
 function renderFavorites(products) {
-    products.forEach(product => {
+    console.log(products);
+    const productsArray = Object.values(products); // або Object.entries(products)
+
+    productsArray.forEach(product => {
         $('.favorites__products').append(product);
     });
     $('.product__img-wrap').append(`<button class="product__delete">
