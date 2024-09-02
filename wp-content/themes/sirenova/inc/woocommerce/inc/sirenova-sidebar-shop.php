@@ -24,29 +24,58 @@
             </div>
         </div>
         <?php
-        $product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
-        if ($product_categories): ?>
-        <!-- Start Single Sidebar -->
-        <div class="single-sidebar-wrap active">
-            <h3 class="product-title" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">Категорії
-                товарів</h3>
-            <div class="sidebar-body" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">
-                <ul class="sidebar-list">
-                    <?php foreach ($product_categories as $product_category): ?>
+$product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
+
+if ($product_categories): ?>
+    <!-- Start Single Sidebar -->
+    <div class="single-sidebar-wrap active">
+        <h3 class="product-title" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">Категорії товарів</h3>
+        <div class="sidebar-body" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">
+            <ul class="sidebar-list">
+                <?php foreach ($product_categories as $product_category):
+                    $category_id = absint($product_category->term_id);
+                    
+                    // Перевіряємо, чи це сторінка sale
+                    if (is_page('sale')) {
+                        // Отримуємо ID продуктів у цій категорії
+                        $product_ids = wc_get_products(array(
+                            'status' => 'publish',
+                            'limit' => -1,
+                            'category' => array($product_category->slug),
+                            'return' => 'ids',
+                        ));
+                        
+                        // Фільтруємо ID продуктів, які знаходяться на знижці
+                        $sale_product_ids = array_filter($product_ids, function($product_id) {
+                            return in_array($product_id, wc_get_product_ids_on_sale());
+                        });
+                        
+                        // Пропускаємо категорію, якщо немає товарів зі знижкою
+                        if (empty($sale_product_ids)) {
+                            continue;
+                        }
+
+                        $product_count = count($sale_product_ids); // Кількість товарів на знижці
+                    } else {
+                        $product_count = absint($product_category->count); // Загальна кількість товарів
+                    }
+                    ?>
                     <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
                         <input type="checkbox" name="product_cats[]"
-                            id="product-cat-<?php echo absint($product_category->term_id) ?>"
-                            value="<?php echo absint($product_category->term_id) ?>" />
-                        <label
-                            for="product-cat-<?php echo absint($product_category->term_id) ?>"><?php echo esc_html($product_category->name) ?>
-                            <span>(<?php echo absint($product_category->count) ?>)</span></label>
+                               id="product-cat-<?php echo $category_id; ?>"
+                               value="<?php echo $category_id; ?>" />
+                        <label for="product-cat-<?php echo $category_id; ?>">
+                            <?php echo esc_html($product_category->name); ?>
+                            <span>(<?php echo $product_count; ?>)</span>
+                        </label>
                     </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+                <?php endforeach; ?>
+            </ul>
         </div>
-        <!-- End Single Sidebar -->
-        <?php endif; ?>
+    </div>
+    <!-- End Single Sidebar -->
+<?php endif; ?>
+
 
         <!-- Start Single Sidebar -->
         <div class="single-sidebar-wrap active">

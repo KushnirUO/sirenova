@@ -127,6 +127,8 @@ function shop_filter_ajax()
         $args['orderby'] = 'meta_value_num';
         $args['order'] = $order;
     }
+
+    
     
 
     // Виконуємо запит

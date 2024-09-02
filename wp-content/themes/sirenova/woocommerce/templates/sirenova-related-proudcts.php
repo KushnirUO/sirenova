@@ -25,6 +25,13 @@ if (!empty($categories)) {
                         'terms' => 'aksesuary',
                     ),
                 ),
+                'meta_query' => array(
+                    array(
+                        'key' => '_stock_status',
+                        'value' => 'instock',
+                        'compare' => '='
+                    ),
+                ),
             );
             break;
 
@@ -40,6 +47,13 @@ if (!empty($categories)) {
                         'taxonomy' => 'product_cat',
                         'field' => 'slug',
                         'terms' => 'trusyky',
+                    ),
+                ),
+                'meta_query' => array(
+                    array(
+                        'key' => '_stock_status',
+                        'value' => 'instock',
+                        'compare' => '='
                     ),
                 ),
             );
@@ -59,6 +73,13 @@ if (!empty($categories)) {
                         'terms' => 'pizhamy',
                     ),
                 ),
+                'meta_query' => array(
+                    array(
+                        'key' => '_stock_status',
+                        'value' => 'instock',
+                        'compare' => '='
+                    ),
+                ),
             );
             break;
 
@@ -74,6 +95,13 @@ if (!empty($categories)) {
                         'taxonomy' => 'product_cat',
                         'field' => 'slug',
                         'terms' => 'trusyky',
+                    ),
+                ),
+                'meta_query' => array(
+                    array(
+                        'key' => '_stock_status',
+                        'value' => 'instock',
+                        'compare' => '='
                     ),
                 ),
             );
@@ -93,6 +121,13 @@ if (!empty($categories)) {
                         'terms' => 'kupalnyky',
                     ),
                 ),
+                'meta_query' => array(
+                    array(
+                        'key' => '_stock_status',
+                        'value' => 'instock',
+                        'compare' => '='
+                    ),
+                ),
             );
             break;
 
@@ -110,6 +145,13 @@ if (!empty($categories)) {
                         'terms' => 'inshe',
                     ),
                 ),
+                'meta_query' => array(
+                    array(
+                        'key' => '_stock_status',
+                        'value' => 'instock',
+                        'compare' => '='
+                    ),
+                ),
             );
             break;
 
@@ -121,6 +163,13 @@ if (!empty($categories)) {
                 'posts_per_page' => 12,
                 'orderby' => 'rand',
                 'post__not_in' => array($product->get_id()), // Виключаємо поточний товар
+                'meta_query' => array(
+                    array(
+                        'key' => '_stock_status',
+                        'value' => 'instock',
+                        'compare' => '='
+                    ),
+                ),
             );
             break;
     }

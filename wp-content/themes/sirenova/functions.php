@@ -61,6 +61,18 @@ require_once get_template_directory() . '/inc/woocommerce/sirenova-ordering-ajax
 // AJAX wishlist
 require_once get_template_directory() . '/inc/woocommerce/sirenova-wishlist-ajax.php';
 
+// Заборона шорткодам виводити товари не в наявності
+add_filter('woocommerce_shortcode_products_query', 'exclude_out_of_stock_from_shortcode');
+
+function exclude_out_of_stock_from_shortcode($args) {
+    // Додаємо meta_query для виключення товарів, яких немає в наявності
+    $args['meta_query'][] = array(
+        'key' => '_stock_status',
+        'value' => 'instock',
+        'compare' => '='
+    );
+    return $args;
+}
 
 // Отримати кількість товарів зі знижкою
 function get_total_discounted_products_count()
