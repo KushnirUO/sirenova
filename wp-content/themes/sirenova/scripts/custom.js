@@ -737,6 +737,7 @@ function updateCounterLike() {
         $('.h-like').prepend(`<span class="cart__counter-icon">${count}</span>`);
     }
     else {
+        $('.favorites__products > p').remove();
         $('.favorites__products').append(`<p>У вас немає улюблених товарів.</p>`)
     }
 }
@@ -749,9 +750,7 @@ function getFavoriteIds() {
 
 // Функція рендерингу отриманих товарів (приклад)
 function renderFavorites(products) {
-    console.log(products);
-    const productsArray = Object.values(products); // або Object.entries(products)
-
+    const productsArray = Object.values(products);
     productsArray.forEach(product => {
         $('.favorites__products').append(product);
     });
@@ -882,6 +881,7 @@ function ajaxSendFilter() {
 
 function ajaxGetFavorites() {
     if (location.pathname == '/wishlist/') {
+        $('.favorites__products').addClass('loading');
         const favoriteIds = getFavoriteIds();
         if (favoriteIds.length > 0) {
             $.ajax({
@@ -890,12 +890,16 @@ function ajaxGetFavorites() {
                 data: { product_ids: favoriteIds, action: 'wishlist' },
                 success: function (response) {
                     renderFavorites(response.data);
+                    $('.favorites__products').removeClass('loading');
+
                 },
                 error: function (error) {
                     console.error('Помилка отримання улюблених товарів:', error);
                 }
             });
         } else {
+            $('.favorites__products').removeClass('loading');
+            $('.favorites__products > p').remove();
             $('.favorites__products').append(`<p>У вас немає улюблених товарів.</p>`)
         }
     }

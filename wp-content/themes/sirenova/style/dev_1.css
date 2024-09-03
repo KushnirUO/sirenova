@@ -3254,7 +3254,7 @@
 
 .favorites {
   margin-top: 7.68rem;
-  margin-bottom: 2rem;
+  margin-bottom: 11rem;
 }
 
 .favorites h1 {
@@ -3269,6 +3269,7 @@
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  min-height: 24vh;
 }
 
 .favorites__products .favorites__product {
