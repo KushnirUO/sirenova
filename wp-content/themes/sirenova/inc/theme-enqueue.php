@@ -3,8 +3,11 @@ add_action('wp_enqueue_scripts', 'sirenova_scripts');
 
 function sirenova_scripts()
 {
-    wp_deregister_style('woocommerce-general');
-    wp_deregister_style('woocommerce-layout');
+    if (!is_checkout()) {
+        // Відключаємо стилі WooCommerce, якщо не на сторінці чекауту
+        wp_deregister_style('woocommerce-general');
+        wp_deregister_style('woocommerce-layout');
+    }
 
 
     wp_enqueue_style('normalize', get_template_directory_uri() . '/style/normalize.css');
