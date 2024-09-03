@@ -48,7 +48,7 @@ require_once get_template_directory() . '/inc/woocommerce/sirenova-add-to-cart-a
 require_once get_template_directory() . '/inc/woocommerce/sirenova-custom-format-price.php';
 // Кастомне поле цін
 require_once get_template_directory() . '/inc/woocommerce/sirenova-custom-prices.php';
-// Знижка на всі товари
+// Знижка на всі товари - NO READY!!!!!!!!!!
 require_once get_template_directory() . '/inc/woocommerce/sirenova-discount-products.php';
 // AJAX на фільтр магазину
 require_once get_template_directory() . '/inc/woocommerce/sirenova-shop-filter-ajax.php';
@@ -57,7 +57,7 @@ require_once get_template_directory() . '/inc/woocommerce/sirenova-get-products-
 // Дозвіл загружати і відображати SVG
 require_once get_template_directory() . '/inc/sirenova-allow-svg.php';
 // AJAX сортування магазину
-require_once get_template_directory() . '/inc/woocommerce/sirenova-ordering-ajax.php';
+// require_once get_template_directory() . '/inc/woocommerce/sirenova-ordering-ajax.php';
 // AJAX wishlist
 require_once get_template_directory() . '/inc/woocommerce/sirenova-wishlist-ajax.php';
 
