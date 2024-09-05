@@ -8,8 +8,8 @@ function shop_filter_ajax()
     $product_cats = isset($_POST['product_cats']) ? array_map('intval', $_POST['product_cats']) : array();
     $min_price = isset($_POST['min_price']) ? floatval($_POST['min_price']) : 0;
     $max_price = isset($_POST['max_price']) ? floatval($_POST['max_price']) : 0;
-    $color = isset($_POST['color']) ? sanitize_text_field($_POST['color']) : '';
-    $size = isset($_POST['size']) ? sanitize_text_field($_POST['size']) : '';
+    $color = isset($_POST['color']) ? array_map('intval', $_POST['color']) : array();
+    $size = isset($_POST['size']) ? array_map('intval', $_POST['size']) : array();
     $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : '';
     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $sale = isset($_POST['sale-page']);
@@ -121,7 +121,7 @@ function shop_filter_ajax()
         // Розділяємо результати на два масиви: наявні та відсутні
         $in_stock = [];
         $out_of_stock = [];
-        
+
         while ($query->have_posts()) {
             $query->the_post();
             if (get_post_meta(get_the_ID(), '_stock_status', true) === 'instock') {
@@ -146,7 +146,7 @@ function shop_filter_ajax()
         while ($query->have_posts()) {
             $query->the_post();
             wc_get_template_part('content', 'product');
-        }   
+        }
         $products_html = ob_get_clean();
         $product_count = count($sorted_ids); // Загальна кількість товарів
 
@@ -297,14 +297,14 @@ function shop_filter_ajax()
 //     // Додавання сортування
 //     if ($orderby === 'price_up' || $orderby === 'price_down') {
 //         $order = ($orderby === 'price_up') ? 'ASC' : 'DESC';
-    
+
 //         $args['meta_key'] = '_price';
 //         $args['orderby'] = 'meta_value_num';
 //         $args['order'] = $order;
 //     }
 
-    
-    
+
+
 
 //     // Виконуємо запит
 //     $query = new WP_Query($args);
