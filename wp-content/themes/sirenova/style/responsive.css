@@ -1020,6 +1020,52 @@
 }
 
 @media only screen and (max-width: 767px) {
+
+  .payment_method_wayforpay img {
+    width: 20vw;
+  }
+
+  .woocommerce-privacy-policy-text p {
+    font-size: 1.2rem;
+    line-height: 120%;
+    margin-bottom: 0;
+  }
+
+  .woocommerce #payment #place_order {
+    margin-bottom: -.5rem;
+  }
+
+  #order_review_heading {
+    font-size: 2.6rem;
+  }
+
+  .wc_payment_method input:checked+label:before {
+    bottom: 0.8rem;
+    left: -2.5rem;
+    width: 2rem;
+    height: 1.2rem;
+  }
+
+  .checkout_coupon.woocommerce-form-coupon .form-row {
+    margin-bottom: .5rem;
+    width: 100%;
+  }
+
+  .checkout_coupon.woocommerce-form-coupon {
+    padding: 2rem !important;
+  }
+
+  .checkout_coupon.woocommerce-form-coupon>p {
+    margin-bottom: 1rem;
+  }
+
+  .woocommerce-info {
+    margin: 1rem 0 !important;
+    font-size: 1.8rem;
+  }
+
+  .checkout_coupon.woocommerce-form-coupon {}
+
   .slider-wrapper {
     max-width: 100%;
     width: 92vw;

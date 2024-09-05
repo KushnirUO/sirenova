@@ -3409,9 +3409,48 @@
 
 .woocommerce form .form-row input.input-text,
 .woocommerce form .form-row textarea {
-  border: .1rem solid #231942;
+  border: .1rem solid #9B72CF;
   padding: 1rem 2rem;
   border-radius: 1rem;
+}
+
+.checkout_coupon.woocommerce-form-coupon button {
+  border: 1px solid #9b72cf;
+  color: white;
+  background: #9b72cf;
+  display: block;
+  width: 100%;
+  border-radius: 4rem;
+  padding: 1.5rem 3.4rem;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2.1rem;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all .3s linear;
+}
+
+.checkout_coupon.woocommerce-form-coupon button:hover {
+  background: #834bcb;
+  color: white;
+}
+
+.checkout_coupon.woocommerce-form-coupon>p {
+  margin-bottom: 2rem;
+}
+
+.checkout_coupon.woocommerce-form-coupon {
+  padding: 2rem 2rem 0 !important;
+  margin: 2rem 0 !important;
+}
+
+.woocommerce-info,
+.woocommerce-error {
+  margin: 2rem 0 !important;
+}
+
+.checkout_coupon.woocommerce-form-coupon input {
+  margin-top: .6rem !important;
 }
 
 .woocommerce form .form-row textarea {
@@ -3421,7 +3460,7 @@
 .select2-container--default .select2-selection--single {
   height: auto !important;
   border-radius: 1rem !important;
-  border: .1rem solid #231942 !important;
+  border: .1rem solid #9B72CF !important;
 
 }
 
@@ -3439,7 +3478,7 @@
 
 .select2-container--open .select2-dropdown {
   left: 0;
-  top: 1rem;
+  top: -8rem;
   border-radius: 1rem !important;
   border: .1rem solid #231942 !important;
 }

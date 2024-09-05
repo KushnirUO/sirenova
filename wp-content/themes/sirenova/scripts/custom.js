@@ -842,6 +842,9 @@ $(document).ready(function () {
 });
 $(window).on('load', function () {
     initSliderProduct();
+    setTimeout(function () {
+        $('#billing_nova_poshta_warehouse_field label').html(`Відділення або поштомат <span class="optional"><span class="asterisk-color">*</span></span>`);
+    }, 500);
 })
 
 // -- ajax

@@ -671,6 +671,11 @@ hr {
     gap: 1rem;
 }
 
+.wc_payment_methods.payment_methods,
+.woocommerce-checkout #payment div.form-row {
+    background-color: white;
+}
+
 .min-cart__products-product {
     position: relative;
     -ms-flex-wrap: wrap;
@@ -680,6 +685,70 @@ hr {
     -ms-flex-pack: center;
     justify-content: center;
     align-items: unset;
+}
+
+.wc_payment_method label {
+    text-decoration: underline;
+}
+
+#customer_details {
+    margin-bottom: 3rem;
+}
+
+.woocommerce #payment #place_order {
+    width: 100%;
+    max-width: 100%;
+    border: .1rem solid #9b72cf;
+    color: white;
+    background: #9b72cf;
+    display: block;
+    margin-top: 1rem;
+    padding: 1.5rem 2.4rem;
+    border-radius: 3rem;
+}
+
+.woocommerce-checkout #payment ul.payment_methods li {
+    border-bottom: 0.1rem solid #51515166;
+    padding: 1rem 0;
+}
+
+.woocommerce-checkout #payment ul.payment_methods {
+    border-radius: 1rem;
+    border-bottom: unset !important;
+}
+
+.woocommerce-checkout #payment div.payment_box {
+    background-color: white;
+    margin: 0;
+    padding: 1rem 2rem;
+}
+
+.woocommerce-checkout #payment div.form-row {
+    padding: 0 1em 1em;
+}
+
+.woocommerce-checkout #payment div.payment_box::before {
+    border-color: transparent;
+}
+
+.woocommerce-privacy-policy-text p {
+    font-size: 1.3rem;
+    line-height: 120%;
+    color: gray;
+}
+
+.woocommerce-checkout-payment {
+    border: 0.1rem solid #51515166;
+    background-color: white !important;
+    border-radius: 1rem !important;
+}
+
+.shop_table.woocommerce-checkout-review-order-table .product-name {
+    width: 70vw;
+}
+
+.shop_table.woocommerce-checkout-review-order-table .product-total {
+    width: 30vw;
 }
 
 .min-cart__products-product .min-cart__config {
@@ -744,6 +813,14 @@ hr {
 
 .checkout .row .col-lg-6.col-xl-5.ml-auto {
     max-width: unset;
+}
+
+.woocommerce-info {
+    border-top-color: #9B72CF;
+}
+
+.woocommerce-info::before {
+    color: #9B72CF;
 }
 
 .min-cart__products-product .min-cart__config th {
