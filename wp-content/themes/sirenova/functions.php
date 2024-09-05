@@ -64,7 +64,8 @@ require_once get_template_directory() . '/inc/woocommerce/sirenova-wishlist-ajax
 // Заборона шорткодам виводити товари не в наявності
 add_filter('woocommerce_shortcode_products_query', 'exclude_out_of_stock_from_shortcode');
 
-function exclude_out_of_stock_from_shortcode($args) {
+function exclude_out_of_stock_from_shortcode($args)
+{
     // Додаємо meta_query для виключення товарів, яких немає в наявності
     $args['meta_query'][] = array(
         'key' => '_stock_status',
@@ -92,4 +93,23 @@ function get_total_discounted_products_count()
     }
 
     return $parent_products_count;
+}
+
+// Додати блок оплати у col-2
+add_action('woocommerce_checkout_shipping', 'woocommerce_checkout_payment', 20);
+// Видалення полів checkout
+add_filter('woocommerce_cart_needs_shipping_address', '__return_false');
+add_filter('woocommerce_billing_fields', 'custom_remove_billing_fields');
+
+function custom_remove_billing_fields($fields)
+{
+
+    unset($fields['billing_company']);
+    unset($fields['billing_address_1']);
+    unset($fields['billing_address_2']);
+    unset($fields['billing_city']);
+    unset($fields['billing_postcode']);
+    unset($fields['billing_state']);
+
+    return $fields;
 }

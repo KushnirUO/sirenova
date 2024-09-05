@@ -42,7 +42,7 @@ if ( post_password_required() ) {
 	 */
 	do_action( 'woocommerce_before_single_product_summary' );
 	?>
-1
+
 	<div class="summary entry-summary">
 		<?php
 		/**

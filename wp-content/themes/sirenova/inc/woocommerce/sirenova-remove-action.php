@@ -6,3 +6,5 @@ remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
+// Видалити блок оплати з поточного місця
+remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
