@@ -74,19 +74,13 @@ function shop_filter_ajax()
             'relation' => 'OR',
             array(
                 'key' => 'sirenova_sale_price',
-                'value' => '',
-                'compare' => 'EXISTS',
-                'type' => 'NUMERIC'
-            ),
-            array(
-                'key' => 'sirenova_sale_price',
-                'value' => 100,
+                'value' => $min_price,
                 'compare' => '>=',
                 'type' => 'NUMERIC'
             ),
             array(
                 'key' => 'sirenova_price',
-                'value' => 100,
+                'value' => $min_price,
                 'compare' => '>=',
                 'type' => 'NUMERIC'
             ),
@@ -99,19 +93,13 @@ function shop_filter_ajax()
             'relation' => 'OR',
             array(
                 'key' => 'sirenova_sale_price',
-                'value' => '',
-                'compare' => 'EXISTS',
-                'type' => 'NUMERIC'
-            ),
-            array(
-                'key' => 'sirenova_sale_price',
-                'value' => 500,
+                'value' => $max_price,
                 'compare' => '<=',
                 'type' => 'NUMERIC'
             ),
             array(
                 'key' => 'sirenova_price',
-                'value' => 500,
+                'value' => $max_price,
                 'compare' => '<=',
                 'type' => 'NUMERIC'
             ),
