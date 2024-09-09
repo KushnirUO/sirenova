@@ -24,57 +24,57 @@
             </div>
         </div>
         <?php
-$product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
+        $product_categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => true));
 
-if ($product_categories): ?>
-    <!-- Start Single Sidebar -->
-    <div class="single-sidebar-wrap active">
-        <h3 class="product-title" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">Категорії товарів</h3>
-        <div class="sidebar-body" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">
-            <ul class="sidebar-list">
-                <?php foreach ($product_categories as $product_category):
-                    $category_id = absint($product_category->term_id);
-                    
-                    // Перевіряємо, чи це сторінка sale
-                    if (is_page('sale')) {
-                        // Отримуємо ID продуктів у цій категорії
-                        $product_ids = wc_get_products(array(
-                            'status' => 'publish',
-                            'limit' => -1,
-                            'category' => array($product_category->slug),
-                            'return' => 'ids',
-                        ));
-                        
-                        // Фільтруємо ID продуктів, які знаходяться на знижці
-                        $sale_product_ids = array_filter($product_ids, function($product_id) {
-                            return in_array($product_id, wc_get_product_ids_on_sale());
-                        });
-                        
-                        // Пропускаємо категорію, якщо немає товарів зі знижкою
-                        if (empty($sale_product_ids)) {
-                            continue;
-                        }
+        if ($product_categories): ?>
+            <!-- Start Single Sidebar -->
+            <div class="single-sidebar-wrap active">
+                <h3 class="product-title" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">Категорії товарів</h3>
+                <div class="sidebar-body" style="<?php echo is_product_category() ? 'display: none;' : ''; ?>">
+                    <ul class="sidebar-list">
+                        <?php foreach ($product_categories as $product_category):
+                            $category_id = absint($product_category->term_id);
 
-                        $product_count = count($sale_product_ids); // Кількість товарів на знижці
-                    } else {
-                        $product_count = absint($product_category->count); // Загальна кількість товарів
-                    }
-                    ?>
-                    <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
-                        <input type="checkbox" name="product_cats[]"
-                               id="product-cat-<?php echo $category_id; ?>"
-                               value="<?php echo $category_id; ?>" />
-                        <label for="product-cat-<?php echo $category_id; ?>">
-                            <?php echo esc_html($product_category->name); ?>
-                            <span>(<?php echo $product_count; ?>)</span>
-                        </label>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
-    <!-- End Single Sidebar -->
-<?php endif; ?>
+                            // Перевіряємо, чи це сторінка sale
+                            if (is_page('sale')) {
+                                // Отримуємо ID продуктів у цій категорії
+                                $product_ids = wc_get_products(array(
+                                    'status' => 'publish',
+                                    'limit' => -1,
+                                    'category' => array($product_category->slug),
+                                    'return' => 'ids',
+                                ));
+
+                                // Фільтруємо ID продуктів, які знаходяться на знижці
+                                $sale_product_ids = array_filter($product_ids, function ($product_id) {
+                                    return in_array($product_id, wc_get_product_ids_on_sale());
+                                });
+
+                                // Пропускаємо категорію, якщо немає товарів зі знижкою
+                                if (empty($sale_product_ids)) {
+                                    continue;
+                                }
+
+                                $product_count = count($sale_product_ids); // Кількість товарів на знижці
+                            } else {
+                                $product_count = absint($product_category->count); // Загальна кількість товарів
+                            }
+                        ?>
+                            <li class="<?php echo $product_category->parent == '0' ? 'parent-filter' : 'child-filter'; ?>">
+                                <input type="checkbox" name="product_cats[]"
+                                    id="product-cat-<?php echo $category_id; ?>"
+                                    value="<?php echo $category_id; ?>" />
+                                <label for="product-cat-<?php echo $category_id; ?>">
+                                    <?php echo esc_html($product_category->name); ?>
+                                    <span>(<?php echo $product_count; ?>)</span>
+                                </label>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+            <!-- End Single Sidebar -->
+        <?php endif; ?>
 
 
         <!-- Start Single Sidebar -->
@@ -124,8 +124,8 @@ if ($product_categories): ?>
                     $color_hex = get_term_meta($term->term_id, 'attribute_color', true);
                     echo '<li>';
                     echo '<label for="color-' . esc_attr($term->slug) . '" style="background-color: ' . esc_attr($color_hex) . '"></label>'; // Мітка без тексту
-        
-                    echo '<input type="checkbox" name="color" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . $color_hex . ';" />';
+
+                    echo '<input type="checkbox" name="color[]" id="color-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" style="background-color: ' . $color_hex . ';" />';
                     echo $term->name;
                     echo '</li>';
                 }
@@ -140,7 +140,7 @@ if ($product_categories): ?>
                 echo '<ul class="size-list">'; // Змінено клас для розмірів
                 foreach ($terms as $term) {
                     echo '<li>';
-                    echo '<input type="checkbox" name="size" id="size-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
+                    echo '<input type="checkbox" name="size[]" id="size-' . esc_attr($term->slug) . '" value="' . esc_attr($term->slug) . '" />';
                     echo '<label for="size-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
                     echo '</li>';
                 }
@@ -155,12 +155,12 @@ if ($product_categories): ?>
         <?php if (is_product_category()):
             $category = get_queried_object();
             $category_id = $category->term_id;
-            ?>
-        <input type="hidden" name="product_cats[]:" value="<?php echo $category_id; ?>">
+        ?>
+            <input type="hidden" name="product_cats[]:" value="<?php echo $category_id; ?>">
         <?php endif; ?>
         <?php if (is_page('sale')):
-            ?>
-        <input type="hidden" name="sale-page" value="<?php echo 'sale'; ?>">
+        ?>
+            <input type="hidden" name="sale-page" value="<?php echo 'sale'; ?>">
         <?php endif; ?>
 
     </form>

@@ -8,8 +8,8 @@ function shop_filter_ajax()
     $product_cats = isset($_POST['product_cats']) ? array_map('intval', $_POST['product_cats']) : array();
     $min_price = isset($_POST['min_price']) ? floatval($_POST['min_price']) : 0;
     $max_price = isset($_POST['max_price']) ? floatval($_POST['max_price']) : 0;
-    $color = isset($_POST['color']) ? sanitize_text_field($_POST['color']) : '';
-    $size = isset($_POST['size']) ? sanitize_text_field($_POST['size']) : '';
+    $color = isset($_POST['color']) ? array_map('sanitize_text_field', (array)$_POST['color']) : array();
+    $size = isset($_POST['size']) ? array_map('sanitize_text_field', (array)$_POST['size']) : array();
     $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : '';
     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $sale = isset($_POST['sale-page']);
@@ -55,7 +55,7 @@ function shop_filter_ajax()
         $args['tax_query'][] = array(
             'taxonomy' => 'pa_color',
             'field' => 'slug',
-            'terms' => explode(',', $color),
+            'terms' => $color,
         );
     }
 
@@ -64,7 +64,7 @@ function shop_filter_ajax()
         $args['tax_query'][] = array(
             'taxonomy' => 'pa_size',
             'field' => 'slug',
-            'terms' => explode(',', $size),
+            'terms' => $size,
         );
     }
 
@@ -74,13 +74,19 @@ function shop_filter_ajax()
             'relation' => 'OR',
             array(
                 'key' => 'sirenova_sale_price',
-                'value' => $min_price,
+                'value' => '',
+                'compare' => 'EXISTS',
+                'type' => 'NUMERIC'
+            ),
+            array(
+                'key' => 'sirenova_sale_price',
+                'value' => 100,
                 'compare' => '>=',
                 'type' => 'NUMERIC'
             ),
             array(
                 'key' => 'sirenova_price',
-                'value' => $min_price,
+                'value' => 100,
                 'compare' => '>=',
                 'type' => 'NUMERIC'
             ),
@@ -93,13 +99,19 @@ function shop_filter_ajax()
             'relation' => 'OR',
             array(
                 'key' => 'sirenova_sale_price',
-                'value' => $max_price,
+                'value' => '',
+                'compare' => 'EXISTS',
+                'type' => 'NUMERIC'
+            ),
+            array(
+                'key' => 'sirenova_sale_price',
+                'value' => 500,
                 'compare' => '<=',
                 'type' => 'NUMERIC'
             ),
             array(
                 'key' => 'sirenova_price',
-                'value' => $max_price,
+                'value' => 500,
                 'compare' => '<=',
                 'type' => 'NUMERIC'
             ),
@@ -154,7 +166,7 @@ function shop_filter_ajax()
         echo json_encode(array(
             'products' => $products_html,
             'count' => $product_count,
-            'test' => $sorted_ids,
+            'test' => $color,
         ));
     } else {
         echo json_encode(array(

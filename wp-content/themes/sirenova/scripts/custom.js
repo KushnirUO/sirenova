@@ -751,6 +751,7 @@ function getFavoriteIds() {
 // Функція рендерингу отриманих товарів (приклад)
 function renderFavorites(products) {
     const productsArray = Object.values(products);
+    console.log(productsArray, products);
     productsArray.forEach(product => {
         $('.favorites__products').append(product);
     });
