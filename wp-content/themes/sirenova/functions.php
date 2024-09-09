@@ -1,7 +1,7 @@
 <?php
 
 // Hide admin bar
-show_admin_bar(false);
+show_admin_bar(true);
 
 // Custom Theme decklaration
 add_action('after_setup_theme', function () {
@@ -111,5 +111,20 @@ function custom_remove_billing_fields($fields)
     unset($fields['billing_postcode']);
     unset($fields['billing_state']);
 
+    return $fields;
+}
+
+// Додати заголовок в блок оплати
+add_action('woocommerce_review_order_before_payment', 'add_payment_heading');
+function add_payment_heading()
+{
+    echo '<h3>Виберіть спосіб оплати:</h3>';
+}
+
+// Видаляємо поле реєстрації облікового запису
+add_filter('woocommerce_checkout_fields', 'remove_account_fields');
+function remove_account_fields($fields)
+{
+    unset($fields['account']);
     return $fields;
 }
