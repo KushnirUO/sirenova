@@ -128,3 +128,17 @@ function remove_account_fields($fields)
     unset($fields['account']);
     return $fields;
 }
+
+// Видаляем адресу доставки з thankyou-page
+add_action('woocommerce_thankyou', 'remove_shipping_address_column', 1);
+
+function remove_shipping_address_column()
+{
+    ?>
+    <style>
+        .woocommerce-column.woocommerce-column--2.woocommerce-column--shipping-address.col-2 {
+            display: none !important;
+        }
+    </style>
+    <?php
+}
