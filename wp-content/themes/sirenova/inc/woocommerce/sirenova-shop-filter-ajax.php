@@ -6,13 +6,14 @@ function shop_filter_ajax()
 {
     // Отримуємо параметри з запиту
     $product_cats = isset($_POST['product_cats']) ? array_map('intval', $_POST['product_cats']) : array();
-    $min_price = isset($_POST['min_price']) ? floatval($_POST['min_price']) : 0;
-    $max_price = isset($_POST['max_price']) ? floatval($_POST['max_price']) : 0;
+    $min_price = !empty($_POST['min_price']) && $_POST['min_price'] ? absint($_POST['min_price']) : 0;
+    $max_price = !empty($_POST['max_price']) && $_POST['max_price'] ? absint($_POST['max_price']) : 100;
     $color = isset($_POST['color']) ? array_map('sanitize_text_field', (array)$_POST['color']) : array();
     $size = isset($_POST['size']) ? array_map('sanitize_text_field', (array)$_POST['size']) : array();
     $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : '';
     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
     $sale = isset($_POST['sale-page']);
+
 
     // Кількість товарів на сторінці
     $products_per_page = -1;
@@ -68,43 +69,14 @@ function shop_filter_ajax()
         );
     }
 
-    // Фільтр за мінімальною ціною
-    if ($min_price > 0) {
-        $args['meta_query'][] = array(
-            'relation' => 'OR',
-            array(
-                'key' => 'sirenova_sale_price',
-                'value' => $min_price,
-                'compare' => '>=',
-                'type' => 'NUMERIC'
-            ),
-            array(
-                'key' => 'sirenova_price',
-                'value' => $min_price,
-                'compare' => '>=',
-                'type' => 'NUMERIC'
-            ),
-        );
-    }
-
-    // Фільтр за максимальною ціною
-    if ($max_price > 0) {
-        $args['meta_query'][] = array(
-            'relation' => 'OR',
-            array(
-                'key' => 'sirenova_sale_price',
-                'value' => $max_price,
-                'compare' => '<=',
-                'type' => 'NUMERIC'
-            ),
-            array(
-                'key' => 'sirenova_price',
-                'value' => $max_price,
-                'compare' => '<=',
-                'type' => 'NUMERIC'
-            ),
-        );
-    }
+    $args['meta_query'] = array(
+        'price_clause' => array(
+            'key' => '_price',
+            'value' => array($min_price, $max_price), // значения ОТ и ДО
+            'compare' => 'between',
+            'type' => 'numeric'
+        )
+    );
 
     // Додавання сортування
     if ($orderby === 'price_up' || $orderby === 'price_down') {
@@ -124,10 +96,15 @@ function shop_filter_ajax()
 
         while ($query->have_posts()) {
             $query->the_post();
-            if (get_post_meta(get_the_ID(), '_stock_status', true) === 'instock') {
+            $stock_status = get_post_meta(get_the_ID(), '_stock_status', true);
+
+            if ($stock_status === 'instock') {
                 $in_stock[] = get_the_ID();
+            } elseif ($stock_status === 'outofstock') {
+                $out_of_stock[] = get_the_ID();
             } else {
                 $out_of_stock[] = get_the_ID();
+                // Можна обробити випадки, якщо `_stock_status` має інші значення або є пустим
             }
         }
 
@@ -154,7 +131,9 @@ function shop_filter_ajax()
         echo json_encode(array(
             'products' => $products_html,
             'count' => $product_count,
-            'test' => $color,
+            'test2' => $min_price,
+            'test' => $max_price,
+
         ));
     } else {
         echo json_encode(array(
