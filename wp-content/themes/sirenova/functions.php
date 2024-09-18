@@ -142,3 +142,41 @@ function remove_shipping_address_column()
     </style>
     <?php
 }
+
+// Переміщення товарів без наявності в кінець списку і сортування по новизні
+function custom_sort_out_of_stock_to_end_and_by_date($query)
+{
+    if (!is_admin() && $query->is_main_query() && (is_shop() || is_product_category() || is_product_tag() || is_sale_page())) {
+        // Додаємо мета-запит для сортування за наявністю
+        $meta_query = $query->get('meta_query');
+
+        $meta_query[] = array(
+            'relation' => 'OR',
+            array(
+                'key' => '_stock_status',
+                'value' => 'instock',
+                'compare' => '=',
+            ),
+            array(
+                'key' => '_stock_status',
+                'value' => 'outofstock',
+                'compare' => '=',
+            ),
+        );
+
+        $query->set('meta_query', $meta_query);
+
+        // Сортування: спочатку по новизні, потім по наявності
+        $query->set('orderby', array(
+            'meta_value' => 'ASC',  // Сортування за наявністю
+            'date' => 'DESC', // Сортування по новизні
+        ));
+    }
+}
+add_action('pre_get_posts', 'custom_sort_out_of_stock_to_end_and_by_date');
+
+// Перевірка, чи це сторінка sale (розпродаж)
+function is_sale_page()
+{
+    return is_page() && get_the_ID() === wc_get_page_id('sale');
+}

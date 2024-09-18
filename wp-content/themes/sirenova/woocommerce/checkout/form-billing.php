@@ -41,7 +41,11 @@ defined('ABSPATH') || exit;
 		?>
 	</div>
 
+
+
+
 	<?php do_action('woocommerce_after_checkout_billing_form', $checkout); ?>
+
 </div>
 
 <!-- <?php if (!is_user_logged_in() && $checkout->is_registration_enabled()): ?>
