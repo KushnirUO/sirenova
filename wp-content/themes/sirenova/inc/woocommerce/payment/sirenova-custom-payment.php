@@ -6,8 +6,8 @@ function redirect_to_wayforpay_if_cod($order_id)
 {
     $order = wc_get_order($order_id);
 
-    // Перевіряємо, чи метод оплати "Готівка при отриманні"
-    if ('cod' === $order->get_payment_method()) {
+    // Перевіряємо, чи метод оплати "Готівка при отриманні" і чи замовлення ще не оплачене
+    if ('cod' === $order->get_payment_method() && 'processing' !== $order->get_status()) {
         // Фіксована сума для WayForPay
         $amount = 10;
 
@@ -21,6 +21,7 @@ function redirect_to_wayforpay_if_cod($order_id)
         exit;
     }
 }
+
 
 function generate_signature(
     $merchantAccount,
