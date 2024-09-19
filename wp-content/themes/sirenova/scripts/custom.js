@@ -592,32 +592,48 @@ function TabProduct() {
     }
 }
 function initSliderProduct() {
+    var sliderNav = $('.slider-product-cart-nav');
+    var sliderMain = $('.slider-product-cart');
 
-    $('.slider-product-cart').slick({
+    // Ініціалізуємо головний слайдер
+    sliderMain.slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
         fade: true,
         asNavFor: '.slider-product-cart-nav'
     });
-    $('.slider-product-cart-nav').slick({
+
+    // Ініціалізуємо навігаційний слайдер
+    sliderNav.slick({
         slidesToShow: 5,
         slidesToScroll: 1,
         asNavFor: '.slider-product-cart',
         dots: false,
-        // centerMode: true,
         focusOnSelect: true,
         vertical: true,
         arrows: false
     });
+
+    // Перевіряємо кількість слайдів
+    var totalSlides = sliderNav.find('.slick-slide').length;
+
+    // Стрілки будуть працювати навіть якщо слайдів менше 5
     $('.nav-up').click(function () {
-        $('.slider-product-cart-nav').slick('slickPrev');
+        if (totalSlides > 1) {
+            sliderMain.slick('slickPrev'); // Перемикаємо головний слайд
+            sliderNav.slick('slickPrev'); // Перемикаємо навігаційний слайд
+        }
     });
 
     $('.nav-down').click(function () {
-        $('.slider-product-cart-nav').slick('slickNext');
+        if (totalSlides > 1) {
+            sliderMain.slick('slickNext'); // Перемикаємо головний слайд
+            sliderNav.slick('slickNext'); // Перемикаємо навігаційний слайд
+        }
     });
 }
+
 function getSingleProductColor() {
     $('.pallete').each(function () {
         $(this).children().first().attr('checked', 'checked');

@@ -1145,7 +1145,7 @@
     position: fixed;
     top: 5.4rem;
     left: 0;
-    z-index: 10000;
+    z-index: 1000;
     background: #9b72cf;
     color: white;
     border-radius: unset;
@@ -1205,6 +1205,7 @@
     gap: 2rem;
     padding-left: 0;
     height: 100%;
+    padding-top: 6rem;
   }
 
   .promo-image {

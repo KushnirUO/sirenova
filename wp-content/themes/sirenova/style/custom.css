@@ -20,6 +20,15 @@
     opacity: 1;
 }
 
+.page-numbers {
+    cursor: pointer;
+}
+
+.page-numbers.current {
+    cursor: none;
+    pointer-events: none;
+}
+
 .h-cart {
     cursor: pointer;
 }
@@ -3038,6 +3047,14 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     .hit-single-product .info h2::after {
         right: -4rem;
     }
+
+    .woocommerce-order .woocommerce-customer-details .woocommerce-customer-details--phone {
+        margin-bottom: 0em;
+    }
+}
+
+#eapps-instagram-feed-1 {
+    margin-top: 3rem;
 }
 
 .fancybox-content {
@@ -3052,4 +3069,59 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
     font-size: 1.8rem;
     font-weight: 100;
     text-transform: uppercase;
+}
+
+.woocommerce-order {}
+
+.woocommerce-order address {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    line-height: 165%;
+}
+
+.woocommerce-order h2 {
+    font-size: 2.6rem;
+    margin: 0 0 2rem 0;
+}
+
+.woocommerce-order .woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received {
+    font-size: 2.4rem;
+    line-height: 150%;
+}
+
+.woocommerce-order ul.order_details li {
+    font-size: 1.6rem !important;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.woocommerce-order ul.order_details {
+    flex-direction: column;
+    margin: 3rem 0rem !important;
+}
+
+.page-not-found h1 {}
+
+.page-not-found {
+    margin-top: 13rem;
+    text-align: center;
+}
+
+.page-not-found a {
+    text-decoration-line: none;
+    color: white;
+    background-color: #9B72CF;
+}
+
+.woocommerce-remove-coupon {
+    text-decoration-line: underline;
+    color: gray;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.woocommerce-message {
+    margin-top: 0;
 }
