@@ -188,7 +188,6 @@ function handle_wayforpay_service_url()
             'status' => 'accept',
             'time' => time(),
         );
-        echo json_encode($response);
         exit;
     }
 }
@@ -218,5 +217,7 @@ function handle_payment_gateway_response($response, $order_id)
             break;
     }
 
-    // Додаткові дії, наприклад, надсилання електронних листів тощо
+    // Перенаправлення на стандартну сторінку подяки
+    wp_redirect($order->get_checkout_order_received_url());
+    exit;
 }
