@@ -36,10 +36,6 @@ $cart_count = WC()->cart->get_cart_contents_count();
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.3/dist/locomotive-scroll.min.js"></script>
-
-
     <?php wp_head() ?>
 </head>
 
@@ -263,7 +259,7 @@ $cart_count = WC()->cart->get_cart_contents_count();
                 );
                 ?>
             </ul>
-            <div class="mobile__menu-info">
+            <ul class="mobile__menu-info">
                 <?php wp_nav_menu(
                     array(
                         "container" => false,
@@ -274,18 +270,18 @@ $cart_count = WC()->cart->get_cart_contents_count();
                     )
                 );
                 ?>
-            </div>
-            <div class="mobile__menu-contacts">
-                <a href="<?php echo $instagram_url; ?>" target="_blank">
-                    <img src="<?php echo $instagram_icon['url']; ?>" alt="">
-                    <?php echo $instagram_text; ?>
-                </a>
-                <a href="tel:<?php echo esc_attr($phone_number); ?>">
-                    <img src="<?php echo $phone_icon['url']; ?>" alt="">
-                    <?php echo $phone_number; ?>
-                </a>
-            </div>
         </div>
+        <div class="mobile__menu-contacts">
+            <a href="<?php echo $instagram_url; ?>" target="_blank">
+                <img src="<?php echo $instagram_icon['url']; ?>" alt="">
+                <?php echo $instagram_text; ?>
+            </a>
+            <a href="tel:<?php echo esc_attr($phone_number); ?>">
+                <img src="<?php echo $phone_icon['url']; ?>" alt="">
+                <?php echo $phone_number; ?>
+            </a>
+        </div>
+    </div>
     </div>
     <div class="black__bg"></div>
     <?php get_template_part('/inc/cart/sirenova-min-cart'); ?>

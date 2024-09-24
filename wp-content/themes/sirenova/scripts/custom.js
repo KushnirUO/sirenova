@@ -701,12 +701,7 @@ function scrollToElement() {
         }, 1000);
     });
 }
-function addSlowScroll() {
-    // const scroll = new LocomotiveScroll({
-    //     el: document.querySelector('[data-scroll-container]'),
-    //     smooth: true
-    // });
-}
+
 
 // --- favorite page
 
@@ -842,7 +837,6 @@ $(document).ready(function () {
     dropdownFilters();
     listFilters();
     scrollToElement();
-    addSlowScroll();
     cartSetProductCount();
     miniCartPopup();
     ScrollBtnFilter();

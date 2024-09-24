@@ -99,7 +99,7 @@ echo implode(' ', $classes);
                 <div class="slider-product-cart-nav">
                     <?php foreach ($gallery_image_ids as $image_id): ?>
                         <?php
-                        $image_url = wp_get_attachment_image_url($image_id, 'full');
+                        $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');
                         ?>
                         <div class="slider-product-cart-nav-wrapp"><img src="<?php echo esc_url($image_url); ?>" alt="">
                         </div>
@@ -111,9 +111,10 @@ echo implode(' ', $classes);
                 <?php foreach ($gallery_image_ids as $image_id): ?>
                     <?php
                     // Отримуємо URL зображення для відображення
-                    $image_url_full = wp_get_attachment_image_url($image_id, 'full'); // URL для повнорозмірного зображення
+                    $image_url_full = wp_get_attachment_image_url($image_id, 'woocommerce_single'); // Отримуємо URL зображення
+
                     ?>
-                    <a href="<?php echo esc_url($image_url_full); ?>" data-fancybox="productGallery"
+                    <a href="<?php echo wp_get_attachment_image_url($image_id, 'medium_large'); ?>" data-fancybox="productGallery"
                         class="slider-product-cart-single">
                         <img src="<?php echo esc_url($image_url_full); ?>" alt="">
                     </a>
